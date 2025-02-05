@@ -1,0 +1,22 @@
+.home-banner{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-par-home{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.top-par-home a {
+    margin-right: 15px;
+    margin-top: 5px;
+}

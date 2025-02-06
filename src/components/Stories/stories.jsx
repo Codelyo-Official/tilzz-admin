@@ -9,7 +9,7 @@ function Stories({children,FeedStories}) {
     return (
         <div>
             <div className="logged-in-user-story-div">
-                <h2 className="heading-your-story">All Stories</h2>
+                <h2 className="heading-your-story">Stories</h2>
                 <div className="story-container">
                     <ul className="story-box101">
                         {FeedStories.map((st, index) => {

@@ -1,0 +1,294 @@
+/*************** User Dashboard Css***************************/
+
+
+.main-user-dashboard{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-areas: "leftbar dashboard";
+  }
+  
+  .leftdiv{
+    grid-area: leftbar;
+    min-height: 100vh;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .rightdiv{
+    grid-area: dashboard;
+  }
+  
+  .top-bar-dashboard{
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    padding: 10px;
+    display: flex;
+    justify-content:end;
+  }
+  
+  .top-bar-dashboard .btn{
+    width: 179px;
+    border-radius: 28px;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+    font-size: 12px;
+  }
+  
+  .logged-in-user-story-div{
+    background-color: white;
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+  
+  .heading-your-story{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 15px;
+    color: rgb(34, 34, 34);
+  }
+
+  .heading-your-story i{
+    width: 20px;
+    height: 20px;
+    fill: black;
+    color:black;
+  }
+
+  .like-dislike-div{
+    position: absolute;
+    top:10px;
+    left:10px;
+  }
+
+  .story-box101{
+    padding: 0px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    grid-template-rows: auto;
+    row-gap: 14px;
+    justify-content: space-evenly;
+  }
+  
+  .story-box{
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .story-box img{
+    width: 100%;
+    margin-bottom: 20px;
+    height: 100%;
+    border-radius:10px;
+    object-fit: cover;
+  }
+  
+  .story-box .title{
+    position: absolute;
+    bottom: 0px;
+    left:0px;
+    width: 100%;
+  }
+  
+  .title p{
+    text-decoration: none;
+    text-transform: capitalize;
+    font-weight: bold;
+    color:white;
+    margin-left: 14px;
+    display: inline-block;
+  }
+  
+  .story-box .descp{
+    margin: 0;
+    margin-left: 2%;
+    margin-bottom: 20px;
+    width: 80%;
+  }
+  
+  .story-container{
+   width: 98%;
+   margin: 1%;
+    overflow: auto;
+  }
+  
+  .story-box .view-btn{
+    background-color: #4F46E5;
+    color: white;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 18px;
+    position: absolute;
+    top:10px;
+    right:10px;
+    text-decoration: none;
+    padding:6px;
+    width: 60px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  
+  .follow-btn{
+    border-width: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    border-style: solid;
+    border-color: white;
+    color:white;
+    margin-left: 5px;
+  }
+  
+  .following-btn{
+    border-width: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    border-style: solid;
+    border-color: white;
+    background-color: white;
+    color:rgb(0, 0, 0);
+    margin-left: 5px;
+  }
+  
+  @media screen and (max-width:1100px){
+
+    .story-box101{
+      padding: 0px;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 48% 48%;
+      grid-template-rows: auto;
+      row-gap: 14px;
+      justify-content: space-evenly;
+    }
+
+    .story-box{
+      height: 200px;
+    }
+    
+  }
+
+  @media screen and (max-width:660px){
+
+    .story-box101{
+      padding: 0px;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 98%;
+      grid-template-rows: auto;
+      row-gap: 14px;
+      justify-content: space-evenly;
+    }
+
+    .story-box{
+      height: 200px;
+    }
+    
+  }
+  
+  
+  @media screen and (max-width:780px){
+
+    .top-bar-dashboard .btn{
+      width: 129px;
+      border-radius: 28px;
+      padding: 10px;
+      text-align: center;
+      align-items: center;
+      font-size: 12px;
+    }
+    
+    .main-user-dashboard{
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-areas: "dashboard";
+    }
+
+    .leftdiv{
+      display: none;
+    }
+  
+  }
+
+  .leftbar-heading{
+    color:rgb(192, 190, 190);
+    font-size: 10px;
+    margin-left: 18px;
+    margin-top: 20px;
+  }
+
+  .leftbar-items div{
+    border-radius: 5px;
+    height: auto;
+    padding: 5px;
+    padding-left: 14px;
+    width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color:black;
+    font-weight: bold;
+  }
+
+  .active-leftbar{
+    background-color: #F5F7F9;
+
+  }
+
+  .viewmore-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .viewmore-div button{
+    width: 120px;
+    padding: 5px;
+    border-width: 1px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    border-style: solid;
+    border-color: #4F46E5;
+    color: #4F46E5;
+    background-color: transparent;
+  }
+
+  .viewmore-div button:hover{
+   
+    background-color: #4F46E5;
+    color: white;
+  }
+
+  /************* heart icon like dislike ***********************/
+
+  .heart-icon{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+  }
+
+  .heart-icon svg{
+    width: 100%;
+    height: 100%;
+  }
+
+  .like-count{
+    color:white;
+    display: inline-block;
+    font-size: 12px;
+  }

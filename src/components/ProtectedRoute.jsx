@@ -9,12 +9,12 @@ const ProtectedRoute = ({children}) => {
     const user = getUser();
     console.log(user)
 
-    if (location.pathname === "/dashboard" && user.username=="none") {
+    if (location.pathname === "/profile" && user.username=="none") {
         return <Navigate to="/login"/>;
     }
 
     if (location.pathname === "/login" && user.username!="none") {
-        return <Navigate to="/dashboard"/>;
+        return <Navigate to="/profile"/>;
     }
 
     return children;

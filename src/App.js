@@ -6,8 +6,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 //pages
 import Home from "./pages/Landing/Home";
 import NotFound from "./components/NotFound";
-import Dashboard from "./components/Dashboard";
-import Login from "./pages/registeration/Login"
+import Login from "./pages/registeration/Login";
+import Profile from "./pages/profile/Profile";
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/login" element={<ProtectedRoute><Login/></ProtectedRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </Router>

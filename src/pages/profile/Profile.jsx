@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import axiosClient from "../../axios-client";
 import "./profile.css";
 import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
+import Stories from "../../components/Stories/stories";
 import {useAuth} from "../../contexts/AuthProvider";
 import {useNavigate} from "react-router-dom";
 
@@ -12,7 +13,7 @@ const Profile = () => {
 
     return (
         <DashboardLayout>
-            <button
+            {/* <button
                 onClick={function () {
                 const res = logout();
                 if (res.success) {
@@ -20,7 +21,8 @@ const Profile = () => {
                     navigate("/login");
                 }
             }}>logout</button>
-            <p>hello {user.username}</p>
+            <p>hello {user.username}</p> */}
+            <Stories/>
         </DashboardLayout>
     );
 }

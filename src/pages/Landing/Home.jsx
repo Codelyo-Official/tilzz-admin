@@ -29,7 +29,12 @@ function Home() {
                     <button className="main-banner-top-sec-btn">Read Our Blog</button>
                 </div>
                 <div className="main-banner-grid-imgs">
-        <div className="box left0">Left (Spans 2 Rows)</div>
+        <div className="box left0">
+            <div className="left0-descp">
+                <p>Best Full-Body</p>
+                <p>Home Gym Machines</p>
+            </div>
+        </div>
         <div className="box center0">Center 0</div>
         <div className="box right0">Right 0</div>
         <div className="box center1">Center 1</div>

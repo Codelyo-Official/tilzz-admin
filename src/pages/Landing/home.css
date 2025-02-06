@@ -113,17 +113,90 @@
     height: 600px; /* Adjust as needed */
 }
 
+@media only screen and (max-width: 1000px) {
+  .main-banner-grid-imgs {
+        display: grid;
+        grid-template-columns: 45% 35% 20%;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+            "left0 center0 right0"
+            "left0 center1 right1"; /* left0 occupies both rows */
+        gap: 10px;
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-bottom: 40px;
+        height: 500px; /* Adjust as needed */
+    }
+  }
+
+  @media only screen and (max-width: 870px) {
+    .main-banner-grid-imgs {
+          display: grid;
+          grid-template-columns: 50% 50%;
+          grid-template-rows: auto auto;
+          grid-template-areas: 
+              "left0 left0"
+              "left0 left0"
+               "center0 right0"
+              "center1 right1"; /* left0 occupies both rows */
+          gap: 10px;
+          width: 96%;
+          margin-left: 2%;
+          margin-right: 2%;
+          margin-bottom: 40px;
+          height: 1000px; /* Adjust as needed */
+      }
+    }
+
 .main-banner-grid-imgs > *{
     border-radius: 26px;
 }
 
 .left0 {
+    position: relative;
     grid-area: left0;
     background-color: lightblue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
+
+
+.left0-descp{
+    position: absolute;
+    bottom: 0px;
+    right:0px;
+    background-color: white;
+    padding: 20px;
+    border-top-left-radius: 26px;
+}
+
+.left0-descp p{
+    font-weight: bold;
+}
+
+.left0-descp::before {
+    position: absolute;
+    content: "";
+    bottom: 0rem;
+    left: -1.25rem;
+    background: transparent;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+    box-shadow: 0.313rem 0.313rem 0 0.313rem #ffffff;
+    text-decoration: none;
+  }
+  .left0-descp::after {
+    position: absolute;
+    content: "";
+    top: -1.25rem;
+    right: 0rem;
+    background: transparent;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+    box-shadow: 0.313rem 0.313rem 0 0.313rem #ffffff;
+    text-decoration: none;
+  }
 
 .center0 {
     grid-area: center0;

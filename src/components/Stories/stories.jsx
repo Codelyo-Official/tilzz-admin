@@ -55,7 +55,7 @@ function Stories({children}) {
                     <ul className="story-box101">
                         {FeedStories.map((st, index) => {
                             return (
-                                <li className="story-box">
+                                <li className="story-box" key={index}>
                                     <a className="view-btn" href="">view</a>
                                     <div className="like-dislike-div">
                                         <div className="heart-icon">

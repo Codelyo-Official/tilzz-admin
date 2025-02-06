@@ -1,5 +1,10 @@
 /*************** User Dashboard Css***************************/
-
+.navbar-dashboard{
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
 
 .main-user-dashboard{
     display: grid;

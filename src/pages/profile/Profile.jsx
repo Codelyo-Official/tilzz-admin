@@ -13,15 +13,6 @@ const Profile = () => {
 
     return (
         <DashboardLayout>
-            {/* <button
-                onClick={function () {
-                const res = logout();
-                if (res.success) {
-                    alert("logout successful");
-                    navigate("/login");
-                }
-            }}>logout</button>
-            <p>hello {user.username}</p> */}
             <Stories/>
         </DashboardLayout>
     );

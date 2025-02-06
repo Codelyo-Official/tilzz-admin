@@ -2,26 +2,26 @@ import React, {useEffect} from "react";
 import axiosClient from "../../axios-client";
 import "./profile.css";
 import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
-import { useAuth } from "../../contexts/AuthProvider";
-import { Navigate } from "react-router-dom";
+import {useAuth} from "../../contexts/AuthProvider";
+import {useNavigate} from "react-router-dom";
 
-function Profile() {
-
-  const {logout} = useAuth();
-
-    useEffect(() => {}, []);
+const Profile = () => {
+    const navigate = useNavigate();
+    const {logout, getUser} = useAuth();
+    const user = getUser();
 
     return (
-       <DashboardLayout>
-        <button onClick={()=>{
-          const res = logout();
-          if(res.success){
-            alert("logout successful")
-            //Navigate("/login");
-          }
-        }}>logout</button>
-        <p>hello</p>
-       </DashboardLayout>
+        <DashboardLayout>
+            <button
+                onClick={function () {
+                const res = logout();
+                if (res.success) {
+                    alert("logout successful");
+                    navigate("/login");
+                }
+            }}>logout</button>
+            <p>hello {user.username}</p>
+        </DashboardLayout>
     );
 }
 

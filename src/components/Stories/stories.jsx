@@ -25,32 +25,8 @@ function Stories({children}) {
 
     return (
         <div>
-            {/* <div className="top-bar-dashboard">
-                <a
-                    href=""
-                    className="btn text-white"
-                    style={{
-                    backgroundColor: "#4F46E5"
-                }}>View All Stories</a>
-                <a
-                    href=""
-                    className="btn "
-                    style={{
-                    color: "#4F46E5",
-                    backgroundColor: "white",
-                    marginLeft: "10px"
-                }}>Create New Story</a>
-            </div> */}
             <div className="logged-in-user-story-div">
-                <h2 className="heading-your-story">Your Stories
-                    <x-fas-magic
-                        style={{
-                        height: "14px",
-                        width: "14px",
-                        display: "inline-block",
-                        margin: "0",
-                        color: "#4F46E5"
-                    }}/></h2>
+                <h2 className="heading-your-story">Your Stories</h2>
                 <div className="story-container">
                     <ul className="story-box101">
                         {FeedStories.map((st, index) => {

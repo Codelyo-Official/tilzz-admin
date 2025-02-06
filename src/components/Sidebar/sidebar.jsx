@@ -3,13 +3,12 @@ import { Link, NavLink } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import {Navigate, useLocation} from "react-router-dom";
 import { links } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextStateProvider';
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu} = useStateContext();
-  const location = useLocation();
+
   const handleActiveMenu = (name) => {
       setActiveMenu(name);
   };

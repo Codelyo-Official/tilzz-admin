@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import "./login.css";
-import axiosClient from "../../axios-client";
 import { useAuth } from "../../contexts/AuthProvider";
 
 const LoginSignup = () => {

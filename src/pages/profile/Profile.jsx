@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import axiosClient from "../../axios-client";
 import "./profile.css";
 import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
 import Stories from "../../components/Stories/stories";

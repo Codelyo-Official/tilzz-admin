@@ -5,6 +5,7 @@ import { useStateContext } from "../../contexts/ContextStateProvider";
 
 const FeedStories = [
     {
+        id:1,
         title: "Hamza First Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -13,6 +14,7 @@ const FeedStories = [
         follow: true,
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
     }, {
+        id:2,
         title: "Hamza Second Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -23,6 +25,7 @@ const FeedStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     }, {
+        id:3,
         title: "R6 Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -33,6 +36,7 @@ const FeedStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:4,
         title: "Japan Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -44,6 +48,7 @@ const FeedStories = [
 
     }
     ,{
+        id:5,
         title: "Pak Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -54,6 +59,7 @@ const FeedStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:6,
         title: "My Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -64,6 +70,7 @@ const FeedStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:7,
         title: "Another Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",

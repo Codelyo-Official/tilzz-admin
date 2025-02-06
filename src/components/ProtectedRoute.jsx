@@ -7,7 +7,6 @@ const ProtectedRoute = ({children}) => {
     const location = useLocation();
 
     const user = getUser();
-    console.log(user)
 
     if (location.pathname === "/profile" && user.username=="none") {
         return <Navigate to="/login"/>;

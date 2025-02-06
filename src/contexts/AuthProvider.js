@@ -6,31 +6,29 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            try {
-                const decoded = jwtDecode(token);
-                if (decoded.exp * 1000 > Date.now() || true) {
-                    // persist if time not expired
-                } else {
-                    // remove session token
-                    localStorage.removeItem("token");
-                }
-            } catch (err) {
-                localStorage.removeItem("token");
-            }
-        }
-    }, []);
+    console.log("auth invoked")
+    const [token, setToken] = useState(() => sessionStorage.getItem("token") || null);
 
-    const login = async(token) => {
+    // send an api req to see if user logged in and set token
+    useEffect(() => {
+        let timeout;
+        if (token) {
+          timeout = setTimeout(() => {
+            setToken(null); // Clear token after 15 minutes
+          }, 15 * 60 * 1000);
+        }
+        return () => clearTimeout(timeout);
+      }, [token]);
+
+    const login = async(newtoken) => {
 
         try {
             // const response = await fetch("/api/login", {   method: "POST",   headers: {
             // "Content-Type": "application/json" },   body: JSON.stringify(credentials),
             // }); const data = await response.json(); response.ok
             if (true) {
-                localStorage.setItem("token", token);
+                setToken(newtoken);
+                sessionStorage.setItem("token",newtoken)
                 return {success: true, message: "Login successful"};
             } else {
                 return {
@@ -44,12 +42,12 @@ export const AuthProvider = ({children}) => {
     };
 
     const logout = () => {
-        localStorage.removeItem("token");
+        setToken(null);
+        sessionStorage.removeItem("token");
         return {success: true, message: "Logout successful"};
     };
 
     const getUser = () =>{
-      const token = localStorage.getItem("token");
       const decoded = token? jwtDecode(token):{username:"none"};
       return decoded;
     }
@@ -57,6 +55,7 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider
             value={{
+            token,
             login,
             logout,
             getUser

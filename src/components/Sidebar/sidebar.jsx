@@ -11,13 +11,6 @@ const Sidebar = () => {
   const { activeMenu, setActiveMenu} = useStateContext();
   const location = useLocation();
   const handleActiveMenu = (name) => {
-    // const url = new URL(window.location);
-    // if(name==="My Stories"){
-    //   url.searchParams.set("activeTab","my-stories");
-    // }else if(name==="Create New Story"){
-    //   url.searchParams.set("activeTab","create-story");
-    // }
-    // location.replace(url);
       setActiveMenu(name);
   };
 
@@ -34,7 +27,7 @@ const Sidebar = () => {
                 <div className="leftbar-items">
                   {item.links.map((link) => (
                       <NavLink
-                        to={`/dashboard`}
+                        to={`/dashboard?activeTab=${link.slug}`}
                         key={link.name}
                         onClick={()=>{handleActiveMenu(link.name)}}
                         className={activeMenu===link.name ? "active-leftbar" : ""}

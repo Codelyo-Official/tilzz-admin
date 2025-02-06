@@ -475,10 +475,12 @@ export const links = [
     links: [
       {
         name: 'Stories Feed',
+        slug:'stories-feed',
         icon: <IoMdContacts style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       },
       {
         name: 'My Stories',
+        slug:'my-stories',
         icon: <RiContactsLine style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       }
     ],
@@ -489,6 +491,7 @@ export const links = [
     links: [
       {
         name: 'Create New Story',
+        slug:'create-story',
         icon: <FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       },
     ],

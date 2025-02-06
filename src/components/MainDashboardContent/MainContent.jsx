@@ -10,7 +10,10 @@ function MainContent({children}) {
     const queryParams = new URLSearchParams(location.search);
     const value = queryParams.get('activeTab'); // Retrieve the value of a specific query parameter
 
-    if (value=="my-stories") {
+    if (value=="stories-feed") {
+        setActiveMenu("Stories Feed")
+    }
+    else if (value=="my-stories") {
         setActiveMenu("My Stories")
     }else if(value=="create-story"){
         setActiveMenu("Create New Story")

@@ -1,32 +1,15 @@
 import React, {useEffect} from "react";
 
-const FeedStories = [
-    {
-        title: "Hamza First Story",
-        img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
-                "&cs=tinysrgb&w=1260&h=750&dpr=1",
-        follow: true
-    }, {
-        title: "Hamza Second Story",
-        img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
-                "&cs=tinysrgb&w=1260&h=750&dpr=1",
-        follow: false
-    }, {
-        title: "R6 Story",
-        img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
-                "&cs=tinysrgb&w=1260&h=750&dpr=1",
-        follow: true
-    }
-]
 
-function Stories({children}) {
+
+function Stories({children,FeedStories}) {
 
     useEffect(() => {}, []);
 
     return (
         <div>
             <div className="logged-in-user-story-div">
-                <h2 className="heading-your-story">Your Stories</h2>
+                <h2 className="heading-your-story">All Stories</h2>
                 <div className="story-container">
                     <ul className="story-box101">
                         {FeedStories.map((st, index) => {
@@ -56,15 +39,17 @@ function Stories({children}) {
                                         </div>
                                         <h4 className="like-count">10</h4>
                                     </div>
+                                    <h4 className="story-by-user">by {st.story_by_user} <img src={st.user_avatar}/></h4>
+
                                     <img src={st.img} alt=""/>
                                     <div className="title">
-                                        <p >{st.title}</p>
-                                        <button
+                                        <p >{st.title} <button
                                             className={st.follow
                                             ? "following-btn"
                                             : "follow-btn"}>{st.follow
                                                 ? "following"
-                                                : "follow"}</button>
+                                                : "follow"}</button></p>
+                                        <p className="descp">{st.description}</p>
                                     </div>
                                 </li>
                             )

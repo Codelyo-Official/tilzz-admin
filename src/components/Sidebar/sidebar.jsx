@@ -29,7 +29,7 @@ const Sidebar = () => {
                         to={`/dashboard?activeTab=${link.slug}`}
                         key={link.name}
                         onClick={()=>{handleActiveMenu(link.name)}}
-                        className={activeMenu===link.name ? "active-leftbar" : ""}
+                        className={activeMenu===link.slug ? "active-leftbar" : ""}
                       >
                         {link.icon} {link.name}
                       </NavLink>

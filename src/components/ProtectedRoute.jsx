@@ -8,12 +8,12 @@ const ProtectedRoute = ({children}) => {
 
     const user = getUser();
 
-    if (location.pathname === "/profile" && user.username=="none") {
+    if (location.pathname === "/dashboard" && user.username=="none") {
         return <Navigate to="/login"/>;
     }
 
     if (location.pathname === "/login" && user.username!="none") {
-        return <Navigate to="/profile"/>;
+        return <Navigate to="/dashboard"/>;
     }
 
     return children;

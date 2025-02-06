@@ -25,7 +25,7 @@ function Stories({children}) {
 
     return (
         <div>
-            <div className="top-bar-dashboard">
+            {/* <div className="top-bar-dashboard">
                 <a
                     href=""
                     className="btn text-white"
@@ -40,7 +40,7 @@ function Stories({children}) {
                     backgroundColor: "white",
                     marginLeft: "10px"
                 }}>Create New Story</a>
-            </div>
+            </div> */}
             <div className="logged-in-user-story-div">
                 <h2 className="heading-your-story">Your Stories
                     <x-fas-magic

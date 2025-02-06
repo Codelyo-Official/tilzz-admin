@@ -28,7 +28,7 @@ const LoginSignup = () => {
     const response = await login(token);
     //console.log(response)
     if(response.success){
-      navigate("/profile");
+      navigate("/dashboard");
     }
 
     // axiosClient
@@ -67,7 +67,7 @@ const LoginSignup = () => {
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiZXhwIjoxNzE3MDE0MDAwfQ.12345";
     const response = await login(token);
     if(response.success){
-      navigate("/profile");
+      navigate("/dashboard");
     }
 
     // axiosClient

@@ -233,10 +233,12 @@
     color:rgb(192, 190, 190);
     font-size: 10px;
     margin-left: 18px;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
-  .leftbar-items div{
+  .leftbar-items a{
+    display: block;
     border-radius: 5px;
     height: auto;
     padding: 5px;

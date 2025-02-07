@@ -261,6 +261,15 @@
     background: #ffffff;
   }
 
+  .center0 .icon .iconBox span {
+    border-radius: 50%;
+    margin-top: 20px;
+    background-color: #DAB6ED;
+    padding: 15px;
+    color: #ffffff;
+    font-size: 1.5rem;
+  }
+
   .center0 .icon::before {
     position: absolute;
     content: "";

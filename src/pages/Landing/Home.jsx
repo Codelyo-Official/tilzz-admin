@@ -9,7 +9,7 @@ function Home() {
     return (
         <div className="home-banner">
             <div className="top-par-home">
-                <h2 className="Logo">Logo</h2>
+                <h2 className="Logo">LOGO</h2>
                 <div className="home-navbar">
                     <button>Home</button>
                     <div className="dot"></div>
@@ -37,7 +37,7 @@ function Home() {
                     </div>
                     <div className="box center0">
                     <div class="icon">
-                        <a href="" class="iconBox"><span class="material-symbols-outlined">arrow_outward</span></a>
+                        <a href="" className="iconBox"><span class="material-symbols-outlined">arrow_outward</span></a>
                     </div>
                     </div>
                     <div className="box right0">Right 0</div>

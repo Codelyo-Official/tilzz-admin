@@ -31,18 +31,24 @@ function Home() {
                 <div className="main-banner-grid-imgs">
                     <div className="box left0">
                         <div className="left0-descp">
-                            <p>BEST IDEAS</p>
+                            <p>INTRIGUING IDEAS</p>
                             <p>COLLABORATIVE STORIES</p>
                         </div>
                     </div>
                     <div className="box center0">
-                    <div class="icon">
-                        <a href="" className="iconBox"><span class="material-symbols-outlined">arrow_outward</span></a>
+                        <p className="center0toptitle"><span>Narrato</span> . Collaborative Stories</p>
+                        <div className="center0top">
+                            <p>READY, SET, GO!</p>
+                            <p>CREATE INTERESTING STORIES NOW</p>
+                            <p className="center0topdescp">Join a community of storytellers and shape the future of interactive storytelling!</p>
+                        </div>
+                        <div class="icon">
+                            <a href="" className="iconBox"><span className="material-symbols-outlined">arrow_outward</span></a>
+                        </div>
                     </div>
-                    </div>
-                    <div className="box right0">Right 0</div>
-                    <div className="box center1">Center 1</div>
-                    <div className="box right1">Right 1</div>
+                    <div className="box right0"></div>
+                    <div className="box center1"></div>
+                    <div className="box right1"></div>
                 </div>
             </div>
         </div>

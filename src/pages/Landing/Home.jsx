@@ -29,17 +29,21 @@ function Home() {
                     <button className="main-banner-top-sec-btn">Read Our Blog</button>
                 </div>
                 <div className="main-banner-grid-imgs">
-        <div className="box left0">
-            <div className="left0-descp">
-                <p>Best Full-Body</p>
-                <p>Home Gym Machines</p>
-            </div>
-        </div>
-        <div className="box center0">Center 0</div>
-        <div className="box right0">Right 0</div>
-        <div className="box center1">Center 1</div>
-        <div className="box right1">Right 1</div>
-    </div>
+                    <div className="box left0">
+                        <div className="left0-descp">
+                            <p>BEST PLATFORM</p>
+                            <p>COLLABORATIVE STORIES</p>
+                        </div>
+                    </div>
+                    <div className="box center0">
+                    <div class="icon">
+                        <a href="" class="iconBox"><span class="material-symbols-outlined">arrow_outward</span></a>
+                    </div>
+                    </div>
+                    <div className="box right0">Right 0</div>
+                    <div className="box center1">Center 1</div>
+                    <div className="box right1">Right 1</div>
+                </div>
             </div>
         </div>
     );

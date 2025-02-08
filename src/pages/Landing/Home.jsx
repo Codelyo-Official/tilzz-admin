@@ -42,11 +42,20 @@ function Home() {
                             <p>CREATE INTERESTING STORIES NOW</p>
                             <p className="center0topdescp">Join a community of storytellers and shape the future of interactive storytelling!</p>
                         </div>
+                        <div className="link-go">
+                                <button>Popular Stories</button>
+                            </div>
                         <div class="icon">
                             <a href="" className="iconBox"><span className="material-symbols-outlined">arrow_outward</span></a>
                         </div>
                     </div>
-                    <div className="box right0"></div>
+                    <div className="box right0">
+                    <p className="center0toptitle"><span>Category</span> . Fiction</p>
+                    <div className="center0top">
+                         <p className="center0toptitle1"><span>Hot</span> . 12 Feb</p>
+                            <p>Whispers of the Forgotten Future</p>
+                        </div>
+                    </div>
                     <div className="box center1"></div>
                     <div className="box right1"></div>
                 </div>

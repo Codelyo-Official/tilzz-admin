@@ -135,7 +135,16 @@
     }
   }
 
+  .link-go button{
+    margin-left: 20px;
+ }
+  
+
   @media only screen and (max-width: 870px) {
+
+    .link-go button{
+        margin-left: 18px;
+     }
 
     .home-navbar{ 
         width: 60%;
@@ -164,6 +173,13 @@
               "center1 right1"; /* left0 occupies both rows */
           height: 1000px; /* Adjust as needed */
       }
+    }
+
+    @media only screen and (max-width: 580px) {
+        .link-go button{
+          margin-left: 16px;
+          font-size: 10px;
+       }
     }
 
     @media only screen and (max-width: 690px) {
@@ -289,10 +305,41 @@
     font-family: 'Montserrat', sans-serif !important;
     font-size: 10px;
     margin-top: 10px;
+    width: 60%;
 }
 
-.center0toptitle span{
+@media only screen and (max-width:600px){
+    .center0topdescp{
+        display: none;
+    }
+}
+
+.center0toptitle span,
+.center0toptitle1 span{
     font-weight: bold;
+}
+
+.center0toptitle1{
+    font-family: 'Montserrat', sans-serif !important;
+    margin-top:4px;
+    margin-left: 0px;
+    font-size: 10px;
+
+}
+
+.link-go{
+    position: absolute;
+    bottom: 0px;
+    left:0px;
+    height: 45px;
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-color: #2c2c2c;
+    font-family: benzinextb;
+    display: flex;
+    justify-content: left;
+    font-size: 12px;
 }
 
 .center0 .icon {
@@ -350,6 +397,7 @@
 }
 
 .right0 {
+    position: relative;
     grid-area: right0;
     background-color: #CBDCE4;
     display: flex;

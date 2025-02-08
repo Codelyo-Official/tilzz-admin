@@ -1,11 +1,15 @@
 import React, {use, useEffect} from "react";
 import Stories from "../Stories/stories";
 import {Navigate, useLocation} from "react-router-dom";
-import { useStateContext } from "../../contexts/ContextStateProvider";
+import { useSelector, useDispatch } from 'react-redux';
+import {setActiveTab} from "../../features/tabSlice";
 
 function MainContent({children}) {
 
-    const { activeMenu, setActiveMenu} = useStateContext();
+    console.log("maincontent component rendered");
+
+    const activeMenu = useSelector(((state) => state.activeTab.activeTab));
+    const dispatch = useDispatch();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const value = queryParams.get('activeTab'); // Retrieve the value of a specific query parameter
@@ -13,8 +17,8 @@ function MainContent({children}) {
     useEffect(()=>{
         //console.log(value)
         if(value!=null){
-            console.log(activeMenu)
-            setActiveMenu(value)
+            //console.log(activeMenu)
+            dispatch(setActiveTab(value));
         }
     },[activeMenu])
 

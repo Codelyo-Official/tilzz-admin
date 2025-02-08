@@ -43,7 +43,7 @@ function Home() {
                         <div className="link-go">
                                 <button>Popular Stories</button>
                         </div>
-                        <div class="icon">
+                        <div className="icon">
                             <a href="" className="iconBox"><span className="material-symbols-outlined">arrow_outward</span></a>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ function Home() {
                         </div>
                         <div className="right1-bottom">
                             <button>View All Categories</button>
-                            <div class="icon">
+                            <div className="icon">
                                 <a href="" className="iconBox"><span className="material-symbols-outlined">arrow_outward</span></a>
                             </div>
                         </div>

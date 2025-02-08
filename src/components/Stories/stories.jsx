@@ -208,10 +208,13 @@ const FollowingStories = [
 
 function Stories({children,slugStories}) {
 
+    console.log("stories component rendered");
+
+
     const [dataStories,setDataStories] = React.useState([]);
 
     useEffect(()=>{
-        if(slugStories==="stories-feed" || slugStories===null){
+        if(slugStories==="stories-feed"){
         // api call for all stories
         setDataStories(FeedStories);
         }else if(slugStories==="my-stories"){

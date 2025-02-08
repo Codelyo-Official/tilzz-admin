@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthProvider";
-import { ContextProvider } from "./contexts/ContextStateProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 // pages
@@ -10,10 +9,14 @@ import NotFound from "./components/NotFound";
 import Login from "./pages/registeration/Login";
 import Profile from "./pages/profile/Profile";
 
+//redux
+import { Provider } from 'react-redux';
+import { store } from './state/store';
+
 const App = () => {
   return (
     <AuthProvider>
-      <ContextProvider>
+      <Provider store={store}>
         <Router>
           <Routes>
             <Route path="/" element={<Home/>} />
@@ -22,7 +25,7 @@ const App = () => {
             <Route path="*" element={<NotFound/>} />
           </Routes>
         </Router>
-      </ContextProvider>
+      </Provider>
     </AuthProvider>
   );
 };

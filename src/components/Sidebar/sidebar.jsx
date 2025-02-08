@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { links } from '../../data/dummy';
-import { useStateContext } from '../../contexts/ContextStateProvider';
+import { useSelector, useDispatch } from 'react-redux';
+import {setActiveTab} from "../../features/tabSlice";
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu} = useStateContext();
+
+  console.log("sidebar component rendered");
+
+    const activeMenu = useSelector(((state) => state.activeTab.activeTab));
+    const dispatch = useDispatch();
 
   const handleActiveMenu = (name) => {
-      setActiveMenu(name);
+      dispatch(setActiveTab(name));
   };
 
   return (

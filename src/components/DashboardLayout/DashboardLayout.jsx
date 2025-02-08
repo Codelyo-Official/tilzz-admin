@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect,useMemo} from "react";
 import "./styles.css";
 import { useAuth } from "../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
@@ -6,8 +6,10 @@ import Sidebar from "../Sidebar/sidebar";
 
 function DashboardLayout({children}) {
 
+    console.log("dashboard layout component rendered");
+
     const {getUser,logout} = useAuth();
-    const user = getUser();
+    const user = useMemo(() => getUser(), []);
     const navigate = useNavigate();
 
     return (

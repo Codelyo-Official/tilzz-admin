@@ -57,7 +57,7 @@ function Home() {
                         </div>
                     </div>
                     <div className="box center1">
-                    <video autoplay muted playsinline loop>
+                    <video autoPlay loop muted playsInline>
                             <source src="/videos/try2.mp4" type="video/mp4"/>
                         </video>
                     <p className="center0toptitle" style={{color:"white"}}><span>Narrato</span> . innovative dashboard</p>

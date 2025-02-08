@@ -4,8 +4,6 @@ import "./home.css";
 
 function Home() {
 
-    useEffect(() => {}, []);
-
     return (
         <div className="home-banner">
             <div className="top-par-home">

@@ -1,6 +1,5 @@
 import React, {createContext, useContext, useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
-import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -9,7 +8,6 @@ export const AuthProvider = ({children}) => {
     console.log("auth invoked")
     const [token, setToken] = useState(() => sessionStorage.getItem("token") || null);
 
-    // send an api req to see if user logged in and set token
     useEffect(() => {
         let timeout;
         if (token) {
@@ -23,9 +21,6 @@ export const AuthProvider = ({children}) => {
     const login = async(newtoken) => {
 
         try {
-            // const response = await fetch("/api/login", {   method: "POST",   headers: {
-            // "Content-Type": "application/json" },   body: JSON.stringify(credentials),
-            // }); const data = await response.json(); response.ok
             if (true) {
                 setToken(newtoken);
                 sessionStorage.setItem("token",newtoken)

@@ -6,16 +6,17 @@ import "./login.css";
 import { useAuth } from "../../contexts/AuthProvider";
 
 const LoginSignup = () => {
+
   const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const [isLogin, setIsLogin] = useState(true);
   const { login } = useAuth();
   const [errors, setErrors] = useState(null);
-  const [companyName, setCompanyName] = useState("");
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -24,12 +25,7 @@ const LoginSignup = () => {
       password: password,
     };
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiZXhwIjoxNzE3MDE0MDAwfQ.12345";
-    const response = await login(token);
-    //console.log(response)
-    if(response.success){
-      navigate("/dashboard");
-    }
+    //send an api req to login and get access token from backend
 
     // axiosClient
     //   .post("/login", payload)
@@ -51,6 +47,14 @@ const LoginSignup = () => {
     //       setErrors("User name or password is incorrect");
     //     }
     //   });
+
+    // using dummy token for now
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiZXhwIjoxNzE3MDE0MDAwfQ.12345";
+    const response = await login(token);
+
+    if(response.success){
+      navigate("/dashboard");
+    }
   };
 
   const handleSignupSubmit = async (e) => {
@@ -64,12 +68,6 @@ const LoginSignup = () => {
     };
     console.log(payload);
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiZXhwIjoxNzE3MDE0MDAwfQ.12345";
-    const response = await login(token);
-    if(response.success){
-      navigate("/dashboard");
-    }
-
     // axiosClient
     //   .post("/signup", payload)
     //   .then(({ data }) => {
@@ -82,6 +80,12 @@ const LoginSignup = () => {
     //       setErrors(response.data.errors);
     //     }
     //   });
+
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiZXhwIjoxNzE3MDE0MDAwfQ.12345";
+    const response = await login(token);
+    if(response.success){
+      navigate("/dashboard");
+    }
   };
 
   const toggleLoginSignup = () => {

@@ -1,12 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import {FiSettings} from "react-icons/fi";
-import {TooltipComponent} from "@syncfusion/ej2-react-popups";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { ContextProvider } from "./contexts/ContextStateProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
-//pages
+// pages
 import Home from "./pages/Landing/Home";
 import NotFound from "./components/NotFound";
 import Login from "./pages/registeration/Login";

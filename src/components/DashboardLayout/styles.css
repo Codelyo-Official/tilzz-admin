@@ -1,4 +1,6 @@
 /*************** User Dashboard Css***************************/
+
+
 .navbar-dashboard{
   position: relative;
   height: 70px;
@@ -8,6 +10,7 @@
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: aliceblue;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .logo{
@@ -16,6 +19,7 @@
   transform: translateY(-50%);
   left:5%;
   font-weight: bold;
+  font-family: benzinextb;
 }
 
 .logged-in-user-avatar{
@@ -43,6 +47,7 @@
     grid-area: leftbar;
     min-height: 100vh;
     height: auto;
+    font-family: 'Montserrat', sans-serif !important;
     background-color: rgb(255, 255, 255);
   }
   
@@ -69,6 +74,7 @@
   }
   
   .logged-in-user-story-div{
+    font-family: 'Montserrat', sans-serif !important;
     background-color: white;
     width: 98%;
     margin-top: 20px;

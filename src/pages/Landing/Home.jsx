@@ -56,7 +56,14 @@ function Home() {
                             <p>Whispers of the Forgotten Future</p>
                         </div>
                     </div>
-                    <div className="box center1"></div>
+                    <div className="box center1">
+                    <video autoplay muted playsinline loop>
+                            <source src="/videos/try2.mp4" type="video/mp4"/>
+                        </video>
+                    <p className="center0toptitle" style={{color:"white"}}><span>Narrato</span> . innovative dashboard</p>
+                    <p className="video-descp-banner">Effortlessly create and manage your stories, track episodes, and engage with a thriving community of writers and readers.</p>
+
+                    </div>
                     <div className="box right1"></div>
                 </div>
             </div>

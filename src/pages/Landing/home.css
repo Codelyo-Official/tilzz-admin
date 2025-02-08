@@ -395,11 +395,22 @@
   
 
 .center1 {
+    position: relative;
     grid-area: center1;
     background-color: lightgreen;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+
+.center1 video{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .right0 {
@@ -417,6 +428,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.video-descp-banner{
+    position: absolute;
+    bottom: 0px;
+    left:0px;
+    width: 100%;
+    font-family: benzinextb;
+    color:white;
+    font-size: 12px;
+    padding: 14px;
+    text-align: left;
 }
 
 .box {

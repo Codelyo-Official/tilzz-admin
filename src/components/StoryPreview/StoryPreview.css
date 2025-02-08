@@ -1,0 +1,131 @@
+.story-preview {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  
+  .story-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .story-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .story-info {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .story-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .story-description {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .episodes-list {
+    padding: 20px;
+  }
+  
+  .episode {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .episode-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  
+  .episode-header h4 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .episode-header span {
+    color: #007bff;
+    font-size: 14px;
+  }
+  
+  .episode-content {
+    padding-top: 10px;
+    font-size: 16px;
+  }
+  
+  .edit-episode-btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-episode-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .add-episode {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .new-episode-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .new-episode-btn:hover {
+    background-color: #218838;
+  }
+  
+  .new-episode-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .new-episode-form input,
+  .new-episode-form textarea {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
+    max-width: 500px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .new-episode-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .new-episode-form button:hover {
+    background-color: #0056b3;
+  }
+  

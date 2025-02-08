@@ -1,5 +1,7 @@
 import React, {use, useEffect} from "react";
 import Stories from "../Stories/stories";
+import CreateStory from "../CreateStory/CreateStory";
+import StoryPreview from "../StoryPreview/StroryPreview";
 import {Navigate, useLocation} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {setActiveTab} from "../../features/tabSlice";
@@ -35,9 +37,11 @@ function MainContent({children}) {
         )}
 
         {activeMenu==="create-story"&&(
-            <div>
-                create new story here
-            </div>
+            <CreateStory/>
+        )}
+
+        {activeMenu==="story-preview"&&(
+            <StoryPreview/>
         )}
         </>
     );

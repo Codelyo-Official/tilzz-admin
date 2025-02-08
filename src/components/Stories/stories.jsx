@@ -1,4 +1,8 @@
 import React, {useEffect} from "react";
+import { Link, NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {setActiveTab} from "../../features/tabSlice";
+
 
 const FeedStories = [
     {
@@ -82,6 +86,7 @@ const FeedStories = [
 
 const MyStories = [
     {
+        id:1,
         title: "Hamza First Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -90,6 +95,7 @@ const MyStories = [
         follow: true,
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
     }, {
+        id:2,
         title: "R6 Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -100,6 +106,7 @@ const MyStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:3,
         title: "Japan Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -111,6 +118,7 @@ const MyStories = [
 
     }
     ,{
+        id:4,
         title: "Pak Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -121,6 +129,7 @@ const MyStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:5,
         title: "My Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -131,6 +140,7 @@ const MyStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:6,
         title: "Another Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -145,6 +155,7 @@ const MyStories = [
 
 const FollowingStories = [
     {
+        id:1,
         title: "Hamza First Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -153,6 +164,7 @@ const FollowingStories = [
         follow: true,
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
     }, {
+        id:2,
         title: "R6 Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -163,6 +175,7 @@ const FollowingStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:3,
         title: "Japan Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -174,6 +187,7 @@ const FollowingStories = [
 
     }
     ,{
+        id:4,
         title: "Pak Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -184,6 +198,7 @@ const FollowingStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:5,
         title: "My Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -194,6 +209,7 @@ const FollowingStories = [
         user_avatar:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"
 
     },{
+        id:6,
         title: "Another Story",
         img: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -207,6 +223,8 @@ const FollowingStories = [
 ]
 
 function Stories({children,slugStories}) {
+
+     const dispatch = useDispatch();
 
     console.log("stories component rendered");
 
@@ -224,7 +242,11 @@ function Stories({children,slugStories}) {
             // api call for stories followed by the user
             setDataStories(FollowingStories);
         }
-    },[slugStories])
+    },[slugStories]);
+
+    const handleActiveMenu = (name) => {
+          dispatch(setActiveTab(name));
+      };
 
     return (
         <div>
@@ -235,7 +257,13 @@ function Stories({children,slugStories}) {
                         {dataStories.map((st, index) => {
                             return (
                                 <li className="story-box" key={index}>
-                                    <a className="view-btn" href="">view</a>
+                                    <NavLink
+                                        className="view-btn"
+                                        to={`/dashboard?activeTab=story-preview&storyId=${st.id}`}
+                                        onClick={()=>{handleActiveMenu("story-preview")}}
+                                        >
+                                        View
+                                    </NavLink>
                                     <div className="like-dislike-div">
                                         <div className="heart-icon">
                                             <svg

@@ -226,7 +226,7 @@ function Stories({children,slugStories}) {
     return (
         <div>
             <div className="logged-in-user-story-div">
-                <h2 className="heading-your-story">Stories</h2>
+                <h2 className="heading-your-story">{slugStories===null || slugStories==="stories-feed" ? ("Stories"):slugStories==="my-stories"?"My Stories":"Following Stories"}</h2>
                 <div className="story-container">
                     <ul className="story-box101">
                         {dataStories.map((st, index) => {

@@ -44,7 +44,7 @@ function Home() {
                         </div>
                         <div className="link-go">
                                 <button>Popular Stories</button>
-                            </div>
+                        </div>
                         <div class="icon">
                             <a href="" className="iconBox"><span className="material-symbols-outlined">arrow_outward</span></a>
                         </div>

@@ -64,7 +64,23 @@ function Home() {
                     <p className="video-descp-banner">Effortlessly create and manage your stories, track episodes, and engage with a thriving community of writers and readers.</p>
 
                     </div>
-                    <div className="box right1"></div>
+                    <div className="box right1">
+                        <div className="right1-categories">
+                            <button>Life Style</button>
+                            <button style={{backgroundColor:"#FFE665"}}>Fiction</button>
+                            <button>Diet</button>
+                            <button>Diseases</button>
+                            <button>Medical Knowledge</button>
+                            <button>Fantasy</button>
+                            <button>Thriller</button>
+                        </div>
+                        <div className="right1-bottom">
+                            <button>View All Categories</button>
+                            <div class="icon">
+                                <a href="" className="iconBox"><span className="material-symbols-outlined">arrow_outward</span></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -22,6 +22,8 @@ import product5 from './product5.jpg';
 import product6 from './product6.jpg';
 import product7 from './product7.jpg';
 import product8 from './product8.jpg';
+import { IoExitOutline } from "react-icons/io5";
+
 
 export const gridOrderImage = (props) => (
   <div>
@@ -502,6 +504,16 @@ export const links = [
         name: 'Create New Story',
         slug:'create-story',
         icon: <FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+      },
+    ],
+  },
+  {
+    title: 'Account',
+    links: [
+      {
+        name: 'logout',
+        slug:'user-logout',
+        icon: <IoExitOutline style={{height:"16px", width:"16px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       },
     ],
   },

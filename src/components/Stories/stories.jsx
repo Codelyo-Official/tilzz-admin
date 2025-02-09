@@ -248,6 +248,14 @@ function Stories({children,slugStories}) {
           dispatch(setActiveTab(name));
       };
 
+    const toggleFollow = (id) => {
+
+        setDataStories(() =>
+            dataStories.map((story) =>
+              story.id === id ? { ...story, follow: !story.follow } : story
+            ));    
+    }
+
     return (
         <div>
             <div className="logged-in-user-story-div">
@@ -287,11 +295,12 @@ function Stories({children,slugStories}) {
                                         </div>
                                         <h4 className="like-count">10</h4>
                                     </div>
-                                    <h4 className="story-by-user">by {st.story_by_user} <img src={st.user_avatar}/></h4>
+                                    <h4 className="story-by-user"><img src={st.user_avatar}/> {st.story_by_user}</h4>
 
                                     <img src={st.img} alt=""/>
                                     <div className="title">
                                         <p >{st.title} <button
+                                            onClick={()=>{toggleFollow(st.id)}}
                                             className={st.follow
                                             ? "following-btn"
                                             : "follow-btn"}>{st.follow

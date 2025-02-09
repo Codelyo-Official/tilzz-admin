@@ -1,131 +1,147 @@
 .story-preview {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #fff;
-  }
-  
-  .story-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .story-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .story-info {
-    margin-top: 15px;
-    text-align: center;
-  }
-  
-  .story-title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .story-description {
-    font-size: 16px;
-    color: #555;
-    margin-top: 10px;
-  }
-  
-  .episodes-list {
-    padding: 20px;
-  }
-  
-  .episode {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-  
-  .episode-header {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-  
-  .episode-header h4 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .episode-header span {
-    color: #007bff;
-    font-size: 14px;
-  }
-  
-  .episode-content {
-    padding-top: 10px;
-    font-size: 16px;
-  }
-  
-  .edit-episode-btn {
-    margin-top: 10px;
-    padding: 5px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .edit-episode-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .add-episode {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .new-episode-btn {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .new-episode-btn:hover {
-    background-color: #218838;
-  }
-  
-  .new-episode-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .new-episode-form input,
-  .new-episode-form textarea {
-    margin: 10px 0;
-    padding: 10px;
-    width: 80%;
-    max-width: 500px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .new-episode-form button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .new-episode-form button:hover {
-    background-color: #0056b3;
-  }
-  
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.story-header {
+  position: relative;
+}
+
+.story-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.story-info {
+  padding: 20px;
+}
+
+.story-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.story-description {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px;
+  color: #555;
+}
+
+.episodes-list {
+  padding: 20px;
+}
+
+.episodes-list h3{
+  font-size: 14px;
+}
+
+.episode {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  transition: all 0.3s;
+}
+
+.episode-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.episode-header:hover {
+  background: #ececec;
+}
+
+.episode-header h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.episode-header span {
+  font-size: 14px;
+  color: #007bff;
+}
+
+.episode-content {
+  padding: 15px;
+  font-size: 14px;
+  background: #f1f1f1;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.edit-episode-btn {
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right:100px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-episode {
+  padding: 20px;
+  text-align: center;
+}
+
+.new-episode-btn,
+.new-episode-submit {
+  padding: 12px 20px;
+  width: 160px;
+  border-radius: 24px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #4F46E5;
+  color: #4F46E5;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.new-episode-btn:hover,
+.new-episode-submit:hover {
+  background: #4F46E5;
+  color:white;
+}
+
+.new-episode-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.new-episode-form input, .new-episode-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.new-episode-form button {
+ width: 200px;
+}
+

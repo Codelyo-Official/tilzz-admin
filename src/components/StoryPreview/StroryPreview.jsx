@@ -1,10 +1,13 @@
 import React, { useState,useMemo } from 'react';
 import './StoryPreview.css';
 import { useAuth } from "../../contexts/AuthProvider";
-
+import { FiEdit } from 'react-icons/fi';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const dummyData = {
-  storyImage: 'https://via.placeholder.com/600x300',
+  storyImage: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
+                "&cs=tinysrgb&w=1260&h=750&dpr=1",
   title: 'The Mysterious Journey',
   description: 'Follow the journey of a young explorer seeking the hidden treasures of the ancient world.',
   creator: 'user123',
@@ -38,6 +41,7 @@ const StoryPreview = ({ userId }) => {
   const [activeEpisode, setActiveEpisode] = useState(null);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
+  const [value, setValue] = useState('');
 
   const handleEpisodeToggle = (episodeId) => {
     setActiveEpisode(activeEpisode === episodeId ? null : episodeId);
@@ -70,21 +74,21 @@ const StoryPreview = ({ userId }) => {
           <div key={episode.id} className="episode">
             <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
               <h4>{episode.title}</h4>
+                {episode.creator === user.username && (
+                    <button className="edit-episode-btn"><FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/></button>
+                )}
               <span>{activeEpisode === episode.id ? 'Hide' : 'Read More'}</span>
             </div>
             {activeEpisode === episode.id && (
               <div className="episode-content">
                 <p>{episode.content}</p>
-                {episode.creator === user.username && (
-                  <button className="edit-episode-btn">Edit Episode</button>
-                )}
               </div>
             )}
           </div>
         ))}
       </div>
 
-      {userId === dummyData.creator && (
+     
         <div className="add-episode">
           {showNewEpisodeForm ? (
             <div className="new-episode-form">
@@ -94,12 +98,13 @@ const StoryPreview = ({ userId }) => {
                 value={newEpisode.title}
                 onChange={(e) => setNewEpisode({ ...newEpisode, title: e.target.value })}
               />
-              <textarea
+              {/* <textarea
                 placeholder="Episode Content"
                 value={newEpisode.content}
                 onChange={(e) => setNewEpisode({ ...newEpisode, content: e.target.value })}
-              />
-              <button onClick={handleSubmitNewEpisode}>Submit New Episode</button>
+              /> */}
+              <ReactQuill theme="snow" value={value} onChange={setValue} style={{height:"100%"}}/>
+              <button className="new-episode-submit" onClick={handleSubmitNewEpisode}>Submit New Episode</button>
             </div>
           ) : (
             <button className="new-episode-btn" onClick={handleNewEpisode}>
@@ -107,7 +112,7 @@ const StoryPreview = ({ userId }) => {
             </button>
           )}
         </div>
-      )}
+      
     </div>
   );
 };

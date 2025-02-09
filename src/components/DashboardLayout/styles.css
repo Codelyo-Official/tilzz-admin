@@ -105,6 +105,8 @@
     position: absolute;
     bottom:10px;
     right:10px;
+    height: auto;
+    width: auto;
   }
 
   .story-box101{

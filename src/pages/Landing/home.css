@@ -164,6 +164,30 @@
 
     @media only screen and (max-width: 690px) {
 
+        .main-banner-top-sec-h{
+            font-weight: bold;
+            position: absolute;
+            top:50%;
+            transform: translateY(-50%);
+            left:5%;
+            font-size: 32px;
+            font-family: benzinextb;
+        }
+
+        .main-banner-top-sec-btn{
+            font-family: 'Montserrat', sans-serif !important;
+            position: absolute;
+            top:50%;
+            transform: translateY(-50%);
+            right:5%;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            background-color: #EFEFEF;
+            color: black;
+        }
+        
+
         .top-par-home{
             margin-bottom: 60px;
         }

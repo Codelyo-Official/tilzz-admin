@@ -1,6 +1,8 @@
 .form-container {
     margin-top: 15vh;
     height: max-content;
+    font-family: 'Montserrat', sans-serif !important;
+
 }
 
 
@@ -93,5 +95,23 @@
     .form-container input {
       margin-bottom: 10px;
     }
+  }
+
+  button[type="submit"]{
+    padding: 12px 20px;
+    width: 160px;
+    border-radius: 24px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #4F46E5;
+    color: #4F46E5;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #4d44f8;
+    color:white;
   }
   

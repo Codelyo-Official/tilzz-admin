@@ -93,12 +93,14 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="login-signup-container">
+    <div className="login-signup-container" style={{position:"relative"}}>
+      <div style={{position:"absolute", top:"0px", left:"0px", width:"100%", height:"100px", textAlign:"center"}}> <h2 className="Logo" style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>Narrato</h2></div>
       <div
         className={`form-container ${isLogin ? "" : "form-container-expanded"}`}
+        style={{marginTop:"120px"}}
       >
-        <h2>{isLogin ? "Login" : "Create New Account"}</h2>
-        <form onSubmit={isLogin ? handleLoginSubmit : handleSignupSubmit}>
+        <h2 style={{fontSize:"16px", color:"black"}}>{isLogin ? "Login" : "Create New Account"}</h2>
+        <form onSubmit={isLogin ? handleLoginSubmit : handleSignupSubmit} >
           {!isLogin && (
             <input
               type="text"
@@ -136,9 +138,9 @@ const LoginSignup = () => {
             {errors}
             </p>
           )}
-          <button type="submit">{isLogin ? "Login" : "Create Account"}</button>
+          <button type="submit" style={{fontSize:"14px"}}>{isLogin ? "Login" : "Create Account"}</button>
         </form>
-        <div className="toggle-link" onClick={toggleLoginSignup}>
+        <div className="toggle-link" onClick={toggleLoginSignup} style={{fontSize:"12px", color:"black"}}>
           {isLogin ? "Create New Account" : "Already have an account? Login"}
         </div>
         {/* <div className="social-login">

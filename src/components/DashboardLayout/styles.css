@@ -2,7 +2,9 @@
 
 
 .navbar-dashboard{
-  position: relative;
+  position: absolute;
+  top:0px;
+  left: 0px;
   height: 70px;
   width: 100%;
   display: flex;
@@ -11,6 +13,8 @@
   border-bottom-width: 1px;
   border-bottom-color: aliceblue;
   font-family: 'Montserrat', sans-serif !important;
+  background-color: white;
+  z-index: 4;
 }
 
 .logo{
@@ -41,6 +45,8 @@
     display: grid;
     grid-template-columns: 20% 80%;
     grid-template-areas: "leftbar dashboard";
+    margin-top: 80px;
+    overflow: hidden;
   }
   
   .leftdiv{

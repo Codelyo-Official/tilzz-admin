@@ -14,18 +14,21 @@ const dummyData = {
   episodes: [
     {
       id: 1,
+      episode:1,
       title: 'The Lost Map',
       content: 'The first part of the journey begins with the discovery of a mysterious map...',
       creator: 'user123',
     },
     {
       id: 2,
+      episode:2,
       title: 'The Forbidden Temple',
       content: 'A forbidden temple stands in their path, filled with puzzles and dangers...',
       creator: 'johndoe',
     },
     {
       id: 3,
+      episode:3,
       title: 'The Final Puzzle',
       content: 'The final trial awaits the explorer, but only the smartest will succeed...',
       creator: 'user123',
@@ -73,7 +76,7 @@ const StoryPreview = ({ userId }) => {
         {dummyData.episodes.map((episode) => (
           <div key={episode.id} className="episode">
             <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
-              <h4>{episode.title}</h4>
+              <h4>episode {episode.episode} : {episode.title}</h4>
                 {episode.creator === user.username && (
                     <button className="edit-episode-btn"><FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/></button>
                 )}

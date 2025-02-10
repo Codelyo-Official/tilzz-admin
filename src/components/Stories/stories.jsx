@@ -338,7 +338,7 @@ function Stories({children,slugStories}) {
                                         </button>
                                         <h4 className="like-count">{st.like_count}</h4>
                                     </div>
-                                    <h4 className="story-by-user"><img src={st.user_avatar}/> {st.story_by_user}</h4>
+                                    <div className="story-by-user"><img src={st.user_avatar}/> <div style={{position:"absolute" , top:"2px", left:"32px"}}>{st.story_by_user}</div></div>
 
                                     <img src={st.img} alt=""/>
                                     <div className="title">

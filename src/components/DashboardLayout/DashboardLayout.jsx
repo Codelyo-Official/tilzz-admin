@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {setActiveTab} from "../../features/tabSlice";
 
+import { RiHomeLine } from "react-icons/ri";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+
+
 function DashboardLayout({children}) {
 
     console.log("dashboard layout component rendered");
@@ -41,6 +46,11 @@ function DashboardLayout({children}) {
                 <Sidebar/>
             </div>
             <div className="rightdiv">{children}</div>
+        </div>
+        <div className="bottom-bar-dashboard">
+            <RiHomeLine/>
+            <IoAddCircleOutline/>
+            <CgProfile/>
         </div>
         </>
     );

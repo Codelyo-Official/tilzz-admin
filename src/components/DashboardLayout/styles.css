@@ -289,6 +289,10 @@
   
   @media screen and (max-width:780px){
 
+    .logged-in-user-avatar span{
+      display: none;
+    }
+
     .top-bar-dashboard .btn{
       width: 129px;
       border-radius: 28px;

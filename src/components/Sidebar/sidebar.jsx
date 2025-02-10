@@ -57,6 +57,7 @@ const Sidebar = () => {
                         <div className="leftbar-items">
                           {item.links.map((link) => (
                               <NavLink
+                              to={`/dashboard?activeTab=${link.slug}`}
                                 key={link.name}
                                 onClick={()=>{handleActiveMenu(link.slug)}}
                                 className={activeMenu===link.slug ? "active-leftbar" : ""}

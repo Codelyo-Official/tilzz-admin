@@ -33,9 +33,7 @@ function DashboardLayout({children}) {
         }}><img src={"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"}/></button>
         <div className="dropdown-content" id="dropdown-content-id">
             <a onClick={()=>{
-                console.log("click here")
                 navigate("/dashboard?activeTab=account");
-
                 dispatch(setActiveTab("account"))
             }}>View Profile</a>
         </div>
@@ -48,9 +46,23 @@ function DashboardLayout({children}) {
             <div className="rightdiv">{children}</div>
         </div>
         <div className="bottom-bar-dashboard">
+        <a onClick={()=>{
+                navigate("/");
+            }}>
             <RiHomeLine/>
+            </a>
+            <a onClick={()=>{
+                navigate("/dashboard?activeTab=create-story");
+                dispatch(setActiveTab("create-story"))
+            }}>
             <IoAddCircleOutline/>
+            </a>
+            <a onClick={()=>{
+                navigate("/dashboard?activeTab=account");
+                dispatch(setActiveTab("account"))
+            }}>
             <CgProfile/>
+            </a>
         </div>
         </>
     );

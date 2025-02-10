@@ -38,7 +38,7 @@ const dummyData = {
 
 const StoryPreview = ({ userId }) => {
 
-
+  console.log("story preview rendered")
   const {getUser} = useAuth();
   const user = useMemo(() => getUser(), []);
   const [activeEpisode, setActiveEpisode] = useState(null);

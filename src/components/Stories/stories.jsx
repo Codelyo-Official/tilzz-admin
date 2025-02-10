@@ -270,7 +270,7 @@ function Stories({children,slugStories}) {
     const [dataStories,setDataStories] = React.useState([]);
 
     useEffect(()=>{
-        if(slugStories==="stories-feed"){
+        if(slugStories==="stories-feed" || slugStories===null){
         // api call for all stories
         setDataStories(FeedStories);
         }else if(slugStories==="my-stories"){

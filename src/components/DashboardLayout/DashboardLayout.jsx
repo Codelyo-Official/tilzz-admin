@@ -1,22 +1,24 @@
 import React, {useEffect,useMemo} from "react";
 import "./styles.css";
 import { useAuth } from "../../contexts/AuthProvider";
-import { useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar/sidebar";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import {setActiveTab} from "../../features/tabSlice";
 
 function DashboardLayout({children}) {
 
     console.log("dashboard layout component rendered");
-
+     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {getUser} = useAuth();
     const user = useMemo(() => getUser(), []);
-    const navigate = useNavigate();
 
     return (
         <>
         <div className="navbar-dashboard">
         <h2 className="logo">Narrato</h2>
-        <p className="logged-in-user-avatar"><span>{user.username}</span> <button onClick={()=>{
+        <div className="logged-in-user-avatar"><span>{user.username}</span> <button onClick={()=>{
             let element = document.getElementById("dropdown-content-id");
             if (element.style.display === "none") {
                 element.style.display = "block";
@@ -24,11 +26,15 @@ function DashboardLayout({children}) {
                 element.style.display = "none";
             }
         }}><img src={"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740"}/></button>
-        <div class="dropdown-content" id="dropdown-content-id">
-            <a href="#">View Profile</a>
-            <a href="#">Edit Profile</a>
+        <div className="dropdown-content" id="dropdown-content-id">
+            <a onClick={()=>{
+                console.log("click here")
+                navigate("/dashboard?activeTab=account");
+
+                dispatch(setActiveTab("account"))
+            }}>View Profile</a>
         </div>
-        </p>
+        </div>
         </div>
         <div className="main-user-dashboard">
             <div className="leftdiv">

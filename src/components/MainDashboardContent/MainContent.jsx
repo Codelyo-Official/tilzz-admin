@@ -5,6 +5,7 @@ import StoryPreview from "../StoryPreview/StroryPreview";
 import {Navigate, useLocation} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {setActiveTab} from "../../features/tabSlice";
+import Account from "../Account/Account";
 
 function MainContent({children}) {
 
@@ -15,33 +16,26 @@ function MainContent({children}) {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const value = queryParams.get('activeTab'); // Retrieve the value of a specific query parameter
-    
-    useEffect(()=>{
-        //console.log(value)
-        if(value!=null){
-            //console.log(activeMenu)
-            dispatch(setActiveTab(value));
-        }
-    },[activeMenu])
 
     return (
         <>
-        { activeMenu!= null && (activeMenu==="stories-feed" || activeMenu==="my-stories" ||
-            activeMenu==="following-stories"
-        ) && (
-            <Stories slugStories={activeMenu}/>
+
+        { (value === null || (value==="stories-feed" || value==="my-stories" ||
+            value==="following-stories"
+        )) && (
+            <Stories slugStories={value}/>
         )}
 
-        { value === null && (
-            <Stories slugStories={"stories-feed"}/>
-        )}
-
-        {activeMenu==="create-story"&&(
+        {value==="create-story" && (
             <CreateStory/>
         )}
 
-        {activeMenu==="story-preview"&&(
+        {value==="story-preview" && (
             <StoryPreview/>
+        )}
+
+        {value==="account" && (
+            <Account/>
         )}
         </>
     );

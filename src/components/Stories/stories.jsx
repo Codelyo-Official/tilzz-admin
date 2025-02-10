@@ -342,13 +342,17 @@ function Stories({children,slugStories}) {
 
                                     <img src={st.img} alt=""/>
                                     <div className="title">
-                                        <p >{st.title} <button
-                                            onClick={()=>{toggleFollow(st.id)}}
-                                            className={st.follow
-                                            ? "following-btn"
-                                            : "follow-btn"}>{st.follow
-                                                ? "following"
-                                                : "follow"}</button></p>
+                                        <p >{st.title} 
+                                            {slugStories!=="my-stories" && (
+                                                <button
+                                                onClick={()=>{toggleFollow(st.id)}}
+                                                className={st.follow
+                                                ? "following-btn"
+                                                : "follow-btn"}>{st.follow
+                                                    ? "following"
+                                                    : "follow"}</button>
+                                            )}
+                                            </p>
                                         <p className="descp">{st.description}</p>
                                     </div>
                                 </li>

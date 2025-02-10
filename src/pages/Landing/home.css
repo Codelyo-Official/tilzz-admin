@@ -99,7 +99,7 @@
     right:10%;
     padding: 20px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 12px;
     background-color: #EFEFEF;
     color: black;
 }
@@ -194,7 +194,7 @@
     position: relative;
     grid-area: left0;
     background-color: lightblue;
-    background-image: url("/public/Images/banner0.jpg");
+    background-image: url("/public/Images/main-story-banner.jpeg");
     background-size: cover;
 }
 

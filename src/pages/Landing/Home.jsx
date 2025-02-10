@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import { Link } from 'react-router-dom';
+import { FiArrowRightCircle } from "react-icons/fi";
 import "./home.css";
 
 function Home() {
@@ -11,7 +12,7 @@ function Home() {
                 <div className="home-navbar">
                     <button>Home</button>
                     <div className="dot"></div>
-                    <button>Service</button>
+                    <button>Stories</button>
                     <div className="dot"></div>
                     <button>Contact</button>
                     <div className="dot"></div>
@@ -23,8 +24,8 @@ function Home() {
             </div>
             <div className="main-banner">
                 <div className="main-banner-top-sec">
-                    <h1 className="main-banner-top-sec-h">BLOG</h1>
-                    <button className="main-banner-top-sec-btn">Read Our Blog</button>
+                    <h1 className="main-banner-top-sec-h">STORIES</h1>
+                    <button className="main-banner-top-sec-btn">Read Our Stories <FiArrowRightCircle style={{display:"inline", marginBottom:"2px", marginLeft:"5px"}}/></button>
                 </div>
                 <div className="main-banner-grid-imgs">
                     <div className="box left0">
@@ -51,7 +52,9 @@ function Home() {
                     <p className="center0toptitle"><span>Category</span> . Fiction</p>
                     <div className="center0top">
                          <p className="center0toptitle1"><span>Hot</span> . 12 Feb</p>
-                            <p>Whispers of the Forgotten Future</p>
+                            <p style={{marginTop:"16px"}}>Whispers of the Forgotten Future</p>
+                            <p className="center0toptitle1" style={{fontSize:"12px",fontWeight:"bold", marginTop:"14px"}}>View the most popular story for fiction readers <FiArrowRightCircle style={{display:"inline"}}/>
+                            </p>
                         </div>
                     </div>
                     <div className="box center1">

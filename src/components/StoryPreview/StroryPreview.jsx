@@ -46,6 +46,17 @@ const StoryPreview = ({ userId }) => {
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
   const [value, setValue] = useState('');
 
+  const modules = {
+    toolbar: true ? [] : [
+      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      ['bold', 'italic', 'underline'],
+      ['link'],
+      [{ 'align': [] }],
+      ['image'],
+    ]
+  };
+
   const handleEpisodeToggle = (episodeId) => {
     setActiveEpisode(activeEpisode === episodeId ? null : episodeId);
   };
@@ -84,7 +95,24 @@ const StoryPreview = ({ userId }) => {
             </div>
             {activeEpisode === episode.id && (
               <div className="episode-content">
-                <p>{episode.content}</p>
+                {/* <p>{episode.content}</p> */}
+                <ReactQuill theme="snow"  readOnly={episode.creator === user.username?false:true}
+                modules={episode.creator === user.username? ({toolbar: false ? [] : [
+                  [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                  ['bold', 'italic', 'underline'],
+                  ['link'],
+                  [{ 'align': [] }],
+                  ['image'],
+                ]}):({toolbar: true ? [] : [
+                  [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                  ['bold', 'italic', 'underline'],
+                  ['link'],
+                  [{ 'align': [] }],
+                  ['image'],
+                ]})} 
+               value={episode.content} onChange={()=>{}} style={{height:"100%"}}/>
               </div>
             )}
           </div>

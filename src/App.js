@@ -8,6 +8,7 @@ import Home from "./pages/Landing/Home";
 import NotFound from "./components/NotFound";
 import Login from "./pages/registeration/Login";
 import Profile from "./pages/profile/Profile";
+import PublicStories from "./pages/PublicStories/PublicStories";
 
 //redux
 import { Provider } from 'react-redux';
@@ -20,6 +21,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path="/stories-feed" element={<PublicStories/>} />
             <Route path="/login" element={<ProtectedRoute><Login/></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="*" element={<NotFound/>} />

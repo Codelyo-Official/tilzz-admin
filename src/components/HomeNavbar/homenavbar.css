@@ -15,7 +15,7 @@
     border-style: solid;
     border-width: 1px;
     border-color: rgba(248, 244, 238, 0.829);
-    width: 60%;
+    width: 55%;
     display: flex;
     justify-content: left;
 }
@@ -53,11 +53,31 @@
     right:44px;
     top:50%;
     transform: translateY(-50%);
-    border-radius: 26px;
+    border-radius: 0 26px 26px 0;
     border-style: solid;
     border-width: 1px;
     border-color: rgba(248, 244, 238, 0.829);
     padding: 10px;
     font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px;
+    border-left-width: 0px;
+    width: 90px;
+    text-align: center;
+}
 
+.reg-btn-home{
+    position: absolute;
+    right:116px;
+    top:50%;
+    transform: translateY(-50%);
+    border-radius: 26px 26px 26px 26px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(248, 244, 238, 0.829);
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px;
+    border-right-width: 1px;
+    width: 90px;
+    text-align: center;
 }

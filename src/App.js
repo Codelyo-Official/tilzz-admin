@@ -7,6 +7,7 @@ import "./App.css";
 import Home from "./pages/Landing/Home";
 import NotFound from "./components/NotFound";
 import Login from "./pages/registeration/Login";
+import Register from "./pages/registeration/register";
 import Profile from "./pages/profile/Profile";
 import PublicStories from "./pages/PublicStories/PublicStories";
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/" element={<Home/>} />
             <Route path="/stories-feed" element={<PublicStories/>} />
             <Route path="/login" element={<ProtectedRoute><Login/></ProtectedRoute>} />
+            <Route path="/register" element={<ProtectedRoute><Register/></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="*" element={<NotFound/>} />
           </Routes>

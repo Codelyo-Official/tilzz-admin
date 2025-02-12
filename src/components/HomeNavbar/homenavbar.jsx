@@ -27,6 +27,9 @@ function HomeNavbar() {
                 <Link to={"/login"} className="login-btn-home">
                     Login
                 </Link>
+                <Link to={"/register"} className="reg-btn-home"> 
+                    Register
+                </Link>
             </div>
     );
 }

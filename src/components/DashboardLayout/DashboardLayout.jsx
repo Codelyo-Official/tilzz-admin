@@ -9,6 +9,8 @@ import {setActiveTab} from "../../features/tabSlice";
 import { RiHomeLine } from "react-icons/ri";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+import { Link } from 'react-router-dom';
+
 
 function DashboardLayout({children}) {
 
@@ -21,7 +23,9 @@ function DashboardLayout({children}) {
     return (
         <>
         <div className="navbar-dashboard">
-        <h2 className="logo">Narrato</h2>
+        <Link to={"/"} >
+            <h2 className="logo">Narrato</h2>
+        </Link>
         <div className="logged-in-user-avatar"><span>{user.username}</span> <button onClick={()=>{
             let element = document.getElementById("dropdown-content-id");
             if (element.style.display === "none") {

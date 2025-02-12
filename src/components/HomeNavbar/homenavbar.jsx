@@ -10,7 +10,11 @@ function HomeNavbar() {
 
     return (
             <div className="top-par-home">
-                <h2 className="Logo">Narrato</h2>
+                <Link to={"/"} >
+                    <h2 className="Logo">
+                        Narrato
+                    </h2>
+                </Link>
                 <div className="home-navbar">
                     <button onClick={()=>{
                         navigate("/")

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi";
 import "./publicstory.css";
 import HomeNavbar from "../../components/HomeNavbar/homenavbar";
-import Stories from "../../components/Stories/stories";
+import PublicStoriesFeed from "../../components/PublicStories/PublicStories";
 
 function PublicStories() {
 
@@ -11,7 +11,7 @@ function PublicStories() {
         <>
         <HomeNavbar/>
         <div>
-            <Stories slugStories={"public-feed"}/>
+            <PublicStoriesFeed/>
         </div>
         </>
     );

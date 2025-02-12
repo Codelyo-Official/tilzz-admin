@@ -78,7 +78,6 @@
 
 .episode-header span {
   font-size: 14px;
-  color: #007bff;
 }
 
 .episode-content {
@@ -93,7 +92,7 @@
   position: absolute;
   top:50%;
   transform: translateY(-50%);
-  right:100px;
+  right:30px;
   color: white;
   border: none;
   cursor: pointer;

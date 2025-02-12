@@ -1,0 +1,25 @@
+.storybox-public-feed{
+    position: relative;
+}
+
+.storybox-public-feed .view-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+    color: white;
+}
+
+.storybox-public-feed .story-by-user img{
+    border-radius: 50%;
+}
+
+.storybox-public-feed img{
+    border-radius: 5px;
+}
+
+.public-story-title{
+    font-family: vice;
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: bold;
+}

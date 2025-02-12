@@ -4,6 +4,9 @@ import { useAuth } from "../../contexts/AuthProvider";
 import { FiEdit } from 'react-icons/fi';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { FiArrowDownCircle } from "react-icons/fi";
+import { FiArrowUpCircle } from "react-icons/fi";
+import { useLocation } from 'react-router-dom';
 
 const dummyData = {
   storyImage: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
@@ -38,6 +41,7 @@ const dummyData = {
 
 const StoryPreview = ({ userId }) => {
 
+  const location = useLocation();
   console.log("story preview rendered")
   const {getUser} = useAuth();
   const user = useMemo(() => getUser(), []);
@@ -45,6 +49,9 @@ const StoryPreview = ({ userId }) => {
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
   const [value, setValue] = useState('');
+  const queryParams = new URLSearchParams(location.search);
+  const paramvalue = queryParams.get('storyId'); 
+  console.log(paramvalue)
 
   const modules = {
     toolbar: true ? [] : [
@@ -91,7 +98,7 @@ const StoryPreview = ({ userId }) => {
                 {episode.creator === user.username && (
                     <button className="edit-episode-btn"><FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/></button>
                 )}
-              <span>{activeEpisode === episode.id ? 'Hide' : 'Read More'}</span>
+              <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle /> }</span>
             </div>
             {activeEpisode === episode.id && (
               <div className="episode-content">

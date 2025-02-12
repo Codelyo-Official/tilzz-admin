@@ -6,6 +6,11 @@
     
   }
 
+@font-face {
+  font-family: vice;
+  src: url(./fonts/GTVCS-Bold.otf);
+}
+
 body{
     margin: 0;
     padding:0;

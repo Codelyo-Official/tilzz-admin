@@ -23,3 +23,13 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+.viewmore-div button{
+    color: black;
+    border-color: black;
+}
+
+.viewmore-div button:hover{
+    color: white;
+    background-color: black;
+}

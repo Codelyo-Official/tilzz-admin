@@ -4,6 +4,8 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import "./login.css";
 import { useAuth } from "../../contexts/AuthProvider";
+import { Link } from 'react-router-dom';
+
 
 const Register = () => {
 
@@ -54,7 +56,7 @@ const Register = () => {
 
   return (
     <div className="login-signup-container" style={{position:"relative"}}>
-      <div style={{position:"absolute", top:"0px", left:"0px", width:"100%", height:"100px", textAlign:"center"}}> <h2 className="Logo" style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>Narrato</h2></div>
+      <div style={{position:"absolute", top:"0px", left:"0px", width:"100%", height:"100px", textAlign:"center"}}><Link to={"/"} ><h2 className="Logo" style={{position:"absolute", left:"50%", transform:"translateX(-50%)"}}>Narrato</h2></Link></div>
       <div
         className={`form-container form-container-expanded`}
         style={{marginTop:"120px"}}

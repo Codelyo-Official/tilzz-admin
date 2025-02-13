@@ -114,4 +114,12 @@
     background-color: #4d44f8;
     color:white;
   }
+
+  .Logo{
+    font-family: benzinextb;
+    font-size: 22px;
+    font-weight: bold;
+    position: absolute;
+    top:50px;
+}
   

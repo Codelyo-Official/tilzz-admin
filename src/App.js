@@ -21,7 +21,7 @@ const App = () => {
       <Provider store={store}>
         <Router>
           {/* Suspense wraps the entire routing system to display a fallback UI during lazy loading */}
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/stories-feed" element={<PublicStories />} />

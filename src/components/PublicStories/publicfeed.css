@@ -33,3 +33,12 @@
     color: white;
     background-color: black;
 }
+.descp-public-stories{
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px;
+    white-space: nowrap;            /* Prevent text from wrapping to the next line */
+    overflow: hidden;               /* Hide the overflowed text */
+    text-overflow: ellipsis;        /* Add the ellipsis (...) */
+    width: 200px;                   /* Set a width for the element */
+    border: 0px solid #000;      
+}

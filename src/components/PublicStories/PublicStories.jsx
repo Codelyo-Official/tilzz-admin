@@ -176,7 +176,7 @@ function PublicStoriesFeed({children,slugStories}) {
                                                     : "follow"}</button>
                                             )} */}
                                             </p>
-                                        {/* <p className="descp">{st.description}</p> */}
+                                        <p className="descp-public-stories">{st.description}</p>
                                     </div>
                                 </li>
                             )
@@ -184,9 +184,9 @@ function PublicStoriesFeed({children,slugStories}) {
                     </ul>
 
                 </div>
-                <div className="viewmore-div">
+                {/* <div className="viewmore-div">
                     <button>View More</button>
-                </div>
+                </div> */}
             </div>
         </div>
     );

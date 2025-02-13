@@ -8,20 +8,25 @@ import { store } from './state/store';
 import "./App.css";
 
 // Lazy load pages
-const Home = lazy(() => import("./pages/Landing/Home"));
-const NotFound = lazy(() => import("./components/NotFound"));
-const Login = lazy(() => import("./pages/registeration/Login"));
-const Register = lazy(() => import("./pages/registeration/register"));
-const Profile = lazy(() => import("./pages/profile/Profile"));
-const PublicStories = lazy(() => import("./pages/PublicStories/PublicStories"));
+// const Home = lazy(() => import("./pages/Landing/Home"));
+// const NotFound = lazy(() => import("./components/NotFound"));
+// const Login = lazy(() => import("./pages/registeration/Login"));
+// const Register = lazy(() => import("./pages/registeration/register"));
+// const Profile = lazy(() => import("./pages/profile/Profile"));
+// const PublicStories = lazy(() => import("./pages/PublicStories/PublicStories"));
+
+import Home from "./pages/Landing/Home";
+import PublicStories from "./pages/PublicStories/PublicStories";
+import Login from "./pages/registeration/Login";
+import Register from "./pages/registeration/register";
+import Profile from "./pages/profile/Profile";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
     <AuthProvider>
       <Provider store={store}>
         <Router>
-          {/* Suspense wraps the entire routing system to display a fallback UI during lazy loading */}
-          <Suspense fallback={<div></div>}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/stories-feed" element={<PublicStories />} />
@@ -30,7 +35,6 @@ const App = () => {
               <Route path="/dashboard" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </Suspense>
         </Router>
       </Provider>
     </AuthProvider>

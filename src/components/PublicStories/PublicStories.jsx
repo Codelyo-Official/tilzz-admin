@@ -123,16 +123,16 @@ function PublicStoriesFeed({children,slugStories}) {
                 boxShadow:"none",
             }}>
                 <div className="story-container">
-                    <ul className="story-box101" style={{rowGap:"60px"}}>
+                    <ul className="story-box101" style={{rowGap:"40px"}}>
                         {dataStories.map((st, index) => {
                             return (
                                 <li key={index} className="storybox-public-feed">
-                                    {/* <NavLink
-                                        className="view-btn"
+                                    <NavLink
+                                        className="view-btn-public-feed"
                                         to={`/dashboard?activeTab=story-preview&storyId=${st.id}`}
                                         >
-                                        View
-                                    </NavLink> */}
+                                        
+                                    </NavLink>
                                     <div className="like-dislike-div">
                                         {/* <button 
                                         onClick={()=>{console.log("like btn toggled")}}

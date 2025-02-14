@@ -307,11 +307,11 @@ function Stories({children,slugStories}) {
                             return (
                                 <li className="story-box" key={index}>
                                     <NavLink
-                                        className="view-btn"
+                                        className=""
+                                        style={{position:"absolute",top:"0px",left:"0px",width:"100%",height:"100%"}}
                                         to={`/dashboard?activeTab=story-preview&storyId=${st.id}`}
                                         onClick={()=>{handleActiveMenu("story-preview")}}
                                         >
-                                        View
                                     </NavLink>
                                     <div className="like-dislike-div">
                                         <button 

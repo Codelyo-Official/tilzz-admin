@@ -429,7 +429,7 @@
 }
 
 @media only screen and (max-width:520px){
-    .right1-bottom{
+    .right1-bottom button{
         font-size: 12px;
         visibility: hidden;
     }

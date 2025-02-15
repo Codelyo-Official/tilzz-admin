@@ -297,7 +297,10 @@
     border-top-width: 1px;
     border-top-color: #3b3b3b21;
     background-color: white;
+    font-size: 20px;
   }
+
+  
   
   
   @media screen and (max-width:780px){

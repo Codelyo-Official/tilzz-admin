@@ -56,7 +56,7 @@ function DashboardLayout({children}) {
             }}>
             <RiHomeLine/>
             </a>
-            <a onClick={()=>{
+            <a className="middle-bottom-icon" onClick={()=>{
                 navigate("/dashboard?activeTab=create-story");
                 dispatch(setActiveTab("create-story"))
             }}>

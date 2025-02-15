@@ -428,6 +428,12 @@
     justify-content: left;
 }
 
+@media only screen and (max-width:520px){
+    .right1-bottom{
+        font-size: 12px;
+    }
+}
+
 .right1-bottom button{
     position: relative;
     margin: 0;

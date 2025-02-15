@@ -11,7 +11,7 @@ function HomeNavbar() {
     return (
             <div className="top-par-home">
                 <Link to={"/"} >
-                    <h2 className="Logo">
+                    <h2 className="Logo1">
                         Narrato
                     </h2>
                 </Link>

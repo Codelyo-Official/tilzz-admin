@@ -431,6 +431,7 @@
 @media only screen and (max-width:520px){
     .right1-bottom{
         font-size: 12px;
+        visibility: hidden;
     }
 }
 

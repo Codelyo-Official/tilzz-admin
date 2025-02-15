@@ -16,12 +16,14 @@ function Home() {
                 </div>
                 <div className="main-banner-grid-imgs">
                     <div className="box left0">
+                        <Link to="/stories-feed" style={{position:"absolute", top:"0px",left:"0px",width:"100%",height:"100%"}}></Link>
                         <div className="left0-descp">
                             <p>INTRIGUING IDEAS</p>
                             <p>COLLABORATIVE STORIES</p>
                         </div>
                     </div>
                     <div className="box center0">
+
                         <p className="center0toptitle"><span>Narrato</span> . Collaborative Stories</p>
                         <div className="center0top">
                             <p>READY, SET, GO!</p>
@@ -34,6 +36,9 @@ function Home() {
                         <div className="icon">
                             <a href="" className="iconBox"><span className="material-symbols-outlined">arrow_outward</span></a>
                         </div>
+
+                        <Link to="/stories-feed" style={{position:"absolute", top:"0px",left:"0px",width:"100%",height:"100%"}}></Link>
+
                     </div>
                     <div className="box right0">
                     <p className="center0toptitle"><span>Category</span> . Fiction</p>
@@ -43,6 +48,8 @@ function Home() {
                             <p className="center0toptitle1" style={{fontSize:"12px",fontWeight:"bold", marginTop:"14px"}}>View the most popular story for fiction readers <FiArrowRightCircle style={{display:"inline"}}/>
                             </p>
                         </div>
+                        <Link to="/stories-feed" style={{position:"absolute", top:"0px",left:"0px",width:"100%",height:"100%"}}></Link>
+
                     </div>
                     <div className="box center1">
                     <video autoPlay loop muted playsInline>
@@ -50,6 +57,7 @@ function Home() {
                         </video>
                     <p className="center0toptitle" style={{color:"white"}}><span>Narrato</span> . innovative dashboard</p>
                     <p className="video-descp-banner">Effortlessly create and manage your stories, track episodes, and engage with a thriving community of writers and readers.</p>
+                    <Link to="/stories-feed" style={{position:"absolute", top:"0px",left:"0px",width:"100%",height:"100%"}}></Link>
 
                     </div>
                     <div className="box right1">
@@ -61,6 +69,8 @@ function Home() {
                             <button>Medical Knowledge</button>
                             <button>Fantasy</button>
                             <button>Thriller</button>
+                            <Link to="/stories-feed" style={{position:"absolute", top:"0px",left:"0px",width:"100%",height:"100%"}}></Link>
+
                         </div>
                         <div className="right1-bottom">
                             <button>View All Categories</button>

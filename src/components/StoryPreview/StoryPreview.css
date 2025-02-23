@@ -81,8 +81,10 @@
 }
 
 .episode-content {
+  position: relative;
   padding: 15px;
   font-size: 14px;
+  height: auto;
   background: #f1f1f1;
   border-radius: 8px;
   margin-top: 10px;
@@ -144,3 +146,23 @@
  width: 200px;
 }
 
+
+
+.episode-title-ok-al{
+  white-space: nowrap;            /* Prevent text from wrapping to the next line */
+    overflow: hidden;               /* Hide the overflowed text */
+    text-overflow: ellipsis;        /* Add the ellipsis (...) */
+    width: 250px;
+    font-weight: bold;
+}
+
+.episode-options{
+ display: flex;
+ justify-content: flex-end;
+ margin-top: 15px;
+ margin-right: 5px;
+}
+
+.episode-options button{
+ margin-left: 10px;
+ }

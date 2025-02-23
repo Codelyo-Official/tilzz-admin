@@ -4,9 +4,12 @@ import { useAuth } from "../../contexts/AuthProvider";
 import { FiEdit } from 'react-icons/fi';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { FiArrowDownCircle } from "react-icons/fi";
+import { FiArrowDownCircle,FiArrowRightCircle,FiArrowLeftCircle } from "react-icons/fi";
+import { FaRegHeart } from "react-icons/fa";
 import { FiArrowUpCircle } from "react-icons/fi";
 import { useLocation } from 'react-router-dom';
+import { FaRegFlag } from "react-icons/fa";
+
 
 const dummyData = {
   storyImage: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
@@ -19,21 +22,21 @@ const dummyData = {
       id: 1,
       episode:1,
       title: 'The Lost Map',
-      content: 'The first part of the journey begins with the discovery of a mysterious map...',
+      content: 'The first part of the journey begins with the discovery of a mysterious map',
       creator: 'user123',
     },
     {
       id: 2,
       episode:2,
       title: 'The Forbidden Temple',
-      content: 'A forbidden temple stands in their path, filled with puzzles and dangers...',
+      content: 'A forbidden temple stands in their path, filled with puzzles and dangers',
       creator: 'johndoe',
     },
     {
       id: 3,
       episode:3,
       title: 'The Final Puzzle',
-      content: 'The final trial awaits the explorer, but only the smartest will succeed...',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       creator: 'user123',
     },
   ],
@@ -79,6 +82,18 @@ const StoryPreview = ({ userId }) => {
     setNewEpisode({ title: '', content: '' });
   };
 
+  const nextEp = () =>{
+    console.log(activeEpisode)
+    if(activeEpisode!==null)
+      setActiveEpisode(activeEpisode+1);
+  }
+
+  const prevEp = () =>{
+    console.log(activeEpisode)
+    if(activeEpisode!==null)
+      setActiveEpisode(activeEpisode-1);
+  }
+
   return (
     <div className="story-preview">
       <div className="story-header">
@@ -94,7 +109,8 @@ const StoryPreview = ({ userId }) => {
         {dummyData.episodes.map((episode) => (
           <div key={episode.id} className="episode">
             <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
-              <h4>episode {episode.episode} : {episode.title}</h4>
+              {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
+              <h4 className='episode-title-ok-al'> {episode.content}</h4>
                 {episode.creator === user.username && (
                     <button className="edit-episode-btn"><FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/></button>
                 )}
@@ -120,6 +136,16 @@ const StoryPreview = ({ userId }) => {
                   ['image'],
                 ]})} 
                value={episode.content} onChange={()=>{}} style={{height:"100%"}}/>
+                <div className="episode-options">
+                  <button><FaRegHeart/></button>
+                  {episode.episode!==1 && (<button onClick={()=>{
+                    prevEp();
+                  }}><FiArrowLeftCircle/></button>)}
+                  {episode.episode!==dummyData.episodes.length && (<button onClick={()=>{
+                    nextEp();
+                  }}><FiArrowRightCircle/></button>)}
+                  <button><FaRegFlag/></button>
+                </div>
               </div>
             )}
           </div>

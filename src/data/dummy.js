@@ -493,6 +493,10 @@ export const links = [
         name: 'Favourites',
         slug:'fav-stories',
         icon: <RiContactsLine style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+      },{
+        name: 'Reports',
+        slug:'reports',
+        icon: <RiContactsLine style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       }
     ],
   },

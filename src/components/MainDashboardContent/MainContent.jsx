@@ -6,6 +6,7 @@ import {Navigate, useLocation} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {setActiveTab} from "../../features/tabSlice";
 import Account from "../Account/Account";
+import Reports from "../Reports/reports";
 
 function MainContent({children}) {
 
@@ -37,6 +38,10 @@ function MainContent({children}) {
         {value==="account" && (
             <Account/>
         )}
+
+    {value==="reports" && (
+                <Reports/>
+            )}
         </>
     );
 }

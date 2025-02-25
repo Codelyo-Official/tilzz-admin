@@ -78,7 +78,7 @@ const StoryPreview = ({ userId }) => {
   console.log("story preview rendered")
   const {getUser} = useAuth();
   const user = useMemo(() => getUser(), []);
-  const [activeEpisode, setActiveEpisode] = useState(null);
+  const [activeEpisode, setActiveEpisode] = useState(1);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
   const [value, setValue] = useState('');
@@ -130,7 +130,7 @@ const StoryPreview = ({ userId }) => {
         <img src={dummyData.storyImage} alt="Story Preview" className="story-image" />
         <div className="story-info">
           <h2 className="story-title">{dummyData.title}</h2>
-          <p className="story-description">{dummyData.description}</p>
+          {/* <p className="story-description">{dummyData.description}</p> */}
         </div>
       </div>
 
@@ -166,14 +166,14 @@ const StoryPreview = ({ userId }) => {
                 ]})} 
                value={episode.content} onChange={()=>{}} style={{height:"100%"}}/>
                 <div className="episode-options">
-                {episode.episode!==1 && (<button onClick={()=>{
+                  <button><FaRegHeart/></button>
+                  <button><FaRegFlag/></button>
+                  {episode.episode!==1 && (<button onClick={()=>{
                     prevEp();
                   }}><FiArrowLeftCircle/></button>)}
                   {episode.episode!==dummyData.episodes.length && (<button onClick={()=>{
                     nextEp();
                   }}><FiArrowRightCircle/></button>)}
-                  <button><FaRegHeart/></button>
-                  <button><FaRegFlag/></button>
                 </div>
               </div>
             )}
@@ -185,12 +185,12 @@ const StoryPreview = ({ userId }) => {
         <div className="add-episode">
           {showNewEpisodeForm ? (
             <div className="new-episode-form">
-              <input
+              {/* <input
                 type="text"
                 placeholder="Episode Title"
                 value={newEpisode.title}
                 onChange={(e) => setNewEpisode({ ...newEpisode, title: e.target.value })}
-              />
+              /> */}
               {/* <textarea
                 placeholder="Episode Content"
                 value={newEpisode.content}

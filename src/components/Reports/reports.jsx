@@ -115,12 +115,12 @@ const Reports = ({ userId }) => {
         <img src={dummyData.storyImage} alt="Story Preview" className="story-image" />
         <div className="story-info">
           <h2 className="story-title">{dummyData.title}</h2>
-          <p className="story-description">{dummyData.description}</p>
+          {/* <p className="story-description">{dummyData.description}</p> */}
         </div>
       </div>
 
       <div className="episodes-list">
-        <h3>Reports to Review</h3>
+        <h3>Episodes to Review</h3>
         {dummyData.episodes.map((episode) => (
           <div key={episode.id} className="episode">
             <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
@@ -180,7 +180,7 @@ const Reports = ({ userId }) => {
         <img src={dummyData1.storyImage} alt="Story Preview" className="story-image" />
         <div className="story-info">
           <h2 className="story-title">{dummyData1.title}</h2>
-          <p className="story-description">{dummyData1.description}</p>
+          {/* <p className="story-description">{dummyData1.description}</p> */}
         </div>
       </div>
 

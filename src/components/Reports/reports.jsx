@@ -185,7 +185,7 @@ const Reports = ({ userId }) => {
       </div>
 
       <div className="episodes-list">
-        <h3>Reports to Review</h3>
+        <h3>Episodes to Review</h3>
         {dummyData1.episodes.map((episode) => (
           <div key={episode.id} className="episode">
             <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>

@@ -157,7 +157,10 @@
 }
 
 .episode-options{
- display: flex;
+ position: absolute;
+ bottom: 24px;
+ right:18px;
+  display: flex;
  justify-content: flex-end;
  margin-top: 15px;
  margin-right: 5px;

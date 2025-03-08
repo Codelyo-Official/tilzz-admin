@@ -4,7 +4,11 @@ import { useAuth } from "../../contexts/AuthProvider";
 import { FiEdit } from 'react-icons/fi';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { FiArrowDownCircle,FiArrowRightCircle,FiArrowLeftCircle } from "react-icons/fi";
+import { FiArrowDownCircle,FiArrowRightCircle,FiArrowLeftCircle  } from "react-icons/fi";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { TiDeleteOutline } from "react-icons/ti";
+import { MdOutlineReportProblem } from "react-icons/md";
+
 import { FaRegHeart } from "react-icons/fa";
 import { FiArrowUpCircle } from "react-icons/fi";
 import { useLocation } from 'react-router-dom';
@@ -12,6 +16,7 @@ import { FaRegFlag } from "react-icons/fa";
 
 
 const dummyData = {
+  storyId:"5bhja9",
   storyImage: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
                 "&cs=tinysrgb&w=1260&h=750&dpr=1",
   title: 'The Mysterious Journey',
@@ -19,6 +24,7 @@ const dummyData = {
   creator: 'user123',
   episodes: [
     {
+      variations:[],
       id: 1,
       episode:1,
       title: 'The Lost Map',
@@ -55,30 +61,70 @@ const dummyData = {
       id: 2,
       episode:2,
       title: 'The Forbidden Temple',
-      content: `A forbidden temple stands in their path, filled with puzzles and dangers. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.`,
+      content:"1 content",
       creator: 'johndoe',
+      variations: [
+        {
+          "episode_id": "462",
+          "variation_number": 1
+        },
+        {
+          "episode_id": "6C7",
+          "variation_number": 2
+        }
+      ]
     },
     {
       id: 3,
       episode:3,
       title: 'The Final Puzzle',
-      content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.`,
+      content:"1 content",
       creator: 'user123',
+      variations: [
+        {
+          "episode_id": "5C7",
+          "variation_number": 1
+        },
+        {
+          "episode_id": "789A",
+          "variation_number": 2
+        },
+        {
+          "episode_id": "789A99",
+          "variation_number": 3
+        }
+      ]
+    },
+    {
+      id: 4,
+      episode:4,
+      current_variation_number:1,
+      title: 'The Final Puzzle',
+      content:"1 content",
+      creator: 'user123',
+      variations: [
+        {
+          "episode_id": "00C7",
+          "variation_number": 1
+        },
+        {
+          "episode_id": "78989A",
+          "variation_number": 2
+        }
+      ]
     },
   ],
 };
 
 const StoryPreview = ({ userId }) => {
 
+  const [loading,setLoading] = useState(false);
   const location = useLocation();
   console.log("story preview rendered")
   const {getUser} = useAuth();
   const user = useMemo(() => getUser(), []);
   const [activeEpisode, setActiveEpisode] = useState(1);
+  const [activeVariation,setActiveVaraition] = useState(1);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
   const [value, setValue] = useState('');
@@ -112,16 +158,39 @@ const StoryPreview = ({ userId }) => {
     setNewEpisode({ title: '', content: '' });
   };
 
-  const nextEp = () =>{
-    console.log(activeEpisode)
-    if(activeEpisode!==null)
-      setActiveEpisode(activeEpisode+1);
+  const nextVariation = (ep) =>{
+    console.log(ep)
+    if(activeVariation < dummyData.episodes[ep.episode-1].variations.length && !loading)
+    {
+      setActiveEpisode(ep.episode)
+      setActiveVaraition(activeVariation+1)
+      ep.content = `${activeVariation+1} content`
+      for(let i = ep.episode-1;i<dummyData.episodes.length;i++){
+        dummyData.episodes[i].content = `${activeVariation+1} content`;
+      }
+      
+      setLoading(true)
+      setTimeout(()=>{
+        setLoading(false)
+      },[2000])
+    }
   }
 
-  const prevEp = () =>{
-    console.log(activeEpisode)
-    if(activeEpisode!==null)
-      setActiveEpisode(activeEpisode-1);
+  const prevVariation = (ep) =>{
+    console.log(ep)
+   if(activeVariation >1 && !loading)
+    {
+      setActiveEpisode(ep.episode)
+      setActiveVaraition(activeVariation-1)
+      ep.content = `${activeVariation-1} content`
+      for(let i = ep.episode-1;i<dummyData.episodes.length;i++){
+        dummyData.episodes[i].content = `${activeVariation-1} content`;
+      }
+      setLoading(true)
+      setTimeout(()=>{
+        setLoading(false)
+      },[2000])
+    }
   }
 
   return (
@@ -136,6 +205,7 @@ const StoryPreview = ({ userId }) => {
 
       <div className="episodes-list">
         {dummyData.episodes.map((episode) => (
+          (episode.episode >= activeEpisode && loading)? (<div>Loading...</div>): (
           <div key={episode.id} className="episode">
             <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
               {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
@@ -143,11 +213,10 @@ const StoryPreview = ({ userId }) => {
                 {episode.creator === user.username && (
                     <button className="edit-episode-btn"><FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/></button>
                 )}
-              <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle /> }</span>
+              {/* <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle /> }</span> */}
             </div>
-            {activeEpisode === episode.id && (
+            
               <div className="episode-content">
-                {/* <p>{episode.content}</p> */}
                 <ReactQuill theme="snow"  readOnly={episode.creator === user.username?false:true}
                 modules={episode.creator === user.username? ({toolbar: false ? [] : [
                   [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
@@ -166,18 +235,21 @@ const StoryPreview = ({ userId }) => {
                 ]})} 
                value={episode.content} onChange={()=>{}} style={{height:"100%"}}/>
                 <div className="episode-options">
+                  <button><IoAddCircleOutline/></button>
                   <button><FaRegHeart/></button>
                   <button><FaRegFlag/></button>
-                  {episode.episode!==1 && (<button onClick={()=>{
-                    prevEp();
+                  {episode.variations.length>0 && (<button onClick={()=>{
+                    prevVariation(episode);
                   }}><FiArrowLeftCircle/></button>)}
-                  {episode.episode!==dummyData.episodes.length && (<button onClick={()=>{
-                    nextEp();
+                  {episode.variations.length>0 && (<button onClick={()=>{
+                    nextVariation(episode);
                   }}><FiArrowRightCircle/></button>)}
+                  <button><MdOutlineReportProblem/></button>
+                  <button><TiDeleteOutline/></button>
                 </div>
               </div>
-            )}
-          </div>
+            
+          </div>)
         ))}
       </div>
 

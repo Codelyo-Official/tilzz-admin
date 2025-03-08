@@ -178,6 +178,7 @@ const StoryPreview = ({ userId }) => {
         setLoading(false)
       }, [2000])
     }
+    console.log(dummyData)
   }
 
   const prevVariation = (ep) => {
@@ -190,7 +191,7 @@ const StoryPreview = ({ userId }) => {
         ep.current_variation_number = ep.current_variation_number - 1;
         ep.content = `${ep.current_variation_number} content`
         for (let i = ep.episode; i < dummyData.episodes.length; i++) {
-          if(dummyData.episodes[i].current_variation_number > 1){
+          if(dummyData.episodes[i].current_variation_number > 1 && dummyData.episodes[i].current_variation_number>ep.current_variation_number){
           dummyData.episodes[i].current_variation_number = dummyData.episodes[i].current_variation_number - 1;
           dummyData.episodes[i].content = `${dummyData.episodes[i].current_variation_number} content`;
           }
@@ -201,6 +202,7 @@ const StoryPreview = ({ userId }) => {
         }, [2000])
       }
     }
+    console.log(dummyData)
   }
 
   return (

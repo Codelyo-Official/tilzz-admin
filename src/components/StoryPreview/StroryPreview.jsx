@@ -113,7 +113,7 @@ const dummyData = {
         {
           "episode_id": "78989A",
           "variation_number": 2
-        }
+        },
       ]
     },
   ],
@@ -127,7 +127,7 @@ const StoryPreview = ({ userId }) => {
   const { getUser } = useAuth();
   const user = useMemo(() => getUser(), []);
   const [activeEpisode, setActiveEpisode] = useState(1);
-  const [activeVariation, setActiveVaraition] = useState(1);
+  // const [activeVariation, setActiveVaraition] = useState(1);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
   const [value, setValue] = useState('');
@@ -162,14 +162,15 @@ const StoryPreview = ({ userId }) => {
   };
 
   const nextVariation = (ep) => {
-    console.log(ep)
-    if (activeVariation < dummyData.episodes[ep.episode - 1].variations.length && !loading) {
+    if (ep.current_variation_number < ep.variations.length && !loading) {
       setActiveEpisode(ep.episode)
-      setActiveVaraition(activeVariation + 1)
-      ep.current_variation_number = activeVariation + 1;
-      ep.content = `${activeVariation + 1} content`
-      for (let i = ep.episode - 1; i < dummyData.episodes.length; i++) {
-        dummyData.episodes[i].content = `${activeVariation + 1} content`;
+      ep.current_variation_number = ep.current_variation_number + 1;
+      ep.content = `${ep.current_variation_number} content`
+      for (let i = ep.episode; i < dummyData.episodes.length; i++) {
+        if(dummyData.episodes[i].current_variation_number< dummyData.episodes[i].variations.length){
+        dummyData.episodes[i].current_variation_number = dummyData.episodes[i].current_variation_number + 1;
+        dummyData.episodes[i].content = `${dummyData.episodes[i].current_variation_number} content`;
+        }
       }
 
       setLoading(true)
@@ -180,19 +181,19 @@ const StoryPreview = ({ userId }) => {
   }
 
   const prevVariation = (ep) => {
-    console.log(ep)
-    if (activeVariation > 1 && !loading) {
+    if (ep.current_variation_number > 1 && !loading) {
       let c = ep.episode;
-      if (c === 1 || (c > 1 && dummyData.episodes[c - 2].current_variation_number < activeVariation)) {
+      if (c === 1 || (c > 1 && dummyData.episodes[c - 2].current_variation_number < ep.current_variation_number)) {
 
 
         setActiveEpisode(ep.episode)
-        ep.current_variation_number = activeVariation - 1;
-        setActiveVaraition(activeVariation - 1)
-
-        ep.content = `${activeVariation - 1} content`
-        for (let i = ep.episode - 1; i < dummyData.episodes.length; i++) {
-          dummyData.episodes[i].content = `${activeVariation - 1} content`;
+        ep.current_variation_number = ep.current_variation_number - 1;
+        ep.content = `${ep.current_variation_number} content`
+        for (let i = ep.episode; i < dummyData.episodes.length; i++) {
+          if(dummyData.episodes[i].current_variation_number > 1){
+          dummyData.episodes[i].current_variation_number = dummyData.episodes[i].current_variation_number - 1;
+          dummyData.episodes[i].content = `${dummyData.episodes[i].current_variation_number} content`;
+          }
         }
         setLoading(true)
         setTimeout(() => {
@@ -215,54 +216,57 @@ const StoryPreview = ({ userId }) => {
       <div className="episodes-list">
         {dummyData.episodes.map((episode) => (
           (episode.episode >= activeEpisode && loading) ? (<div>Loading...</div>) : (
-            <div key={episode.id} className="episode">
-              <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
-                {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
-                <h4 className='episode-title-ok-al'> {episode.content}</h4>
-                {episode.creator === user.username && (
-                  <button className="edit-episode-btn"><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
-                )}
-                {/* <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle /> }</span> */}
-              </div>
-
-              <div className="episode-content">
-                <ReactQuill theme="snow" readOnly={episode.creator === user.username ? false : true}
-                  modules={episode.creator === user.username ? ({
-                    toolbar: false ? [] : [
-                      [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                      ['bold', 'italic', 'underline'],
-                      ['link'],
-                      [{ 'align': [] }],
-                      ['image'],
-                    ]
-                  }) : ({
-                    toolbar: true ? [] : [
-                      [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                      ['bold', 'italic', 'underline'],
-                      ['link'],
-                      [{ 'align': [] }],
-                      ['image'],
-                    ]
-                  })}
-                  value={episode.content} onChange={() => { }} style={{ height: "100%" }} />
-                <div className="episode-options">
-                  <button><IoAddCircleOutline /></button>
-                  <button><FaRegHeart /></button>
-                  <button><FaRegFlag /></button>
-                  {episode.variations.length > 0 && (<button onClick={() => {
-                    prevVariation(episode);
-                  }}><FiArrowLeftCircle /></button>)}
-                  {episode.variations.length > 0 && (<button onClick={() => {
-                    nextVariation(episode);
-                  }}><FiArrowRightCircle /></button>)}
-                  <button><MdOutlineReportProblem /></button>
-                  <button><TiDeleteOutline /></button>
+            (episode.episode===1 || (episode.episode>1 && dummyData.episodes[episode.episode-2].current_variation_number<=episode.current_variation_number)) &&(
+            <>
+              <div key={episode.id} className="episode">
+                <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
+                  {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
+                  <h4 className='episode-title-ok-al'> {episode.content}</h4>
+                  {episode.creator === user.username && (
+                    <button className="edit-episode-btn"><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
+                  )}
+                  {/* <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle /> }</span> */}
                 </div>
-              </div>
 
-            </div>)
+                <div className="episode-content">
+                  <ReactQuill theme="snow" readOnly={episode.creator === user.username ? false : true}
+                    modules={episode.creator === user.username ? ({
+                      toolbar: false ? [] : [
+                        [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['bold', 'italic', 'underline'],
+                        ['link'],
+                        [{ 'align': [] }],
+                        ['image'],
+                      ]
+                    }) : ({
+                      toolbar: true ? [] : [
+                        [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['bold', 'italic', 'underline'],
+                        ['link'],
+                        [{ 'align': [] }],
+                        ['image'],
+                      ]
+                    })}
+                    value={episode.content} onChange={() => { }} style={{ height: "100%" }} />
+                  <div className="episode-options">
+                    <button><IoAddCircleOutline /></button>
+                    <button><FaRegHeart /></button>
+                    <button><FaRegFlag /></button>
+                    {episode.variations.length > 0 && (<button onClick={() => {
+                      prevVariation(episode);
+                    }}><FiArrowLeftCircle /></button>)}
+                    {episode.variations.length > 0 && (<button onClick={() => {
+                      nextVariation(episode);
+                    }}><FiArrowRightCircle /></button>)}
+                    <button><MdOutlineReportProblem /></button>
+                    <button><TiDeleteOutline /></button>
+                  </div>
+                </div>
+
+              </div>
+            </>))
         ))}
       </div>
 

@@ -193,7 +193,7 @@ const StoryPreview = ({ userId }) => {
         ep.current_variation_number = ep.current_variation_number - 1;
         ep.content = `${ep.current_variation_number} content`
         for (let i = ep.episode; i < dummyData.episodes.length; i++) {
-          if(dummyData.episodes[i].current_variation_number > 1 && dummyData.episodes[i].current_variation_number>ep.current_variation_number){
+          if(dummyData.episodes[i].current_variation_number > 1 && dummyData.episodes[i].current_variation_number>dummyData.episodes[i-1].current_variation_number){
           dummyData.episodes[i].current_variation_number = dummyData.episodes[i].current_variation_number - 1;
           dummyData.episodes[i].content = `${dummyData.episodes[i].current_variation_number} content`;
           }

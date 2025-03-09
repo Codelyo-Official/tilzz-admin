@@ -125,6 +125,8 @@ const StoryPreview = ({ userId }) => {
 
   const [loading, setLoading] = useState(false);
   const location = useLocation();
+  const [isAddNewVersion,setIsAddNewVersion] = useState(false);
+  const [newVAt,setNewVAt] = useState(null)
   console.log("story preview rendered")
   const { getUser } = useAuth();
   const user = useMemo(() => getUser(), []);
@@ -207,6 +209,24 @@ const StoryPreview = ({ userId }) => {
     console.log(dummyData)
   }
 
+  const addVersion = (ep) =>{
+    setIsAddNewVersion(true);
+    let newVarNum = ep.variations[ep.variations.length-1].variation_number+1;
+    setNewVAt(ep);
+    // ep.variations.push({
+    //   "episode_id": "whatever",
+    //   "variation_number": newVarNum
+    // })
+    // ep.current_variation_number = newVarNum;
+    // ep.content = "Add New Version here"
+    // for(let i = ep.episode;i<dummyData.episodes.length;i++){
+    //   dummyData.episodes[i].current_variation_number = ep.current_variation_number;
+    // }
+
+    console.log(dummyData)
+    
+  }
+
   return (
     <div className="story-preview">
       <div className="story-header">
@@ -224,7 +244,9 @@ const StoryPreview = ({ userId }) => {
               <span className="visually-hidden">Loading...</span>
             </Spinner>
           </div>) : (
-            (episode.episode===1 || (episode.episode>1 && dummyData.episodes[episode.episode-2].current_variation_number<=episode.current_variation_number)) &&(
+            (episode.episode===1 || (episode.episode>1 && dummyData.episodes[episode.episode-2].current_variation_number<=episode.current_variation_number && (newVAt===null || (newVAt!==null &&
+              episode.episode < newVAt.episode
+            ))) ) &&(
             <>
               <div key={episode.id} className="episode">
                 {/* <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
@@ -259,7 +281,11 @@ const StoryPreview = ({ userId }) => {
                     })}
                     value={episode.content} onChange={() => { }} style={{ height: "100%" }} />
                   <div className="episode-options">
-                    <button className="tooltip1"><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
+                    {episode.episode>1 &&(
+                      <button className="tooltip1" onClick={()=>{
+                        addVersion(episode)
+                        }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
+                    )}
                     <button className="tooltip1"><FaRegHeart /><span className="tooltiptext1">Like</span></button>
                     <button className="tooltip1"><FaRegFlag /><span className="tooltiptext1">Report</span></button>
                     {episode.variations.length > 0 && episode.current_variation_number>1 && (<button className="tooltip1" onClick={() => {
@@ -280,7 +306,7 @@ const StoryPreview = ({ userId }) => {
 
 
       <div className="add-episode">
-        {showNewEpisodeForm ? (
+        {showNewEpisodeForm ||  isAddNewVersion ? (
           <div className="new-episode-form">
             {/* <input
                 type="text"
@@ -294,11 +320,11 @@ const StoryPreview = ({ userId }) => {
                 onChange={(e) => setNewEpisode({ ...newEpisode, content: e.target.value })}
               /> */}
             <ReactQuill theme="snow" value={value} onChange={setValue} style={{ height: "100%" }} />
-            <button className="new-episode-submit" onClick={handleSubmitNewEpisode}>Submit New Episode</button>
+            <button className="new-episode-submit" onClick={handleSubmitNewEpisode}>{isAddNewVersion?(<>Submit New Version</>):(<>Submit New Episode</>)}</button>
           </div>
         ) : (
           <button className="new-episode-btn" onClick={handleNewEpisode}>
-            Add New Episode
+            {isAddNewVersion?(<>Add Version</>):(<>Add New Episode</>)}
           </button>
         )}
       </div>

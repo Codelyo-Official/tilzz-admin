@@ -13,6 +13,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiArrowUpCircle } from "react-icons/fi";
 import { useLocation } from 'react-router-dom';
 import { FaRegFlag } from "react-icons/fa";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 
 const dummyData = {
@@ -217,7 +219,11 @@ const StoryPreview = ({ userId }) => {
 
       <div className="episodes-list">
         {dummyData.episodes.map((episode) => (
-          (episode.episode >= activeEpisode && loading) ? (<div>Loading...</div>) : (
+          (episode.episode >= activeEpisode && loading) ? (<div style={{width:"100%", backgroundColor:"#F1F1F1", borderRadius:"10px", marginTop:"10px",marginBottom:"10px",height:"40px",display:"flex",justifyContent:"center",alignItems:"center"}}>
+            <Spinner animation="grow" role="status" variant="light" style={{color:"white", fontSize:"20px"}}>
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>) : (
             (episode.episode===1 || (episode.episode>1 && dummyData.episodes[episode.episode-2].current_variation_number<=episode.current_variation_number)) &&(
             <>
               <div key={episode.id} className="episode">

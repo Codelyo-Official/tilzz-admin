@@ -265,6 +265,7 @@ const StoryPreview = ({ userId }) => {
                           ['image'],
                         ]
                       })}
+                      className={episode.creator === user.username  ? "" : "read-only-editor"}
                       value={episode.content} onChange={() => { }} style={{ height: "100%" }} />
                     <div className="episode-options">
                       {episode.episode > 1 && (

@@ -225,3 +225,9 @@
   visibility: visible;
   opacity: 1;
 }
+
+.read-only-editor .ql-toolbar {
+  /* display: none !important; */
+ height: 1px;
+ border-bottom: 1px solid #ccc;
+}

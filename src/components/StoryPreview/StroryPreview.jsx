@@ -227,6 +227,11 @@ const StoryPreview = ({ userId }) => {
     
   }
 
+  const cancelVersion = () =>{
+    setIsAddNewVersion(false);
+    setNewVAt(null);
+  }
+
   return (
     <div className="story-preview">
       <div className="story-header">
@@ -321,6 +326,9 @@ const StoryPreview = ({ userId }) => {
               /> */}
             <ReactQuill theme="snow" value={value} onChange={setValue} style={{ height: "100%" }} />
             <button className="new-episode-submit" onClick={handleSubmitNewEpisode}>{isAddNewVersion?(<>Submit New Version</>):(<>Submit New Episode</>)}</button>
+            {isAddNewVersion && (<button className="new-version-cancel" onClick={()=>{
+              cancelVersion()
+              }}>Cancel</button>)}
           </div>
         ) : (
           <button className="new-episode-btn" onClick={handleNewEpisode}>

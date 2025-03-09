@@ -120,6 +120,20 @@
   font-size: 12px;
 }
 
+
+.new-version-cancel {
+  padding: 12px 20px;
+  width: 160px;
+  border-radius: 24px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e54e46;
+  color: #e54646;
+  cursor: pointer;
+  font-size: 12px;
+  /* color:wh; */
+}
+
 .new-episode-btn:hover,
 .new-episode-submit:hover {
   background: #4F46E5;

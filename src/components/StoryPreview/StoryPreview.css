@@ -226,8 +226,11 @@
   opacity: 1;
 }
 
-.read-only-editor .ql-toolbar {
+.read-only-editor .ql-toolbar.ql-snow {
   /* display: none !important; */
- height: 1px;
+ height: 0px;
+ padding: 0px;
+ border: none;
  border-bottom: 1px solid #ccc;
+ /* background-color: red; */
 }

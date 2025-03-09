@@ -227,14 +227,14 @@ const StoryPreview = ({ userId }) => {
             (episode.episode===1 || (episode.episode>1 && dummyData.episodes[episode.episode-2].current_variation_number<=episode.current_variation_number)) &&(
             <>
               <div key={episode.id} className="episode">
-                <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
-                  {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
+                {/* <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
+                  <h4>episode {episode.episode} : {episode.title}</h4>
                   <h4 className='episode-title-ok-al'> {episode.content}</h4>
                   {episode.creator === user.username && (
                     <button className="edit-episode-btn"><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
                   )}
-                  {/* <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle /> }</span> */}
-                </div>
+                  <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle /> }</span>
+                </div> */}
 
                 <div className="episode-content">
                   <ReactQuill theme="snow" readOnly={episode.creator === user.username ? false : true}
@@ -259,17 +259,17 @@ const StoryPreview = ({ userId }) => {
                     })}
                     value={episode.content} onChange={() => { }} style={{ height: "100%" }} />
                   <div className="episode-options">
-                    <button><IoAddCircleOutline /></button>
-                    <button><FaRegHeart /></button>
-                    <button><FaRegFlag /></button>
-                    {episode.variations.length > 0 && (<button onClick={() => {
+                    <button className="tooltip1"><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
+                    <button className="tooltip1"><FaRegHeart /><span className="tooltiptext1">Like</span></button>
+                    <button className="tooltip1"><FaRegFlag /><span className="tooltiptext1">Report</span></button>
+                    {episode.variations.length > 0 && episode.current_variation_number>1 && (<button className="tooltip1" onClick={() => {
                       prevVariation(episode);
-                    }}><FiArrowLeftCircle /></button>)}
-                    {episode.variations.length > 0 && (<button onClick={() => {
+                    }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
+                    {episode.variations.length > 0 && episode.current_variation_number<episode.variations.length && (<button className="tooltip1" onClick={() => {
                       nextVariation(episode);
-                    }}><FiArrowRightCircle /></button>)}
-                    <button><MdOutlineReportProblem /></button>
-                    <button><TiDeleteOutline /></button>
+                    }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
+                    <button className="tooltip1"><MdOutlineReportProblem  /><span className="tooltiptext1">Quarantine</span></button>
+                    <button className="tooltip1"><TiDeleteOutline  /><span className="tooltiptext1">Delete</span></button>
                   </div>
                 </div>
 

@@ -33,31 +33,24 @@ const dummyData = {
       title: 'The Lost Map',
       content: `The first part of the journey begins with the discovery of a mysterious map.
 
-<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, <em>consectetur</em>, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+Contrary to popular belief, Lorem Ipsum is not simply random text. It originates from classical Latin literature from 45 BC. Richard McClintock, a Latin professor, traced the word consectetur in classical literature and discovered its source.
 
-<p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of <em>de Finibus Bonorum et Malorum</em> (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "<strong>Lorem ipsum dolor sit amet..</strong>", comes from a line in section 1.10.32.</p>
+Lorem Ipsum comes from De Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC, a popular treatise on ethics during the Renaissance. The first line, "Lorem ipsum dolor sit amet...", is derived from section 1.10.32.
 
-<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from <em>de Finibus Bonorum et Malorum</em> by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+Standard Lorem Ipsum Passage
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-<h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
+Section 1.10.32 from De Finibus Bonorum et Malorum
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit..."
 
-<p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</em></p>
+1914 Translation by H. Rackham
+"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born... No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful."
 
-<h3>Section 1.10.32 of <em>de Finibus Bonorum et Malorum</em>, written by Cicero in 45 BC</h3>
+Section 1.10.33 from De Finibus Bonorum et Malorum
+"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident..."
 
-<p><em>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</em></p>
-
-<h3>1914 translation by H. Rackham</h3>
-
-<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</p>
-
-<h3>Section 1.10.33 of <em>de Finibus Bonorum et Malorum</em>, written by Cicero in 45 BC</h3>
-
-<p><em>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</em></p>
-
-<h3>1914 translation by H. Rackham</h3>
-
-<p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.</p>`,
+1914 Translation by H. Rackham
+"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment... The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."`,
       creator: 'user123',
     },
     {
@@ -123,6 +116,7 @@ const dummyData = {
 
 const StoryPreview = ({ userId }) => {
 
+  const [currentEditId, setCurrentEditId] = useState(null);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const [isAddNewVersion, setIsAddNewVersion] = useState(false);
@@ -243,9 +237,9 @@ const StoryPreview = ({ userId }) => {
               episode.episode < newVAt.episode
             )))) && (
               <>
-                <div key={episode.id} className="episode" style={{ marginTop: "0px" }}>
+                <div key={episode.id} className="episode">
                   <div className="episode-content">
-                    <ReactQuill theme="snow" readOnly={episode.creator === user.username ? false : true}
+                    {/* <ReactQuill theme="snow" readOnly={episode.creator === user.username ? false : true}
                       modules={episode.creator === user.username ? ({
                         toolbar: false ? [] : [
                           [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
@@ -266,8 +260,60 @@ const StoryPreview = ({ userId }) => {
                         ]
                       })}
                       className={episode.creator === user.username  ? "" : "read-only-editor"}
-                      value={episode.content} onChange={() => { }} style={{ height: "100%" }} />
-                    <div className="episode-options">
+                      value={episode.content} onChange={() => { }} style={{ height: "100%" }} /> */}
+                    {episode.creator === user.username ? (
+
+                      episode.id === currentEditId ? (
+                        <div className="new-episode-form">
+                          <textarea>{episode.content}</textarea>
+                          <div style={{ display: "flex", justifyContent: "center" }}>
+                            <button className="new-episode-submit" style={{ margin: "5px" }}>save</button>
+                            <button style={{ margin: "5px" }} className="new-version-cancel"onClick={()=>{
+                              setCurrentEditId(null)
+                            }} >Cancel</button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p>{episode.content} <div className="episode-options">
+                          {episode.episode > 1 && (
+                            <button className="tooltip1" onClick={() => {
+                              addVersion(episode)
+                            }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
+                          )}
+                          {episode.creator === user.username && (<button onClick={() => { setCurrentEditId(episode.id) }}><FiEdit /></button>)}
+                          <button className="tooltip1"><FaRegHeart /><span className="tooltiptext1">Like</span></button>
+                          <button className="tooltip1"><FaRegFlag /><span className="tooltiptext1">Report</span></button>
+                          {isPrevOption(episode) && (<button className="tooltip1" onClick={() => {
+                            prevVariation(episode);
+                          }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
+                          {isNextOption(episode) && (<button className="tooltip1" onClick={() => {
+                            nextVariation(episode);
+                          }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
+                          <button className="tooltip1"><MdOutlineReportProblem /><span className="tooltiptext1">Quarantine</span></button>
+                          <button className="tooltip1"><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>
+                        </div></p>)
+
+                    ) : (
+                      <p>{episode.content} <div className="episode-options">
+                        {episode.episode > 1 && (
+                          <button className="tooltip1" onClick={() => {
+                            addVersion(episode)
+                          }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
+                        )}
+                        {episode.creator === user.username && (<button onClick={() => { setCurrentEditId(episode.id) }}><FiEdit /></button>)}
+                        <button className="tooltip1"><FaRegHeart /><span className="tooltiptext1">Like</span></button>
+                        <button className="tooltip1"><FaRegFlag /><span className="tooltiptext1">Report</span></button>
+                        {isPrevOption(episode) && (<button className="tooltip1" onClick={() => {
+                          prevVariation(episode);
+                        }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
+                        {isNextOption(episode) && (<button className="tooltip1" onClick={() => {
+                          nextVariation(episode);
+                        }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
+                        <button className="tooltip1"><MdOutlineReportProblem /><span className="tooltiptext1">Quarantine</span></button>
+                        <button className="tooltip1"><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>
+                      </div></p>
+                    )}
+                    {/* <div className="episode-options">
                       {episode.episode > 1 && (
                         <button className="tooltip1" onClick={() => {
                           addVersion(episode)
@@ -275,19 +321,16 @@ const StoryPreview = ({ userId }) => {
                       )}
                       <button className="tooltip1"><FaRegHeart /><span className="tooltiptext1">Like</span></button>
                       <button className="tooltip1"><FaRegFlag /><span className="tooltiptext1">Report</span></button>
-                      {/* episode.variations.length > 0 && episode.current_variation_number > 1 */}
-                      { isPrevOption(episode) && (<button className="tooltip1" onClick={() => {
+                      {isPrevOption(episode) && (<button className="tooltip1" onClick={() => {
                         prevVariation(episode);
                       }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
-                      {/* episode.variations.length > 0 && episode.current_variation_number < episode.variations.length  */}
                       {isNextOption(episode) && (<button className="tooltip1" onClick={() => {
                         nextVariation(episode);
                       }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
                       <button className="tooltip1"><MdOutlineReportProblem /><span className="tooltiptext1">Quarantine</span></button>
                       <button className="tooltip1"><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>
-                    </div>
+                    </div> */}
                   </div>
-
                 </div>
               </>))
         ))}
@@ -297,7 +340,8 @@ const StoryPreview = ({ userId }) => {
       <div className="add-episode">
         {showNewEpisodeForm || isAddNewVersion ? (
           <div className="new-episode-form">
-            <ReactQuill theme="snow" value={value} onChange={setValue} style={{ height: "100%" }} />
+            {/* <ReactQuill theme="snow" value={value} onChange={setValue} style={{ height: "100%" }} /> */}
+            <textarea></textarea>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <button className="new-episode-submit" style={{ margin: "5px" }} onClick={handleSubmitNewEpisode}>{isAddNewVersion ? (<>Submit New Version</>) : (<>Submit New Episode</>)}</button>
               {isAddNewVersion && (<button style={{ margin: "5px" }} className="new-version-cancel" onClick={() => {

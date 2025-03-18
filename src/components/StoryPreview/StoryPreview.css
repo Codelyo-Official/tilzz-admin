@@ -51,9 +51,10 @@
 }
 
 .episode {
-  border-bottom: 1px solid #eee;
-  padding: 15px 0;
+  /* border-bottom: 1px solid #eee; */
+  padding: 0;
   transition: all 0.3s;
+  margin-top: 10px;
 }
 
 .episode-header {
@@ -84,12 +85,18 @@
 
 .episode-content {
   position: relative;
-  padding: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   font-size: 14px;
   height: auto;
-  background: #f1f1f1;
+  /* background: #f1f1f1; */
   border-radius: 8px;
-  margin-top: 10px;
+  margin-top: 0px;
+  text-align: center;
+}
+
+.episode-content textarea{
+  width: 100%;
 }
 
 .edit-episode-btn {
@@ -105,6 +112,7 @@
 
 .add-episode {
   padding: 20px;
+  padding-top: 0px;
   text-align: center;
 }
 
@@ -173,12 +181,11 @@
 }
 
 .episode-options{
- position: absolute;
- bottom: 24px;
- right:18px;
-  display: flex;
- justify-content: flex-end;
- margin-top: 15px;
+ /* position: absolute; */
+ /* bottom: 16px; */
+ /* right:18px; */
+  display: inline-block;
+ /* margin-top: 15px; */
  margin-right: 5px;
 }
 
@@ -233,4 +240,8 @@
  border: none;
  border-bottom: 1px solid #ccc;
  /* background-color: red; */
+}
+
+.myeditarea{
+  background-color: #F9F9F9;
 }

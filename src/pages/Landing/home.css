@@ -357,7 +357,7 @@
 .center1 {
     position: relative;
     grid-area: center1;
-    background-color: lightgreen;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;

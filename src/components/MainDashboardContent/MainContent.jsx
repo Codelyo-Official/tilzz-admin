@@ -7,6 +7,7 @@ import { setActiveTab } from "../../features/tabSlice";
 import Account from "../Account/Account";
 import Reports from "../Reports/reports";
 import UserList from "../Users/AllUsers";
+import Approvals from "../approvals/approvals";
 
 function MainContent({ children }) {
 
@@ -41,6 +42,10 @@ function MainContent({ children }) {
 
             {value === "users" && (
                 <UserList />
+            )}
+
+            {value === "approvals" && (
+                <Approvals />
             )}
         </>
     );

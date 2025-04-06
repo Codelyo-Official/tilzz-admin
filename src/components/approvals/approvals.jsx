@@ -56,7 +56,7 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
   ],
 };
 
-const Reports = ({ userId }) => {
+const Approvals = ({ userId }) => {
 
   const location = useLocation();
   console.log("story preview rendered")
@@ -135,11 +135,11 @@ const Reports = ({ userId }) => {
                 <div className="episode-content" style={{marginTop:"20px"}}>
                   {/* <p>{episode.content}</p> */}
                   <div className="new-episode-form">
-                    <textarea>{episode.content}</textarea>
+                    <p>{episode.content}</p>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      <button className="new-episode-submit" style={{ margin: "5px" }}>submit for approval</button>
+                      <button className="new-episode-submit" style={{ margin: "5px" }}>approve</button>
                       <button style={{ margin: "5px" }} className="new-version-cancel" onClick={() => {
-                      }} >Cancel</button>
+                      }} >Revisit</button>
                     </div>
                   </div>
                   <div className="episode-options">
@@ -183,11 +183,11 @@ const Reports = ({ userId }) => {
               {activeEpisode === episode.id && (
                 <div className="episode-content"  style={{marginTop:"20px"}}>
                   <div className="new-episode-form">
-                    <textarea>{episode.content}</textarea>
+                    <p>{episode.content}</p>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      <button className="new-episode-submit" style={{ margin: "5px" }}>submit for approval</button>
+                      <button className="new-episode-submit" style={{ margin: "5px" }}>approve</button>
                       <button style={{ margin: "5px" }} className="new-version-cancel" onClick={() => {
-                      }} >Cancel</button>
+                      }} >Revisit</button>
                     </div>
                   </div>
                   <div className="episode-options">
@@ -211,4 +211,4 @@ const Reports = ({ userId }) => {
   );
 };
 
-export default Reports;
+export default Approvals;

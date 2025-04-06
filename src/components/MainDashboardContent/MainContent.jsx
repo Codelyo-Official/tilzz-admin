@@ -1,6 +1,5 @@
 import React, { use, useEffect } from "react";
 import Stories from "../Stories/stories";
-import CreateStory from "../CreateStory/CreateStory";
 import StoryPreview from "../StoryPreview/StroryPreview";
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,10 +26,6 @@ function MainContent({ children }) {
             )) && (
                     <Stories slugStories={value} />
                 )}
-
-            {value === "create-story" && (
-                <CreateStory />
-            )}
 
             {value === "story-preview" && (
                 <StoryPreview />

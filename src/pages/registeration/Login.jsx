@@ -91,23 +91,6 @@ const LoginSignup = () => {
           )}
           <button type="submit" style={{fontSize:"14px"}}>{"Login"}</button>
         </form>
-        <div className="toggle-link" onClick={toggleLoginSignup} style={{fontSize:"12px", color:"black"}}>
-          {"Create New Account"}
-        </div>
-        {/* <div className="social-login">
-          <p>Or login with:</p>
-          <div className="social-icons">
-            <FaFacebook
-              style={{ color: "#15A0F9" }}
-              className="facebook-icon"
-              onClick={() => console.log("Facebook Login")}
-            />
-            <FcGoogle
-              className="google-icon"
-              onClick={() => console.log("Google Login")}
-            />
-          </div>
-        </div> */}
       </div>
     </div>
   );

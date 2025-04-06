@@ -5,8 +5,7 @@ import { setActiveTab } from "../../features/tabSlice";
 import { FaTrash, FaEye } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
 import { IoTrashOutline } from "react-icons/io5";
-
-
+import ModalDialog from "../ModalDialog";
 
 
 const FeedStories = [
@@ -273,6 +272,9 @@ function Stories({ children, slugStories }) {
 
 
     const [dataStories, setDataStories] = React.useState([]);
+    const [open, setOpen] = React.useState(false);
+    const [ctext, setCtext] = React.useState("");
+
 
     useEffect(() => {
         if (slugStories === "stories-feed" || slugStories === null) {
@@ -290,14 +292,6 @@ function Stories({ children, slugStories }) {
     const handleActiveMenu = (name) => {
         dispatch(setActiveTab(name));
     };
-
-    const toggleFollow = (id) => {
-
-        setDataStories(() =>
-            dataStories.map((story) =>
-                story.id === id ? { ...story, follow: !story.follow } : story
-            ));
-    }
 
     return (
         <div>
@@ -329,8 +323,14 @@ function Stories({ children, slugStories }) {
                                         <p className="descp">{st.description}</p>
                                     </div>
                                     <div className="admin-options">
-                                        <IoMdEye style={{ color: "white" }} />
-                                        <IoTrashOutline style={{ color: "white" }} />
+                                        <IoMdEye style={{ color: "white" }} onClick={() => {
+                                            setCtext("Are you sure you want to set this story to private")
+                                            setOpen(true);
+                                        }} />
+                                        <IoTrashOutline style={{ color: "white" }} onClick={() => {
+                                            setCtext("Are you sure you want to delete this story")
+                                            setOpen(true);
+                                        }} />
                                     </div>
                                 </li>
                             )
@@ -341,6 +341,9 @@ function Stories({ children, slugStories }) {
                 <div className="viewmore-div">
                     <button>View More</button>
                 </div>
+                <ModalDialog isOpen={open} onClose={() => setOpen(false)} confirmationText={ctext}
+                >
+                </ModalDialog>
             </div>
         </div>
     );

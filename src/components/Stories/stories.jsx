@@ -313,7 +313,7 @@ function Stories({children,slugStories}) {
                                         onClick={()=>{handleActiveMenu("story-preview")}}
                                         >
                                     </NavLink>
-                                    <div className="like-dislike-div">
+                                    {/* <div className="like-dislike-div">
                                         <button 
                                         onClick={()=>{console.log("like btn toggled")}}
                                         style={{height:"20px",width:"20px",color:"white"}}
@@ -340,13 +340,13 @@ function Stories({children,slugStories}) {
                                             </div>
                                         </button>
                                         <h4 className="like-count">{st.like_count}</h4>
-                                    </div>
+                                    </div> */}
                                     <div className="story-by-user"><img src={st.user_avatar}/> <div style={{position:"absolute" , top:"2px", left:"32px"}}>{st.story_by_user}</div></div>
 
                                     <img src={st.img} alt=""/>
                                     <div className="title">
                                         <p >{st.title} 
-                                            {slugStories!=="my-stories" && (
+                                            {/* {slugStories!=="my-stories" && (
                                                 <button
                                                 onClick={()=>{toggleFollow(st.id)}}
                                                 className={st.follow
@@ -354,7 +354,7 @@ function Stories({children,slugStories}) {
                                                 : "follow-btn"}>{st.follow
                                                     ? "following"
                                                     : "follow"}</button>
-                                            )}
+                                            )} */}
                                             </p>
                                         <p className="descp">{st.description}</p>
                                     </div>

@@ -479,24 +479,25 @@ export const links = [
     title: 'Dashboard',
     links: [
       {
-        name: 'Stories Feed',
+        name: 'All Stories',
         slug:'stories-feed',
         icon: <IoMdContacts style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       },
       {
-        name: 'My Stories',
-        slug:'my-stories',
+        name: 'All Users',
+        slug:'users',
         icon: <RiContactsLine style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       },
+      // {
+      //   name: 'Following Stories',
+      //   slug:'following-stories',
+      //   icon: <SlUserFollowing style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+      // },{
+      //   name: 'Favourites',
+      //   slug:'fav-stories',
+      //   icon: <FaRegHeart style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+      // },
       {
-        name: 'Following Stories',
-        slug:'following-stories',
-        icon: <SlUserFollowing style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
-      },{
-        name: 'Favourites',
-        slug:'fav-stories',
-        icon: <FaRegHeart style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
-      },{
         name: 'Quarantine',
         slug:'reports',
         icon: <FaRegFlag style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
@@ -504,16 +505,16 @@ export const links = [
     ],
   },
 
-  {
-    title: 'Actions',
-    links: [
-      {
-        name: 'Create New Story',
-        slug:'create-story',
-        icon: <FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
-      },
-    ],
-  },
+  // {
+  //   title: 'Actions',
+  //   links: [
+  //     {
+  //       name: 'Create New Story',
+  //       slug:'create-story',
+  //       icon: <FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+  //     },
+  //   ],
+  // },
   {
     title: 'Account',
     links: [

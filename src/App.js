@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import { store } from './state/store';
 import "./App.css";
 
-import Home from "./pages/Landing/Home";
-import PublicStories from "./pages/PublicStories/PublicStories";
 import Login from "./pages/registeration/Login";
 import Register from "./pages/registeration/register";
 import Profile from "./pages/profile/Profile";
@@ -20,8 +18,7 @@ const App = () => {
       <Provider store={store}>
         <Router>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/stories-feed" element={<PublicStories />} />
+              <Route path="/" element={<Login />} />
               <Route path="/login" element={<ProtectedRoute><Login /></ProtectedRoute>} />
               <Route path="/register" element={<ProtectedRoute><Register /></ProtectedRoute>} />
               <Route path="/dashboard" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

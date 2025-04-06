@@ -1,14 +1,15 @@
-import React, {use, useEffect} from "react";
+import React, { use, useEffect } from "react";
 import Stories from "../Stories/stories";
 import CreateStory from "../CreateStory/CreateStory";
 import StoryPreview from "../StoryPreview/StroryPreview";
-import {Navigate, useLocation} from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import {setActiveTab} from "../../features/tabSlice";
+import { setActiveTab } from "../../features/tabSlice";
 import Account from "../Account/Account";
 import Reports from "../Reports/reports";
+import UserList from "../Users/AllUsers";
 
-function MainContent({children}) {
+function MainContent({ children }) {
 
     console.log("maincontent component rendered");
 
@@ -21,26 +22,30 @@ function MainContent({children}) {
     return (
         <>
 
-        { (value === null || (value==="stories-feed" || value==="my-stories" ||
-            value==="following-stories"
-        )) && (
-            <Stories slugStories={value}/>
-        )}
+            {(value === null || (value === "stories-feed" || value === "my-stories" ||
+                value === "following-stories"
+            )) && (
+                    <Stories slugStories={value} />
+                )}
 
-        {value==="create-story" && (
-            <CreateStory/>
-        )}
+            {value === "create-story" && (
+                <CreateStory />
+            )}
 
-        {value==="story-preview" && (
-            <StoryPreview/>
-        )}
+            {value === "story-preview" && (
+                <StoryPreview />
+            )}
 
-        {value==="account" && (
-            <Account/>
-        )}
+            {value === "account" && (
+                <Account />
+            )}
 
-    {value==="reports" && (
-                <Reports/>
+            {value === "reports" && (
+                <Reports />
+            )}
+
+            {value === "users" && (
+                <UserList />
             )}
         </>
     );

@@ -341,8 +341,27 @@ function Stories({ children, slugStories }) {
                 <div className="viewmore-div">
                     <button>View More</button>
                 </div>
-                <ModalDialog isOpen={open} onClose={() => setOpen(false)} confirmationText={ctext}
+                <ModalDialog isOpen={open} onClose={() => setOpen(false)} 
                 >
+                    <p className="text-lg text-center mb-6">Are You Sure You want to proceed</p>
+                    <div className="flex justify-center gap-4">
+                        <button
+                            onClick={()=>{
+                                setOpen(false)
+                            }}
+                            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={()=>{
+                                setOpen(false)
+                            }}
+                            className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg"
+                        >
+                            Confirm
+                        </button>
+                    </div>
                 </ModalDialog>
             </div>
         </div>

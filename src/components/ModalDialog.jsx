@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { gsap } from "gsap";
 
-export default function ModalDialog({ isOpen, onClose, confirmationText }) {
+export default function ModalDialog({ isOpen, onClose, children }) {
   const modalRef = useRef(null);
   const backdropRef = useRef(null);
 
@@ -10,9 +10,9 @@ export default function ModalDialog({ isOpen, onClose, confirmationText }) {
     if (isOpen) {
       gsap.fromTo(
         modalRef.current,
-        { y: "-100%", opacity: 0 },
+        { y: -100, opacity: 0 },
         {
-          y: "50%",
+          y: 50,
           opacity: 1,
           duration: 0.6,
           ease: "power3.out",
@@ -36,7 +36,7 @@ export default function ModalDialog({ isOpen, onClose, confirmationText }) {
     });
 
     tl.to(modalRef.current, {
-      y: "-100%",
+      y: -100,
       opacity: 0,
       duration: 0.4,
       ease: "power2.in",
@@ -68,9 +68,10 @@ export default function ModalDialog({ isOpen, onClose, confirmationText }) {
           ✕
         </button>
 
-        {confirmationText ? (
+       
           <>
-            <p className="text-lg text-center mb-6">{confirmationText}</p>
+            {children}
+            {/* <p className="text-lg text-center mb-6">{confirmationText}</p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleClose}
@@ -84,12 +85,9 @@ export default function ModalDialog({ isOpen, onClose, confirmationText }) {
               >
                 Confirm
               </button>
-            </div>
+            </div> */}
           </>
-        ) : (
-          // If no confirmation text, render children
-          <div></div>
-        )}
+       
       </div>
     </div>,
     document.body

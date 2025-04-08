@@ -71,4 +71,57 @@
   .delete-btn:hover {
     background: #c0392b;
   }
+
+
+  #create-user-modal-container {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1001;
+  }
+
+  #create-user-modal-container  h2{
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  
+  #create-user-modal-container .form-group {
+    margin-bottom: 15px;
+  }
+  
+  #create-user-modal-container .form-group label {
+    display: block;
+    font-size: 14px;
+  }
+  
+  #create-user-modal-container .form-group input,
+  #create-user-modal-container .form-group select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    margin-top: 5px;
+    border: solid 1px black;
+    border-radius:5px;
+  }
+  
+  #create-user-modal-container .form-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #create-user-modal-container button {
+    padding: 10px 15px;
+    font-size: 14px;
+    width: 120px;
+    cursor: pointer;
+    border: solid 1px black;
+    border-radius:25px;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
   

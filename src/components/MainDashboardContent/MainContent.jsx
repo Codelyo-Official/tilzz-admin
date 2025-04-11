@@ -13,8 +13,6 @@ function MainContent({ children }) {
 
     console.log("maincontent component rendered");
 
-    const activeMenu = useSelector(((state) => state.activeTab.activeTab));
-    const dispatch = useDispatch();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const value = queryParams.get('activeTab'); // Retrieve the value of a specific query parameter

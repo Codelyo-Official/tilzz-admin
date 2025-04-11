@@ -6,7 +6,7 @@ const Profile = () => {
     console.log("profile component rendered");
     return (
         <DashboardLayout>
-            <MainContent/>
+            <MainContent />
         </DashboardLayout>
     );
 }

@@ -17,8 +17,11 @@ function DashboardLayout({children}) {
     console.log("dashboard layout component rendered");
      const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {getUser} = useAuth();
-    const user = useMemo(() => getUser(), []);
+    const {user} = useAuth();
+    // const user = useMemo(() => {
+    //     console.log('from dashboard memo')
+    //     return getUser();
+    // }, []);
 
     return (
         <>

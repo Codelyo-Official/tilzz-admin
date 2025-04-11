@@ -60,8 +60,8 @@ const Approvals = ({ userId }) => {
 
   const location = useLocation();
   console.log("story preview rendered")
-  const { getUser } = useAuth();
-  const user = useMemo(() => getUser(), []);
+  const { user } = useAuth();
+  // const user = useMemo(() => getUser(), []);
   const [activeEpisode, setActiveEpisode] = useState(null);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });

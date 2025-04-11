@@ -123,7 +123,7 @@ const StoryPreview = ({ userId }) => {
   const [newVAt, setNewVAt] = useState(null)
   console.log("story preview rendered")
   const { getUser } = useAuth();
-  const user = useMemo(() => getUser(), []);
+  // const user = useMemo(() => getUser(), []);
   const [activeEpisode, setActiveEpisode] = useState(1);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });

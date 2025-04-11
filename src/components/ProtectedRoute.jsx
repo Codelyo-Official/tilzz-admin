@@ -4,10 +4,10 @@ import {useAuth} from "../contexts/AuthProvider";
 
 
 const ProtectedRoute = ({children}) => {
-    const {getUser} = useAuth();
+    const {user} = useAuth();
     const location = useLocation();
 
-    const user = getUser();
+    // const user = getUser();
 
     if (location.pathname === "/dashboard" && user.username=="none") {
         return <Navigate to="/login"/>;

@@ -1,30 +1,36 @@
-import React, {createContext, useContext, useState, useEffect} from "react";
-import {jwtDecode} from "jwt-decode";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
 
     console.log("auth invoked")
     const [token, setToken] = useState(() => sessionStorage.getItem("token") || null);
+    const [user, setUser] = useState({ username: "none" });
 
     useEffect(() => {
         let timeout;
         if (token) {
-          timeout = setTimeout(() => {
-            setToken(null); // Clear token after 15 minutes
-          }, 15 * 60 * 1000);
+            const decoded = token ? jwtDecode(token) : { username: "none" };
+            setUser(decoded)
+            timeout = setTimeout(() => {
+                setUser({ username: "none" })
+                setToken(null); // Clear token after 15 minutes
+            }, 15 * 60 * 1000);
         }
         return () => clearTimeout(timeout);
-      }, [token]);
+    }, [token]);
 
-    const login = async(newtoken) => {
+    const login = (newtoken) => {
 
         try {
             if (true) {
                 setToken(newtoken);
-                sessionStorage.setItem("token",newtoken)
-                return {success: true, message: "Login successful"};
+                // const decoded = newtoken ? jwtDecode(newtoken) : { username: "none" };
+                // setUser(decoded)
+                sessionStorage.setItem("token", newtoken)
+                return { success: true, message: "Login successful" };
             } else {
                 return {
                     success: false,
@@ -32,29 +38,30 @@ export const AuthProvider = ({children}) => {
                 };
             }
         } catch (error) {
-            return {success: false, message: "Network error"};
+            return { success: false, message: "Network error" };
         }
     };
 
     const logout = () => {
         setToken(null);
+        setUser({ username: "none" })
         sessionStorage.removeItem("token");
-        return {success: true, message: "Logout successful"};
+        return { success: true, message: "Logout successful" };
     };
 
-    const getUser = () =>{
-      const decoded = token? jwtDecode(token):{username:"none"};
-      return decoded;
-    }
+    // const getUser = () => {
+    //     console.log("get user avoked")
+    //     const decoded = token ? jwtDecode(token) : { username: "none" };
+    //     return decoded;
+    // }
 
     return (
         <AuthContext.Provider
             value={{
-            token,
-            login,
-            logout,
-            getUser
-        }}>
+                user,
+                login,
+                logout,
+            }}>
             {children}
         </AuthContext.Provider>
     );

@@ -8,7 +8,20 @@ import { IoTrashOutline } from "react-icons/io5";
 import ModalDialog from "../ModalDialog";
 
 
-const FeedStories = [
+type story = {
+    id: number;
+    title: string;
+    img: string;
+    description: string;
+    story_by_user: string;
+    follow: boolean;
+    liked: boolean;
+    like_count: number;
+    user_avatar: string;
+}
+
+
+const FeedStories:story[] = [
     {
         id: 1,
         title: "Hamza First Story",
@@ -102,7 +115,7 @@ const FeedStories = [
     }
 ]
 
-const MyStories = [
+const MyStories:story[] = [
     {
         id: 1,
         title: "Hamza First Story",
@@ -183,7 +196,7 @@ const MyStories = [
     }
 ]
 
-const FollowingStories = [
+const FollowingStories:story[] = [
     {
         id: 1,
         title: "Hamza First Story",
@@ -264,14 +277,15 @@ const FollowingStories = [
     }
 ]
 
-function Stories({ children, slugStories }) {
+function Stories({  slugStories }:{slugStories:string | null}) {
 
     const dispatch = useDispatch();
 
     console.log("stories component rendered");
 
 
-    const [dataStories, setDataStories] = React.useState([]);
+    const [dataStories, setDataStories] = React.useState<story[]>([]);
+
     const [open, setOpen] = React.useState(false);
     const [ctext, setCtext] = React.useState("");
 
@@ -289,7 +303,7 @@ function Stories({ children, slugStories }) {
         }
     }, [slugStories]);
 
-    const handleActiveMenu = (name) => {
+    const handleActiveMenu = (name:string) => {
         dispatch(setActiveTab(name));
     };
 

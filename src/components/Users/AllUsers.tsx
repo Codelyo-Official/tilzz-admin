@@ -1,42 +1,61 @@
-import React from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import "./users.css";
 import ModalDialog from "../ModalDialog";
 
-const users = [
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  active: boolean;
+  role: string;
+}
+
+const users: User[] = [
   { id: 1, name: "John Doe", email: "john@example.com", password: "abcdefg", active: true, role: "admin" },
   { id: 2, name: "Jane Smith", email: "jane@example.com", password: "abcdefg", active: false, role: "user" },
   { id: 3, name: "Alice Johnson", email: "alice@example.com", password: "abcdefg", active: true, role: "sub-admin" },
 ];
 
-const UserList = () => {
+const UserList: React.FC = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [role, setRole] = useState<string>("user"); // Default role is 'user'
 
-  const [open, setOpen] = React.useState(false);
-
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [role, setRole] = React.useState('user'); // Default role is 'user'
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newUser = { email, password, role };
+    console.log("Creating user:", newUser);
     clearForm();
+    setOpen(false);
   };
 
   const clearForm = () => {
-    setEmail('');
-    setPassword('');
-    setRole('user');
+    setEmail("");
+    setPassword("");
+    setRole("user");
   };
-
-
 
   return (
     <>
       <div style={{ marginTop: "10px", marginBottom: "10px", display: "flex", justifyContent: "flex-end" }}>
-        <button style={{ marginRight: "20px", border: "solid 1px black", height: "40px", paddingLeft: "15px", paddingRight: "15px", borderRadius: "20px", fontSize: "14px" }} onClick={() => {
-          setOpen(true)
-        }}>Create New User</button>
+        <button
+          style={{
+            marginRight: "20px",
+            border: "solid 1px black",
+            height: "40px",
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            borderRadius: "20px",
+            fontSize: "14px",
+          }}
+          onClick={() => setOpen(true)}
+        >
+          Create New User
+        </button>
       </div>
+
       <div className="user-list-container">
         <h2 className="table-title">User List</h2>
         <table className="user-table">
@@ -51,7 +70,7 @@ const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {users.map((user: User) => (
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
@@ -71,8 +90,8 @@ const UserList = () => {
           </tbody>
         </table>
       </div>
-      <ModalDialog isOpen={open} onClose={() => setOpen(false)}
-      >
+
+      <ModalDialog isOpen={open} onClose={() => setOpen(false)}>
         <div id="create-user-modal-container">
           <h2>Create New User</h2>
           <form onSubmit={handleSubmit}>
@@ -83,7 +102,7 @@ const UserList = () => {
                 id="email"
                 name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -95,7 +114,7 @@ const UserList = () => {
                 id="password"
                 name="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -106,7 +125,7 @@ const UserList = () => {
                 id="role"
                 name="role"
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => setRole(e.target.value)}
               >
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
@@ -115,8 +134,10 @@ const UserList = () => {
             </div>
 
             <div className="form-actions">
-              <button >Create User</button>
-              <button onClick={()=>setOpen(false)}>Close</button>
+              <button type="submit">Create User</button>
+              <button type="button" onClick={() => setOpen(false)}>
+                Close
+              </button>
             </div>
           </form>
         </div>
@@ -126,4 +147,3 @@ const UserList = () => {
 };
 
 export default UserList;
-

@@ -9,7 +9,7 @@ import Reports from "../Reports/reports";
 import UserList from "../Users/AllUsers";
 import Approvals from "../approvals/approvals";
 
-function MainContent({ children }) {
+function MainContent() {
 
     console.log("maincontent component rendered");
 

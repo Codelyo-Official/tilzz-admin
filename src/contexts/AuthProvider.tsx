@@ -1,18 +1,38 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
-const AuthContext = createContext();
+// Define the shape of the JWT payload
+type DecodedToken = {
+    username: string;
+    exp?: number;
+    // [key: string]: any;
+};
 
-export const AuthProvider = ({ children }) => {
+// Define the context value shape
+type AuthContextType = {
+    user: DecodedToken;
+    login: (token: string) => { success: boolean; message: string };
+    logout: () => { success: boolean; message: string };
+};
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+type AuthProviderProps = {
+    children: React.ReactNode;
+};
+
+export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     console.log("auth invoked")
-    const [token, setToken] = useState(() => sessionStorage.getItem("token") || null);
-    const [user, setUser] = useState({ username: "none" });
+    const [token, setToken] = useState<string | null>(
+        () => sessionStorage.getItem("token")
+    );
+    const [user, setUser] = useState<DecodedToken>({ username: "none" });
 
     useEffect(() => {
-        let timeout;
+        let timeout: NodeJS.Timeout;
         if (token) {
-            const decoded = token ? jwtDecode(token) : { username: "none" };
+            const decoded: DecodedToken = token ? jwtDecode(token) : { username: "none" };
             setUser(decoded)
             timeout = setTimeout(() => {
                 setUser({ username: "none" })
@@ -22,7 +42,7 @@ export const AuthProvider = ({ children }) => {
         return () => clearTimeout(timeout);
     }, [token]);
 
-    const login = (newtoken) => {
+    const login = (newtoken: string) => {
 
         try {
             if (true) {
@@ -49,12 +69,6 @@ export const AuthProvider = ({ children }) => {
         return { success: true, message: "Logout successful" };
     };
 
-    // const getUser = () => {
-    //     console.log("get user avoked")
-    //     const decoded = token ? jwtDecode(token) : { username: "none" };
-    //     return decoded;
-    // }
-
     return (
         <AuthContext.Provider
             value={{
@@ -67,4 +81,11 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-export const useAuth = () => useContext(AuthContext);
+// Hook with type safety
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

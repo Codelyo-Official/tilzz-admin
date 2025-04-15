@@ -10,7 +10,26 @@ import { useLocation } from 'react-router-dom';
 import { FaRegFlag } from "react-icons/fa";
 
 
-const dummyData = {
+type episode = {
+  id: number,
+  episode: number,
+  title: string,
+  content: string;
+  creator: string;
+  status?:string;
+}
+
+type story = {
+  storyId: string;
+  storyImage: string;
+  title: string;
+  description: string;
+  creator: string;
+  episodes: episode[]
+}
+
+const dummyData :story= {
+  storyId: "5bhja9",
   storyImage: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
     "&cs=tinysrgb&w=1260&h=750&dpr=1",
   title: 'The Mysterious Journey',
@@ -28,7 +47,8 @@ const dummyData = {
   ],
 };
 
-const dummyData1 = {
+const dummyData1:story = {
+  storyId: "5bhjahjhj9",
   storyImage: "https://images.pexels.com/photos/3218465/pexels-photo-3218465.jpeg?auto=compress" +
     "&cs=tinysrgb&w=1260&h=750&dpr=1",
   title: 'New Era',
@@ -56,13 +76,13 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
   ],
 };
 
-const Approvals = ({ userId }) => {
+const Approvals = () => {
 
   const location = useLocation();
   console.log("story preview rendered")
   const { user } = useAuth();
   // const user = useMemo(() => getUser(), []);
-  const [activeEpisode, setActiveEpisode] = useState(null);
+  const [activeEpisode, setActiveEpisode] = useState<number | null>(null);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
   const [value, setValue] = useState('');
@@ -81,7 +101,7 @@ const Approvals = ({ userId }) => {
     ]
   };
 
-  const handleEpisodeToggle = (episodeId) => {
+  const handleEpisodeToggle = (episodeId:number) => {
     setActiveEpisode(activeEpisode === episodeId ? null : episodeId);
   };
 

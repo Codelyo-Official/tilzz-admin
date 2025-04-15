@@ -24,46 +24,43 @@ interface LinkCategory {
   links: LinkItem[];
 }
 
-export const links: LinkCategory[]  = [
+export const links: LinkCategory[] = [
   {
     title: 'Dashboard',
     links: [
       {
-        name: 'Stories Feed',
+        name: 'All Stories',
         slug:'stories-feed',
         icon: <IoMdContacts style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       },
       {
-        name: 'My Stories',
-        slug:'my-stories',
+        name: 'All Users',
+        slug:'users',
         icon: <RiContactsLine style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       },
       {
-        name: 'Following Stories',
-        slug:'following-stories',
-        icon: <SlUserFollowing style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
-      },{
-        name: 'Favourites',
-        slug:'fav-stories',
-        icon: <FaRegHeart style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
-      },{
         name: 'Quarantine',
         slug:'reports',
+        icon: <FaRegFlag style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+      },
+      {
+        name: 'Approvals',
+        slug:'approvals',
         icon: <FaRegFlag style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       }
     ],
   },
 
-  {
-    title: 'Actions',
-    links: [
-      {
-        name: 'Create New Story',
-        slug:'create-story',
-        icon: <FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
-      },
-    ],
-  },
+  // {
+  //   title: 'Actions',
+  //   links: [
+  //     {
+  //       name: 'Create New Story',
+  //       slug:'create-story',
+  //       icon: <FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+  //     },
+  //   ],
+  // },
   {
     title: 'Account',
     links: [
@@ -74,4 +71,63 @@ export const links: LinkCategory[]  = [
       },
     ],
   },
+  // {
+  //   title: 'Apps',
+  //   links: [
+  //     {
+  //       name: 'calendar',
+  //       icon: <AiOutlineCalendar style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+  //     },
+  //     {
+  //       name: 'kanban',
+  //       icon: <BsKanban style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+  //     },
+  //     {
+  //       name: 'editor',
+  //       icon: <FiEdit style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+  //     },
+  //     {
+  //       name: 'color-picker',
+  //       icon: <BiColorFill style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'Charts',
+  //   links: [
+  //     {
+  //       name: 'line',
+  //       icon: <AiOutlineStock />,
+  //     },
+  //     {
+  //       name: 'area',
+  //       icon: <AiOutlineAreaChart />,
+  //     },
+
+  //     {
+  //       name: 'bar',
+  //       icon: <AiOutlineBarChart />,
+  //     },
+  //     {
+  //       name: 'pie',
+  //       icon: <FiPieChart />,
+  //     },
+  //     {
+  //       name: 'financial',
+  //       icon: <RiStockLine />,
+  //     },
+  //     {
+  //       name: 'color-mapping',
+  //       icon: <BsBarChart />,
+  //     },
+  //     {
+  //       name: 'pyramid',
+  //       icon: <GiLouvrePyramid />,
+  //     },
+  //     {
+  //       name: 'stacked',
+  //       icon: <AiOutlineBarChart />,
+  //     },
+  //   ],
+  // },
 ];

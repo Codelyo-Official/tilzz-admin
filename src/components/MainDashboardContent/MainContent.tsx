@@ -12,10 +12,14 @@ import Approvals from "../approvals/approvals";
 function MainContent() {
 
     console.log("maincontent component rendered");
-
+    const dispatch = useDispatch();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const value = queryParams.get('activeTab'); // Retrieve the value of a specific query parameter
+    React.useEffect(()=>{
+        // console.log(value)
+        dispatch(setActiveTab(value));
+    },[value])
 
     return (
         <>

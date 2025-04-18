@@ -1,4 +1,3 @@
-import React from "react";
 import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
 import MainContent from "../../components/MainDashboardContent/MainContent";
 

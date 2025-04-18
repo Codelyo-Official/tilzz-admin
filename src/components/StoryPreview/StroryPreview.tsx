@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import './StoryPreview.css';
-import { useAuth } from "../../contexts/AuthProvider";
+import styles from '../sharedStyles/styles.module.css';
 import { FiEdit } from 'react-icons/fi';
 // import ReactQuill from 'react-quill';
 // import 'react-quill/dist/quill.snow.css';
@@ -208,58 +207,58 @@ const StoryPreview = () => {
   }
 
   return (
-    <div className="story-preview">
-      <div className="story-header">
-        <img src={dummyData.storyImage} alt="Story Preview" className="story-image" />
-        <div className="story-info">
-          <h2 className="story-title">{dummyData.title}</h2>
+    <div className={styles.storyPreview}>
+      <div className={styles.storyHeader}>
+        <img src={dummyData.storyImage} alt="Story Preview" className={styles.storyImage} />
+        <div className={styles.storyInfo}>
+          <h2 className={styles.storyTitle}>{dummyData.title}</h2>
           {/* <p className="story-description">{dummyData.description}</p> */}
         </div>
       </div>
 
-      <div className="episodes-list" style={{ paddingTop: "0px", marginTop: "0px" }}>
+      <div className={styles.episodesList} style={{ paddingTop: "0px", marginTop: "0px" }}>
         {dummyData.episodes.map((episode) => (
           (episode.episode >= activeEpisode && loading) ? (<div style={{ width: "100%", backgroundColor: "#F1F1F1", borderRadius: "10px", marginTop: "10px", marginBottom: "10px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Spinner animation="grow" role="status" variant="light" style={{ color: "white", fontSize: "20px" }}>
-              <span className="visually-hidden">Loading...</span>
+              <span>Loading...</span>
             </Spinner>
           </div>) : (
             (episode.episode === 1 || (episode.episode > 1 && dummyData.episodes[episode.episode - 2].current_variation_number <= episode.current_variation_number && (newVAt === null || (newVAt !== null &&
               episode.episode < newVAt.episode
             )))) && (
               <>
-                <div key={episode.id} className="episode">
-                  <div className="episode-content">
+                <div key={episode.id} className={styles.episode}>
+                  <div className={styles.episodeContent}>
                     {1===1 ? (
 
                       episode.id === currentEditId ? (
-                        <div className="new-episode-form">
+                        <div className={styles.newEpisodeForm}>
                           <textarea>{episode.content}</textarea>
                           <div style={{ display: "flex", justifyContent: "center" }}>
-                            <button className="new-episode-submit" style={{ margin: "5px" }}>save</button>
-                            <button style={{ margin: "5px" }} className="new-version-cancel"onClick={()=>{
+                            <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }}>save</button>
+                            <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={()=>{
                               setCurrentEditId(null)
                             }} >Cancel</button>
                           </div>
                         </div>
                       ) : (
-                        <p>{episode.content} <div className="episode-options">
+                        <p>{episode.content} <div className={styles.episodeOptions}>
                           {episode.episode > 1 && (
-                            <button className="tooltip1" onClick={() => {
+                            <button className={styles.tooltip1} onClick={() => {
                               addVersion(episode)
-                            }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
+                            }}><IoAddCircleOutline /><span className={styles.tooltiptext1}>Add Version</span></button>
                           )}
                           <button onClick={() => { setCurrentEditId(episode.id) }}><FiEdit /></button>
-                          <button className="tooltip1"><FaRegHeart /><span className="tooltiptext1">Like</span></button>
-                          <button className="tooltip1"><FaRegFlag /><span className="tooltiptext1">Report</span></button>
-                          {isPrevOption(episode) && (<button className="tooltip1" onClick={() => {
+                          <button className={styles.tooltip1}><FaRegHeart /><span className={styles.tooltiptext1}>Like</span></button>
+                          <button className={styles.tooltip1}><FaRegFlag /><span className={styles.tooltiptext1}>Report</span></button>
+                          {isPrevOption(episode) && (<button className={styles.tooltip1} onClick={() => {
                             prevVariation(episode);
-                          }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
-                          {isNextOption(episode) && (<button className="tooltip1" onClick={() => {
+                          }}><FiArrowLeftCircle /><span className={styles.tooltiptext1}>Prev Version</span></button>)}
+                          {isNextOption(episode) && (<button className={styles.tooltip1} onClick={() => {
                             nextVariation(episode);
-                          }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
-                          <button className="tooltip1"><MdOutlineReportProblem /><span className="tooltiptext1">Quarantine</span></button>
-                          <button className="tooltip1"><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>
+                          }}><FiArrowRightCircle /><span className={styles.tooltiptext1}>Next Version</span></button>)}
+                          <button className={styles.tooltip1}><MdOutlineReportProblem /><span className={styles.tooltiptext1}>Quarantine</span></button>
+                          <button className={styles.tooltip1}><TiDeleteOutline /><span className={styles.tooltiptext1}>Delete</span></button>
                         </div></p>)
 
                     ) : (
@@ -290,20 +289,20 @@ const StoryPreview = () => {
       </div>
 
 
-      <div className="add-episode">
+      <div className={styles.addEpisode}>
         {showNewEpisodeForm || isAddNewVersion ? (
-          <div className="new-episode-form">
+          <div className={styles.newEpisodeForm}>
             {/* <ReactQuill theme="snow" value={value} onChange={setValue} style={{ height: "100%" }} /> */}
             <textarea></textarea>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <button className="new-episode-submit" style={{ margin: "5px" }} onClick={handleSubmitNewEpisode}>{isAddNewVersion ? (<>Submit New Version</>) : (<>Submit New Episode</>)}</button>
-              {isAddNewVersion && (<button style={{ margin: "5px" }} className="new-version-cancel" onClick={() => {
+              <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={handleSubmitNewEpisode}>{isAddNewVersion ? (<>Submit New Version</>) : (<>Submit New Episode</>)}</button>
+              {isAddNewVersion && (<button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
                 cancelVersion()
               }}>Cancel</button>)}
             </div>
           </div>
         ) : (
-          <button className="new-episode-btn" onClick={handleNewEpisode}>
+          <button className={styles.newEpisodeBtn} onClick={handleNewEpisode}>
             {isAddNewVersion ? (<>Add Version</>) : (<>Add New Episode</>)}
           </button>
         )}

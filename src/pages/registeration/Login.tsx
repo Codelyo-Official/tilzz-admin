@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
-import { FaFacebook } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+// import { FaFacebook } from "react-icons/fa";
+// import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../contexts/AuthProvider";
 import { Link } from 'react-router-dom';
-import "./login.css";
+import styles from './Login.module.css';
 
 // Define types for form refs
 const LoginSignup = () => {
@@ -20,10 +20,10 @@ const LoginSignup = () => {
     e.preventDefault();
     
     // Ensure refs are non-null before accessing
-    const payload = {
-      email: inputEmailRef.current?.value,
-      password: inputPasswordRef.current?.value,
-    };
+    // const payload = {
+    //   email: inputEmailRef.current?.value,
+    //   password: inputPasswordRef.current?.value,
+    // };
 
     // Dummy token (replace with your actual API request later)
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiZXhwIjoxNzE3MDE0MDAwfQ.12345";
@@ -36,12 +36,12 @@ const LoginSignup = () => {
     }
   };
 
-  const toggleLoginSignup = () => {
-    navigate("/register");
-  };
+  // const toggleLoginSignup = () => {
+  //   navigate("/register");
+  // };
 
   return (
-    <div className="login-signup-container" style={{ position: "relative" }}>
+    <div className={styles.loginSignupContainer} >
       <div
         style={{
           position: "absolute",
@@ -54,7 +54,7 @@ const LoginSignup = () => {
       >
         <Link to={"/"}>
           <h2
-            className="Logo"
+            className={styles.Logo}
             style={{
               position: "absolute",
               left: "50%",
@@ -66,7 +66,7 @@ const LoginSignup = () => {
         </Link>
       </div>
 
-      <div className={`form-container`} style={{ marginTop: "120px" }}>
+      <div className={styles.formContainer} style={{ marginTop: "120px" }}>
         <h2 style={{ fontSize: "16px", color: "black" }}>{"Login"}</h2>
         <form onSubmit={handleLoginSubmit}>
           <input

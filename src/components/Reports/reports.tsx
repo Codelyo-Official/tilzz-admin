@@ -8,6 +8,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiArrowUpCircle } from "react-icons/fi";
 import { useLocation } from 'react-router-dom';
 import { FaRegFlag } from "react-icons/fa";
+import styles from '../sharedStyles/styles.module.css';
+
 
 
 type episode = {
@@ -130,39 +132,39 @@ const Reports = () => {
 
   return (
     <>
-      <div className="story-preview">
-        <div className="story-header">
-          <img src={dummyData.storyImage} alt="Story Preview" className="story-image" />
-          <div className="story-info">
-            <h2 className="story-title">{dummyData.title}</h2>
+      <div className={styles.storyPreview}>
+        <div className={styles.storyHeader}>
+          <img src={dummyData.storyImage} alt="Story Preview" className={styles.storyImage} />
+          <div className={styles.storyInfo}>
+            <h2 className={styles.storyTitle}>{dummyData.title}</h2>
             {/* <p className="story-description">{dummyData.description}</p> */}
           </div>
         </div>
 
-        <div className="episodes-list">
+        <div className={styles.episodesList}>
           <h3>Episodes to Review</h3>
           {dummyData.episodes.map((episode) => (
-            <div key={episode.id} className="episode">
-              <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
+            <div key={episode.id} className={styles.episode}>
+              <div className={styles.episodeHeader} onClick={() => handleEpisodeToggle(episode.id)}>
                 {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
-                <h4 className='episode-title-ok-al'> {episode.content}</h4>
+                <h4 className={styles.episodeTitleOkAl}> {episode.content}</h4>
                 {episode.creator === user.username && (
-                  <button className="edit-episode-btn"><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
+                  <button className={styles.editEpisodeBtn}><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
                 )}
                 <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle />}</span>
               </div>
               {activeEpisode === episode.id && (
-                <div className="episode-content" style={{marginTop:"20px"}}>
+                <div className={styles.episodeContent} style={{marginTop:"20px"}}>
                   {/* <p>{episode.content}</p> */}
-                  <div className="new-episode-form">
+                  <div className={styles.newEpisodeForm}>
                     <textarea>{episode.content}</textarea>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      <button className="new-episode-submit" style={{ margin: "5px" }}>submit for approval</button>
-                      <button style={{ margin: "5px" }} className="new-version-cancel" onClick={() => {
+                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }}>submit for approval</button>
+                      <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
                       }} >Cancel</button>
                     </div>
                   </div>
-                  <div className="episode-options">
+                  <div className={styles.episodeOptions}>
                    
                   </div>
                 </div>
@@ -179,38 +181,38 @@ const Reports = () => {
         </div> */}
 
       </div>
-      <div className="story-preview">
-        <div className="story-header">
-          <img src={dummyData1.storyImage} alt="Story Preview" className="story-image" />
-          <div className="story-info">
-            <h2 className="story-title">{dummyData1.title}</h2>
+      <div className={styles.storyPreview}>
+        <div className={styles.storyHeader}>
+          <img src={dummyData1.storyImage} alt="Story Preview" className={styles.storyImage} />
+          <div className={styles.storyInfo}>
+            <h2 className={styles.storyTitle}>{dummyData1.title}</h2>
             {/* <p className="story-description">{dummyData1.description}</p> */}
           </div>
         </div>
 
-        <div className="episodes-list">
+        <div className={styles.episodesList}>
           <h3>Episodes to Review</h3>
           {dummyData1.episodes.map((episode) => (
-            <div key={episode.id} className="episode">
-              <div className="episode-header" onClick={() => handleEpisodeToggle(episode.id)}>
+            <div key={episode.id} className={styles.episode}>
+              <div className={styles.episodeHeader} onClick={() => handleEpisodeToggle(episode.id)}>
                 {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
-                <h4 className='episode-title-ok-al'> {episode.content}</h4>
+                <h4 className={styles.episodeTitleOkAl}> {episode.content}</h4>
                 {episode.creator === user.username && (
-                  <button className="edit-episode-btn"><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
+                  <button className={styles.editEpisodeBtn}><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
                 )}
                 <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle />}</span>
               </div>
               {activeEpisode === episode.id && (
-                <div className="episode-content"  style={{marginTop:"20px"}}>
-                  <div className="new-episode-form">
+                <div className={styles.episodeContent}  style={{marginTop:"20px"}}>
+                  <div className={styles.newEpisodeForm}>
                     <textarea>{episode.content}</textarea>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      <button className="new-episode-submit" style={{ margin: "5px" }}>submit for approval</button>
-                      <button style={{ margin: "5px" }} className="new-version-cancel" onClick={() => {
+                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }}>submit for approval</button>
+                      <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
                       }} >Cancel</button>
                     </div>
                   </div>
-                  <div className="episode-options">
+                  <div className={styles.episodeOptions}>
 
                   </div>
                 </div>

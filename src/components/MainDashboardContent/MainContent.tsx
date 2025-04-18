@@ -1,8 +1,8 @@
 import React, { use, useEffect } from "react";
 import Stories from "../Stories/stories";
 import StoryPreview from "../StoryPreview/StroryPreview";
-import { Navigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import { setActiveTab } from "../../features/tabSlice";
 import Account from "../Account/Account";
 import Reports from "../Reports/reports";
@@ -17,7 +17,6 @@ function MainContent() {
     const queryParams = new URLSearchParams(location.search);
     const value = queryParams.get('activeTab'); // Retrieve the value of a specific query parameter
     React.useEffect(()=>{
-        // console.log(value)
         dispatch(setActiveTab(value));
     },[value])
 

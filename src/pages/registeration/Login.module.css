@@ -1,0 +1,106 @@
+.formContainer {
+  margin-top: 15vh;
+  height: max-content;
+  font-family: 'Montserrat', sans-serif !important;
+
+}
+
+.formContainer-expanded {
+  margin-top: 5vh;
+
+}
+
+.loginSignupContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.formContainer {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.formContainer h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.formContainer button {
+  padding: 10px;
+  color: #2c2c2c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.formContainer .toggle-link {
+  text-align: center;
+  color: #007bff;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.formContainer .toggle-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .formContainer {
+    padding: 15px;
+  }
+
+  .formContainer h2 {
+    font-size: 20px;
+  }
+
+  .formContainer input {
+    margin-bottom: 10px;
+  }
+}
+
+button[type="submit"] {
+  padding: 12px 20px;
+  width: 160px;
+  border-radius: 24px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #4F46E5;
+  color: #4F46E5;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button[type="submit"]:hover {
+  background-color: #4d44f8;
+  color: white;
+}
+
+.Logo {
+  font-family: benzinextb;
+  font-size: 22px;
+  font-weight: bold;
+  position: absolute;
+  top: 50px;
+}

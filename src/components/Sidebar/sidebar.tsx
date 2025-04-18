@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { links } from '../../data/dummy';
 import { useSelector } from 'react-redux';
 import { FiAlignLeft } from "react-icons/fi";
 import { useAuth } from "../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import type { RootState } from "../../state/store"; // adjust path
-
 
 
 const Sidebar = () => {

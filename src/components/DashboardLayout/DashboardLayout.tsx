@@ -1,5 +1,5 @@
-import React, {Children, useEffect,useMemo} from "react";
-import "./styles.css";
+import React from "react";
+import "./dashboardStyles.css";
 import { useAuth } from "../../contexts/AuthProvider";
 import Sidebar from "../Sidebar/sidebar";
 import { Link } from 'react-router-dom';

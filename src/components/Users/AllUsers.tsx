@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import "./users.css";
+import styles from "./users.module.css";
 import ModalDialog from "../ModalDialog";
 
 interface User {
@@ -56,9 +56,9 @@ const UserList: React.FC = () => {
         </button>
       </div>
 
-      <div className="user-list-container">
-        <h2 className="table-title">User List</h2>
-        <table className="user-table">
+      <div className={styles.userListContainer}>
+        <h2 className={styles.tableTitle}>User List</h2>
+        <table className={styles.userTable}>
           <thead>
             <tr>
               <th>Name</th>
@@ -80,10 +80,10 @@ const UserList: React.FC = () => {
                     {user.active ? "Active" : "Inactive"}
                   </span>
                 </td>
-                <td className="capitalize">{user.role}</td>
+                <td className={styles.capitalize}>{user.role}</td>
                 <td>
-                  <button className="edit-btn">Edit</button>
-                  <button className="delete-btn">Delete</button>
+                  <button className={styles.editBtn}>Edit</button>
+                  <button className={styles.deleteBtn}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -92,10 +92,10 @@ const UserList: React.FC = () => {
       </div>
 
       <ModalDialog isOpen={open} onClose={() => setOpen(false)}>
-        <div id="create-user-modal-container">
+        <div id={styles.createUserModalContainer}>
           <h2>Create New User</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -107,7 +107,7 @@ const UserList: React.FC = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -119,7 +119,7 @@ const UserList: React.FC = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="role">Role</label>
               <select
                 id="role"
@@ -133,7 +133,7 @@ const UserList: React.FC = () => {
               </select>
             </div>
 
-            <div className="form-actions">
+            <div className={styles.formActions}>
               <button type="submit">Create User</button>
               <button type="button" onClick={() => setOpen(false)}>
                 Close

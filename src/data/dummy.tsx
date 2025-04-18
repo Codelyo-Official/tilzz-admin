@@ -1,13 +1,6 @@
 import React from 'react';
-import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
-import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
-import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
-import { FaRegHeart ,FaRegFlag} from "react-icons/fa";
-import { SlUserFollowing } from "react-icons/sl";
+import { FaRegFlag} from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
-
-
-import { BiColorFill } from 'react-icons/bi';
 import { IoMdContacts } from 'react-icons/io';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 
@@ -48,6 +41,11 @@ export const links: LinkCategory[] = [
       {
         name: 'Approvals',
         slug:'approvals',
+        icon: <FaRegCheckCircle style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+      },
+      {
+        name: 'Organizations',
+        slug:'groups',
         icon: <FaRegCheckCircle style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       }
     ],

@@ -249,7 +249,7 @@ const StoryPreview = () => {
                             }}><IoAddCircleOutline /><span className={styles.tooltiptext1}>Add Version</span></button>
                           )}
                           <button onClick={() => { setCurrentEditId(episode.id) }}><FiEdit /></button>
-                          <button className={styles.tooltip1}><FaRegHeart /><span className={styles.tooltiptext1}>Like</span></button>
+                          {/* <button className={styles.tooltip1}><FaRegHeart /><span className={styles.tooltiptext1}>Like</span></button> */}
                           <button className={styles.tooltip1}><FaRegFlag /><span className={styles.tooltiptext1}>Report</span></button>
                           {isPrevOption(episode) && (<button className={styles.tooltip1} onClick={() => {
                             prevVariation(episode);

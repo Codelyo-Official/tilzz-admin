@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useAuth } from "../../contexts/AuthProvider";
 import { FiEdit } from 'react-icons/fi';
-import ReactQuill from 'react-quill';
+// import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { FiArrowDownCircle, FiArrowRightCircle, FiArrowLeftCircle } from "react-icons/fi";
 import { FaRegHeart } from "react-icons/fa";

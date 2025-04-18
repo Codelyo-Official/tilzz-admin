@@ -9,6 +9,7 @@ import Reports from "../Reports";
 import UserList from "../Users";
 import Approvals from "../Approvals";
 import Statistics from "../Statistics";
+import Organization from "../Organization";
 
 function MainContent() {
 
@@ -52,6 +53,10 @@ function MainContent() {
 
             {value === "stats" && (
                 <Statistics />
+            )}
+
+            {value === "groups" && (
+                <Organization />
             )}
         </>
     );

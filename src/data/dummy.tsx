@@ -3,6 +3,8 @@ import { FaRegFlag} from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { IoMdContacts } from 'react-icons/io';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
+import { MdGroups } from "react-icons/md";
+import { IoIosStats } from "react-icons/io";
 
 import { IoExitOutline } from "react-icons/io5";
 
@@ -23,6 +25,11 @@ export const links: LinkCategory[] = [
   {
     title: 'Dashboard',
     links: [
+      {
+        name: 'Statistics',
+        slug:'stats',
+        icon: <IoIosStats style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+      },
       {
         name: 'All Stories',
         slug:'stories-feed',
@@ -46,7 +53,7 @@ export const links: LinkCategory[] = [
       {
         name: 'Organizations',
         slug:'groups',
-        icon: <FaRegCheckCircle style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+        icon: <MdGroups style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       }
     ],
   },

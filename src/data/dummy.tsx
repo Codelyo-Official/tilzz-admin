@@ -4,6 +4,8 @@ import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, Fi
 import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
 import { FaRegHeart ,FaRegFlag} from "react-icons/fa";
 import { SlUserFollowing } from "react-icons/sl";
+import { FaRegCheckCircle } from "react-icons/fa";
+
 
 import { BiColorFill } from 'react-icons/bi';
 import { IoMdContacts } from 'react-icons/io';
@@ -46,7 +48,7 @@ export const links: LinkCategory[] = [
       {
         name: 'Approvals',
         slug:'approvals',
-        icon: <FaRegFlag style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
+        icon: <FaRegCheckCircle style={{height:"14px", width:"14px", display:"inline-block", margin:"0", color:"black", marginRight:"5px", marginTop:"-2px"}}/>,
       }
     ],
   },

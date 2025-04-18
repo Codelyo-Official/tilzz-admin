@@ -62,12 +62,13 @@ export default function ModalDialog({ isOpen, onClose, children }: ModalDialogPr
   return createPortal(
     <div
       ref={backdropRef}
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/50"
+      style={{zIndex:"1001"}}
+      className="fixed inset-0 flex items-start justify-center bg-black/50"
       onClick={handleClose}
     >
       <div
         ref={modalRef}
-        className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-lg relative mt-10"
+        className="bg-white rounded-2xl shadow-lg p-6 w-[96%] max-w-lg relative mt-10"
         onClick={(e) => e.stopPropagation()}
       >
         <button

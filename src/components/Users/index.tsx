@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "./users.module.css";
-import ModalDialog from "../ModalDialog";
+import ModalDialog from "../common/ModalDialog";
 
 interface User {
   id: number;
@@ -41,15 +41,7 @@ const UserList: React.FC = () => {
     <>
       <div style={{ marginTop: "10px", marginBottom: "10px", display: "flex", justifyContent: "flex-end" }}>
         <button
-          style={{
-            marginRight: "20px",
-            border: "solid 1px black",
-            height: "40px",
-            paddingLeft: "15px",
-            paddingRight: "15px",
-            borderRadius: "20px",
-            fontSize: "14px",
-          }}
+          className={styles.createUserBtn}
           onClick={() => setOpen(true)}
         >
           Create New User
@@ -134,9 +126,10 @@ const UserList: React.FC = () => {
             </div>
 
             <div className={styles.formActions}>
-              <button type="submit">Create User</button>
-              <button type="button" onClick={() => setOpen(false)}>
-                Close
+              <button type="submit" className={styles.createUserBtn}
+              >Create</button>
+              <button className={styles.cancelBtn} type="button" onClick={() => setOpen(false)}>
+                Cancel
               </button>
             </div>
           </form>

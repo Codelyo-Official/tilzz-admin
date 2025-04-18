@@ -3,12 +3,12 @@ import { AuthProvider } from "./contexts/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 //redux
 import { Provider } from 'react-redux';
-import { store } from './state/store';
+import { store } from './redux/state/store';
 import "./App.css";
 
 import Login from "./pages/registeration/Login";
 import Profile from "./pages/profile/Profile";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/common/NotFound";
 
 const App = () => {
   return (

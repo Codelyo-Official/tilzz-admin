@@ -8,7 +8,9 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiArrowUpCircle } from "react-icons/fi";
 import { useLocation } from 'react-router-dom';
 import { FaRegFlag } from "react-icons/fa";
-import styles from '../sharedStyles/styles.module.css';
+import styles from '../SharedStylesStoryPreview/styles.module.css';
+
+
 
 type episode = {
   id: number,
@@ -38,7 +40,7 @@ const dummyData :story= {
   episodes: [
 
     {
-      id: 1,
+      id: 0,
       episode: 2,
       title: 'The Forbidden Temple',
       content: 'A forbidden temple stands in their path, filled with puzzles and dangers',
@@ -76,13 +78,13 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
   ],
 };
 
-const Approvals = () => {
+const Reports = () => {
 
   const location = useLocation();
   console.log("story preview rendered")
   const { user } = useAuth();
   // const user = useMemo(() => getUser(), []);
-  const [activeEpisode, setActiveEpisode] = useState<number | null>(null);
+  const [activeEpisode, setActiveEpisode] =  useState<number | null>(null);
   const [showNewEpisodeForm, setShowNewEpisodeForm] = useState(false);
   const [newEpisode, setNewEpisode] = useState({ title: '', content: '' });
   const [value, setValue] = useState('');
@@ -155,11 +157,11 @@ const Approvals = () => {
                 <div className={styles.episodeContent} style={{marginTop:"20px"}}>
                   {/* <p>{episode.content}</p> */}
                   <div className={styles.newEpisodeForm}>
-                    <p>{episode.content}</p>
+                    <textarea>{episode.content}</textarea>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }}>approve</button>
+                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }}>submit for approval</button>
                       <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
-                      }} >Revisit</button>
+                      }} >Cancel</button>
                     </div>
                   </div>
                   <div className={styles.episodeOptions}>
@@ -203,11 +205,11 @@ const Approvals = () => {
               {activeEpisode === episode.id && (
                 <div className={styles.episodeContent}  style={{marginTop:"20px"}}>
                   <div className={styles.newEpisodeForm}>
-                    <p>{episode.content}</p>
+                    <textarea>{episode.content}</textarea>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }}>approve</button>
+                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }}>submit for approval</button>
                       <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
-                      }} >Revisit</button>
+                      }} >Cancel</button>
                     </div>
                   </div>
                   <div className={styles.episodeOptions}>
@@ -231,4 +233,4 @@ const Approvals = () => {
   );
 };
 
-export default Approvals;
+export default Reports;

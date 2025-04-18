@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Trash2, Upload } from "lucide-react";
-import styles from "./AccountPage.module.css";
+import styles from "./accountPage.module.css";
 
 type User = {
   name: string;

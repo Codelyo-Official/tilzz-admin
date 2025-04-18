@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import styles from '../sharedStyles/styles.module.css';
+import styles from '../SharedStylesStoryPreview/styles.module.css';
 import { FiEdit } from 'react-icons/fi';
 // import ReactQuill from 'react-quill';
 // import 'react-quill/dist/quill.snow.css';

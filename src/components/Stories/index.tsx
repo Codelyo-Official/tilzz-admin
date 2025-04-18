@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveTab } from "../../features/tabSlice";
+import { setActiveTab } from "../../redux/features/tabSlice";
 import { FaTrash, FaEye } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
 import { IoTrashOutline } from "react-icons/io5";
-import ModalDialog from "../ModalDialog";
+import ModalDialog from "../common/ModalDialog";
 
 
 type story = {

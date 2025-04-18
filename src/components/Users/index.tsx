@@ -74,8 +74,8 @@ const UserList: React.FC = () => {
                 </td>
                 <td className={styles.capitalize}>{user.role}</td>
                 <td>
-                  <button className={styles.editBtn}>Edit</button>
-                  <button className={styles.deleteBtn}>Delete</button>
+                  <button className={styles.editBtn} style={{margin:"5px"}}>Edit</button>
+                  <button className={styles.deleteBtn} style={{margin:"5px"}}>Delete</button>
                 </td>
               </tr>
             ))}

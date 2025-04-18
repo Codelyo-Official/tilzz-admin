@@ -38,7 +38,7 @@ const dummyData :story= {
   episodes: [
 
     {
-      id: 2,
+      id: 1,
       episode: 2,
       title: 'The Forbidden Temple',
       content: 'A forbidden temple stands in their path, filled with puzzles and dangers',

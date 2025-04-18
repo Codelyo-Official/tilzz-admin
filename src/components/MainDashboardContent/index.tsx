@@ -8,6 +8,7 @@ import Account from "../Account";
 import Reports from "../Reports";
 import UserList from "../Users";
 import Approvals from "../Approvals";
+import Statistics from "../Statistics";
 
 function MainContent() {
 
@@ -16,9 +17,9 @@ function MainContent() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const value = queryParams.get('activeTab'); // Retrieve the value of a specific query parameter
-    React.useEffect(()=>{
+    React.useEffect(() => {
         dispatch(setActiveTab(value));
-    },[value])
+    }, [value])
 
     return (
         <>
@@ -47,6 +48,10 @@ function MainContent() {
 
             {value === "approvals" && (
                 <Approvals />
+            )}
+
+            {value === "stats" && (
+                <Statistics />
             )}
         </>
     );

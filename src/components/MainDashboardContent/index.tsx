@@ -25,9 +25,15 @@ function MainContent() {
     return (
         <>
 
-            {(value === null || (value === "stories-feed" || value === "my-stories" ||
+            {
+                value === null && (
+                    <Statistics />
+                )
+            }
+
+            {(value === "stories-feed" || value === "my-stories" ||
                 value === "following-stories"
-            )) && (
+            ) && (
                     <Stories slugStories={value} />
                 )}
 

@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/state/store';
 import "./App.css";
 
-import Login from "./pages/registeration/Login";
-import Profile from "./pages/profile/Profile";
+import Login from "./pages/registeration";
+import Profile from "./pages/profile";
 import NotFound from "./common/components/NotFound";
 
 const App = () => {

@@ -5,7 +5,7 @@ import { setActiveTab } from "../../redux/features/tabSlice";
 import { FaTrash, FaEye } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
 import { IoTrashOutline } from "react-icons/io5";
-import ModalDialog from "../common/ModalDialog";
+import ModalDialog from "../../common/components/ModalDialog";
 
 
 type story = {

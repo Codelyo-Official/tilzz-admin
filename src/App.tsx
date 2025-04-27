@@ -8,7 +8,7 @@ import "./App.css";
 
 import Login from "./pages/registeration/Login";
 import Profile from "./pages/profile/Profile";
-import NotFound from "./components/common/NotFound";
+import NotFound from "./common/components/NotFound";
 
 const App = () => {
   return (

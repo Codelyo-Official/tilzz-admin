@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "../Users/users.module.css";
-import ModalDialog from "../common/ModalDialog";
+import ModalDialog from "../../common/components/ModalDialog";
 
 interface Group {
   id: number;

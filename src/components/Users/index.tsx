@@ -64,16 +64,16 @@ const UserList: React.FC = () => {
           <tbody>
             {users.map((user: User) => (
               <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.password}</td>
-                <td>
+                <td data-label="Name">{user.name}</td>
+                <td data-label="Email">{user.email}</td>
+                <td data-label="Password">{user.password}</td>
+                <td data-label="Status">
                   <span className={user.active ? "status-active" : "status-inactive"}>
                     {user.active ? "Active" : "Inactive"}
                   </span>
                 </td>
-                <td className={styles.capitalize}>{user.role}</td>
-                <td>
+                <td data-label="Role" className={styles.capitalize}>{user.role}</td>
+                <td data-label="Actions">
                   <button className={styles.editBtn} style={{margin:"5px"}}>Edit</button>
                   <button className={styles.deleteBtn} style={{margin:"5px"}}>Delete</button>
                 </td>

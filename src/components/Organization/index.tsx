@@ -62,10 +62,10 @@ const Organization: React.FC = () => {
           <tbody>
             {users.map((user: Group) => (
               <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.admin}</td>
-                <td>{user.noOfUsers}</td>
-                <td>
+                <td data-label="Name">{user.name}</td>
+                <td data-label="Admin">{user.admin}</td>
+                <td data-label="User Count">{user.noOfUsers}</td>
+                <td data-label="Actions">
                   <button className={styles.editBtn} style={{margin:"5px"}}>Edit</button>
                   <button className={styles.deleteBtn} style={{margin:"5px"}}>Delete</button>
                 </td>
@@ -90,33 +90,6 @@ const Organization: React.FC = () => {
                 required
               />
             </div>
-
-            {/* <div className={styles.formGroup}>
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                required
-              />
-            </div> */}
-
-            {/* <div className={styles.formGroup}>
-              <label htmlFor="role">Role</label>
-              <select
-                id="role"
-                name="role"
-                value={role}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => setRole(e.target.value)}
-              >
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-                <option value="subadmin">Sub Admin</option>
-              </select>
-            </div> */}
-
             <div className={styles.formActions}>
               <button type="submit" className={styles.createUserBtn}
               >Create</button>

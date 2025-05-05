@@ -35,7 +35,6 @@ const Sidebar = () => {
     if (name === "user-logout") {
       const res = logout();
       if (res.success) {
-
         navigate("/login");
       }
     } else {

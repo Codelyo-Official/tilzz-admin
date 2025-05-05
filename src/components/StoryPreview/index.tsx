@@ -250,37 +250,20 @@ const StoryPreview = () => {
                           )}
                           <button onClick={() => { setCurrentEditId(episode.id) }}><FiEdit /></button>
                           {/* <button className={styles.tooltip1}><FaRegHeart /><span className={styles.tooltiptext1}>Like</span></button> */}
-                          <button className={styles.tooltip1}><FaRegFlag /><span className={styles.tooltiptext1}>Report</span></button>
+                          {/*<button className={styles.tooltip1}><FaRegFlag /><span className={styles.tooltiptext1}>Report</span></button>*/} 
                           {isPrevOption(episode) && (<button className={styles.tooltip1} onClick={() => {
                             prevVariation(episode);
                           }}><FiArrowLeftCircle /><span className={styles.tooltiptext1}>Prev Version</span></button>)}
                           {isNextOption(episode) && (<button className={styles.tooltip1} onClick={() => {
                             nextVariation(episode);
                           }}><FiArrowRightCircle /><span className={styles.tooltiptext1}>Next Version</span></button>)}
-                          <button className={styles.tooltip1}><MdOutlineReportProblem /><span className={styles.tooltiptext1}>Quarantine</span></button>
+                          {/*<button className={styles.tooltip1}><MdOutlineReportProblem /><span className={styles.tooltiptext1}>Quarantine</span></button>*/}
                           <button className={styles.tooltip1}><TiDeleteOutline /><span className={styles.tooltiptext1}>Delete</span></button>
                         </div></p>)
 
                     ) : (
                       <></>
-                      // <p>{episode.content} <div className="episode-options">
-                      //   {episode.episode > 1 && (
-                      //     <button className="tooltip1" onClick={() => {
-                      //       addVersion(episode)
-                      //     }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
-                      //   )}
-                      //   <button onClick={() => { setCurrentEditId(episode.id) }}><FiEdit /></button>
-                      //   <button className="tooltip1"><FaRegHeart /><span className="tooltiptext1">Like</span></button>
-                      //   <button className="tooltip1"><FaRegFlag /><span className="tooltiptext1">Report</span></button>
-                      //   {isPrevOption(episode) && (<button className="tooltip1" onClick={() => {
-                      //     prevVariation(episode);
-                      //   }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
-                      //   {isNextOption(episode) && (<button className="tooltip1" onClick={() => {
-                      //     nextVariation(episode);
-                      //   }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
-                      //   <button className="tooltip1"><MdOutlineReportProblem /><span className="tooltiptext1">Quarantine</span></button>
-                      //   <button className="tooltip1"><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>
-                      // </div></p>
+                     
                     )}
                   </div>
                 </div>

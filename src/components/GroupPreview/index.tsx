@@ -3,22 +3,22 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from "../Users/users.module.css";
 import ModalDialog from "../../common/components/ModalDialog";
 
-interface Group {
+interface User {
   id: number;
   name: string;
-  admin: string;
-  noOfUsers: number;
+  email: string;
+  username: string;
 }
 
-const users: Group[] = [
-  { id: 1, name: "Auto Junkies", admin: "m@gmail.com", noOfUsers: 3 },
-  { id: 2, name: "World Affairs", admin: "m2gmail.com", noOfUsers: 11 },
-  { id: 3, name: "Digital Media", admin: "m3@gmail.com", noOfUsers: 12 },
-  { id: 4, name: "Theatre Film Tv", admin: "klo@gmail.com", noOfUsers: 0 },
+const users: User[] = [
+  { id: 1, name: "Ali Hassan", email: "m@gmail.com", username: "Ali123" },
+  { id: 2, name: "Nick", email: "m2gmail.com", username: "Nick_k" },
+  { id: 3, name: "Ahmed", email: "m3@gmail.com", username: "Ahmedd04" },
+  { id: 4, name: "Layla", email: "klo@gmail.com", username: "layla_89" },
 
 ];
 
-const Organization: React.FC = () => {
+const GroupPreview: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [groupName, setGroupName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -40,44 +40,33 @@ const Organization: React.FC = () => {
 
   return (
     <>
-      <div style={{ marginTop: "10px", marginBottom: "10px", display: "flex", justifyContent: "flex-end" }}>
+    <div style={{ marginTop: "10px", marginBottom: "10px", display: "flex", justifyContent: "flex-end" }}>
         <button
           className={styles.createUserBtn}
-          onClick={() => setOpen(true)}
+          onClick={() => {}}
         >
-          Create New Group
+          Save Changes
         </button>
       </div>
-
       <div className={styles.userListContainer}>
-        <h2 className={styles.tableTitle}>Groups</h2>
+        <h2 className={styles.tableTitle}>Edit Group members for XYZ Group Name</h2>
         <table className={styles.userTable}>
           <thead>
             <tr>
-              <th>Group Name</th>
-              <th>Admin</th>
-              <th>User Count</th>
+              <th>User Name</th>
+              <th>User Email</th>
+              <th>Username</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user: Group) => (
+            {users.map((user: User) => (
               <tr key={user.id}>
-                <td data-label="Name">{user.name}</td>
-                <td data-label="Admin">{user.admin}</td>
-                <td data-label="User Count">{user.noOfUsers}</td>
+                <td data-label="User Name">{user.name}</td>
+                <td data-label="User Email">{user.email}</td>
+                <td data-label="Username">{user.username}</td>
                 <td data-label="Actions">
-                  <button className={styles.editBtn} style={{ margin: "5px",position:"relative" }}>
-                    <NavLink
-                      className=""
-                      style={{ position: "absolute", top: "0px", left: "0px", width: "100%", height: "100%" }}
-                      to={`/dashboard?activeTab=group-preview&groupId=0`}
-                      onClick={() => { }}
-                    >
-                    </NavLink>
-                    Edit
-                  </button>
-                  <button className={styles.deleteBtn} style={{ margin: "5px" }}>Delete</button>
+                    <input type="checkbox" />
                 </td>
               </tr>
             ))}
@@ -114,4 +103,4 @@ const Organization: React.FC = () => {
   );
 };
 
-export default Organization;
+export default GroupPreview;

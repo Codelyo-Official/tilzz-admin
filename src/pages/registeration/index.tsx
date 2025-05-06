@@ -67,7 +67,7 @@ const LoginSignup = () => {
       </div>
 
       <div className={styles.formContainer} style={{ marginTop: "120px" }}>
-        <h2 style={{ fontSize: "16px", color: "black" }}>{"Login"}</h2>
+        <h2 style={{ fontSize: "16px", color: "black" }}>{"Login to Admin Panel"}</h2>
         <form onSubmit={handleLoginSubmit}>
           <input
             type="email"

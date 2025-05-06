@@ -10,6 +10,7 @@ import UserList from "../Users";
 import Approvals from "../Approvals";
 import Statistics from "../Statistics";
 import Organization from "../Organization";
+import GroupPreview from "../GroupPreview";
 
 function MainContent() {
 
@@ -63,6 +64,10 @@ function MainContent() {
 
             {value === "groups" && (
                 <Organization />
+            )}
+
+            {value === "group-preview" && (
+                <GroupPreview />
             )}
         </>
     );

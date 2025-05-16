@@ -2,32 +2,54 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import styles from "../Users/users.module.css";
 import ModalDialog from "../../common/components/ModalDialog";
+import { ApiError } from "../../types/apiError";
+import axios from "axios";
 
 interface Group {
   id: number;
   name: string;
-  admin: string;
-  noOfUsers: number;
+  members_count: number;
+  created_by:number;
 }
 
-const users: Group[] = [
-  { id: 1, name: "Auto Junkies", admin: "m@gmail.com", noOfUsers: 3 },
-  { id: 2, name: "World Affairs", admin: "m2gmail.com", noOfUsers: 11 },
-  { id: 3, name: "Digital Media", admin: "m3@gmail.com", noOfUsers: 12 },
-  { id: 4, name: "Theatre Film Tv", admin: "klo@gmail.com", noOfUsers: 0 },
 
-];
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Organization: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [groupName, setGroupName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [role, setRole] = useState<string>("user"); // Default role is 'user'
+  const [groups,setGroups] = useState<Group[]>([]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newGroup = { groupName };
+    const newGroup = { name:groupName,description:'' };
     console.log("Creating group:", newGroup);
+
+    try {
+
+      const token = sessionStorage.getItem('token');
+      const createGroups_response = await axios.post(`${API_BASE_URL}/api/accounts/organizations/`,newGroup, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(createGroups_response);
+      setGroups([...groups,createGroups_response.data.organization]);
+
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+
     clearForm();
     setOpen(false);
   };
@@ -37,6 +59,37 @@ const Organization: React.FC = () => {
     setPassword("");
     setRole("user");
   };
+
+  const getAllGroups = async () => {
+
+    try {
+
+      const token = sessionStorage.getItem('token');
+      const getGroups_response = await axios.get(`${API_BASE_URL}/api/accounts/organizations/list/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(getGroups_response);
+      setGroups(getGroups_response.data);
+
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+
+  }
+
+  React.useEffect(() => {
+    getAllGroups();
+  }, [])
 
   return (
     <>
@@ -55,23 +108,21 @@ const Organization: React.FC = () => {
           <thead>
             <tr>
               <th>Group Name</th>
-              <th>Admin</th>
               <th>User Count</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user: Group) => (
-              <tr key={user.id}>
-                <td data-label="Name">{user.name}</td>
-                <td data-label="Admin">{user.admin}</td>
-                <td data-label="User Count">{user.noOfUsers}</td>
+            {groups.map((gr: Group) => (
+              <tr key={gr.id}>
+                <td data-label="Name">{gr.name}</td>
+                <td data-label="Members Count">{gr.members_count}</td>
                 <td data-label="Actions">
                   <button className={styles.editBtn} style={{ margin: "5px",position:"relative" }}>
                     <NavLink
                       className=""
                       style={{ position: "absolute", top: "0px", left: "0px", width: "100%", height: "100%" }}
-                      to={`/dashboard?activeTab=group-preview&groupId=0`}
+                      to={`/dashboard?activeTab=group-preview&groupId=${gr.id}&createdBy=${gr.created_by}`}
                       onClick={() => { }}
                     >
                     </NavLink>

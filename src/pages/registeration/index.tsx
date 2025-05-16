@@ -1,10 +1,15 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
-// import { FaFacebook } from "react-icons/fa";
-// import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../contexts/AuthProvider";
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
+import { ApiError } from "../../types/apiError";
+import { User } from "../../types/user";
+import axios from 'axios';
+
+
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+
 
 // Define types for form refs
 const LoginSignup = () => {
@@ -18,27 +23,57 @@ const LoginSignup = () => {
 
   const handleLoginSubmit = async (e: React.FormEvent) => {  // Event type
     e.preventDefault();
-    
-    // Ensure refs are non-null before accessing
-    // const payload = {
-    //   email: inputEmailRef.current?.value,
-    //   password: inputPasswordRef.current?.value,
-    // };
 
-    // Dummy token (replace with your actual API request later)
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiZXhwIjoxNzE3MDE0MDAwfQ.12345";
-    const response = login(token);
+    const payload = {
+      username: inputEmailRef.current?.value,
+      password: inputPasswordRef.current?.value,
+    };
 
-    if(response.success){
-      navigate("/dashboard");
-    } else {
-      setErrors("Login failed, please try again.");
+    try {
+      const login_api_response = await axios.post(`${API_BASE_URL}/api/accounts/login/`, payload);
+      console.log(login_api_response);
+      const token = login_api_response.data.token;
+      let p_temp = undefined;
+      if (login_api_response.data.user.profile !== null) {
+        p_temp = login_api_response.data.user.profile.profile_picture;
+      }
+      let user_temp: User = {
+        id: login_api_response.data.user.id,
+        "email": login_api_response.data.user.email,
+        // "first_name": login_api_response.data.user.first_name,
+        // "last_name": login_api_response.data.user.last_name,
+        "profile_picture": p_temp,
+        "role": login_api_response.data.user.profile.role,
+        "username": login_api_response.data.user.username
+      };
+
+      console.log("from above:", user_temp)
+
+      if(user_temp.role!=='admin' && user_temp.role!=='subadmin'){
+        setErrors('Not Allowed!');
+        return;
+      }
+
+      const response = login(token, user_temp);
+      if (response.success) {
+        navigate("/dashboard");
+      } else {
+        setErrors('signup failed, please try again!');
+      }
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      setErrors(apiError.message);
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        setErrors(errorMessage);
+      }
+    } finally {
     }
+
   };
 
-  // const toggleLoginSignup = () => {
-  //   navigate("/register");
-  // };
 
   return (
     <div className={styles.loginSignupContainer} >
@@ -70,8 +105,8 @@ const LoginSignup = () => {
         <h2 style={{ fontSize: "16px", color: "black" }}>{"Login to Admin Panel"}</h2>
         <form onSubmit={handleLoginSubmit}>
           <input
-            type="email"
-            placeholder="Email"
+            type="text"
+            placeholder="username"
             ref={inputEmailRef}
             required
             onChange={(e) => {

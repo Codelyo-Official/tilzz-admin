@@ -1,19 +1,18 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
-
-// Define the shape of the JWT payload
-type DecodedToken = {
-    username: string;
-    exp?: number;
-    // [key: string]: any;
-};
+import { User } from "../types/user";
+import { DecodedToken } from "../types/decodedToken";
+import axios from "axios";
+import { ApiError } from "../types/apiError";
 
 // Define the context value shape
 type AuthContextType = {
-    user: DecodedToken;
-    login: (token: string) => { success: boolean; message: string };
-    logout: () => { success: boolean; message: string };
+    user: DecodedToken | User;
+    login: (token: string, user_temp: User) => { success: boolean; message: string };
+    logout: () => Promise<{ success: boolean; message: string }>;
+    setUser: React.Dispatch<React.SetStateAction<User | DecodedToken>>;
 };
+
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -24,49 +23,65 @@ type AuthProviderProps = {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     console.log("auth invoked")
+
     const [token, setToken] = useState<string | null>(
         () => sessionStorage.getItem("token")
     );
-    const [user, setUser] = useState<DecodedToken>({ username: "none" });
+    const [user, setUser] = useState<User | DecodedToken>({ username: "none", id: 0 });
 
     useEffect(() => {
-        let timeout: NodeJS.Timeout;
         if (token) {
-            const decoded: DecodedToken = token ? jwtDecode(token) : { username: "none" };
-            setUser(decoded)
-            timeout = setTimeout(() => {
-                setUser({ username: "none" })
-                setToken(null); // Clear token after 15 minutes
-            }, 15 * 60 * 1000);
+            if (user.username === "none") {
+                const userData: string | null = localStorage.getItem('user');
+                if (userData !== null)
+                    setUser(JSON.parse(userData))
+            }
         }
-        return () => clearTimeout(timeout);
     }, [token]);
 
-    const login = (newtoken: string) => {
-
+    const login = (newtoken: string, user_temp: User) => {
         try {
-            if (true) {
-                setToken(newtoken);
-                // const decoded = newtoken ? jwtDecode(newtoken) : { username: "none" };
-                // setUser(decoded)
-                sessionStorage.setItem("token", newtoken)
-                return { success: true, message: "Login successful" };
-            } else {
-                return {
-                    success: false,
-                    message: "Login failed"
-                };
-            }
+            console.log(user_temp)
+            setToken(newtoken);
+            setUser(user_temp)
+            sessionStorage.setItem("token", newtoken)
+            localStorage.setItem('user', JSON.stringify(user_temp));
+            return { success: true, message: "successful" };
+
         } catch (error) {
-            return { success: false, message: "Network error" };
+            return { success: false, message: "failed" };
         }
     };
 
-    const logout = () => {
-        setToken(null);
-        setUser({ username: "none" })
-        sessionStorage.removeItem("token");
-        return { success: true, message: "Logout successful" };
+    const logout = async (): Promise<{ success: boolean; message: string }> => {
+        try {
+            const token = sessionStorage.getItem("token");
+            console.log(token)
+            // const logoutUserInfoApi_response = await axios.post(`${API_BASE_URL}/api/users/logout/`, {
+            //     headers: {
+            //         Authorization: `Token ${token}`,
+            //     }
+            // });
+            
+            // console.log(logoutUserInfoApi_response);
+            console.log("came here")
+            setToken(null);
+            setUser({ username: "none", id: 0 })
+            sessionStorage.removeItem("token");
+            localStorage.removeItem("user")
+            return { success: true, message: "Logout successful" };
+
+
+        } catch (err: any) {
+            console.log(err)
+            const apiError = err as ApiError;
+            if (apiError.response) {
+                const status = apiError.response.status;
+                const errorMessage = apiError.response.data?.username || 'could not update user info';
+            }
+            return { success: false, message: "Logout unsuccessful" };
+
+        }
     };
 
     return (
@@ -75,6 +90,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 user,
                 login,
                 logout,
+                setUser
             }}>
             {children}
         </AuthContext.Provider>
@@ -83,9 +99,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 // Hook with type safety
 export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error("useAuth must be used within an AuthProvider");
+    }
+    return context;
 };

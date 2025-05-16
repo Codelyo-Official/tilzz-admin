@@ -1,35 +1,102 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "./users.module.css";
 import ModalDialog from "../../common/components/ModalDialog";
+import { useAuth } from "../../contexts/AuthProvider";
+import { ApiError } from "../../types/apiError";
+import axios from "axios";
 
 interface User {
   id: number;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  password: string;
-  active: boolean;
-  role: string;
+  username: string;
+  profile: {
+    role: string;
+  }
 }
 
-const users: User[] = [
-  { id: 1, name: "John Doe", email: "john@example.com", password: "abcdefg", active: true, role: "admin" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", password: "abcdefg", active: false, role: "user" },
-  { id: 3, name: "Alice Johnson", email: "alice@example.com", password: "abcdefg", active: true, role: "sub-admin" },
-];
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+
 
 const UserList: React.FC = () => {
+
+  const { user, setUser }: any = useAuth();
+
+  // console.log(user)
   const [open, setOpen] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [role, setRole] = useState<string>("user"); // Default role is 'user'
+  const [users, setUsers] = React.useState<User[]>([]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newUser = { email, password, role };
+    const newUser = { email, username, password, role };
     console.log("Creating user:", newUser);
+
+    // /api/accounts/users/create/
+    try {
+      const token = sessionStorage.getItem('token');
+      const createUser_response = await axios.post(`${API_BASE_URL}/api/accounts/users/create/`, newUser, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(createUser_response);
+      setUsers([...users, createUser_response.data.user]);
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+
     clearForm();
     setOpen(false);
   };
+
+  const getAllUsers = async () => {
+
+    try {
+
+      const targetRoute = user.role === "subadmin" ? `/api/accounts/subadmins/${user.id}/users/` : "/api/stories/admin/users/";
+
+      const token = sessionStorage.getItem('token');
+      const getUsers_response = await axios.get(`${API_BASE_URL}${targetRoute}`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(getUsers_response);
+      if (user.role === "admin") {
+        setUsers(getUsers_response.data);
+      } else {
+        setUsers(getUsers_response.data.assigned_users);
+      }
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+
+  }
+
+  React.useEffect(() => {
+    getAllUsers();
+  }, [])
 
   const clearForm = () => {
     setEmail("");
@@ -54,31 +121,28 @@ const UserList: React.FC = () => {
           <thead>
             <tr>
               <th>Name</th>
+              <th>Username</th>
               <th>Email</th>
-              <th>Password</th>
-              <th>Status</th>
               <th>Role</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user: User) => (
-              <tr key={user.id}>
-                <td data-label="Name">{user.name}</td>
-                <td data-label="Email">{user.email}</td>
-                <td data-label="Password">{user.password}</td>
-                <td data-label="Status">
-                  <span className={user.active ? "status-active" : "status-inactive"}>
-                    {user.active ? "Active" : "Inactive"}
-                  </span>
-                </td>
-                <td data-label="Role" className={styles.capitalize}>{user.role}</td>
+            {users.map((cuser: User) => {
+              if (user.id === cuser.id)
+                return;
+
+              return (<tr key={cuser.id}>
+                <td data-label="Name">{cuser.first_name} {cuser.last_name}</td>
+                <td data-label="Username">{cuser.username}</td>
+                <td data-label="Email">{cuser.email}</td>
+                <td data-label="Role" className={styles.capitalize}>{cuser.profile.role}</td>
                 <td data-label="Actions">
-                  <button className={styles.editBtn} style={{margin:"5px"}}>Edit</button>
-                  <button className={styles.deleteBtn} style={{margin:"5px"}}>Delete</button>
+                  <button className={styles.editBtn} style={{ margin: "5px" }}>Edit</button>
+                  <button className={styles.deleteBtn} style={{ margin: "5px" }}>Delete</button>
                 </td>
-              </tr>
-            ))}
+              </tr>)
+            })}
           </tbody>
         </table>
       </div>
@@ -87,6 +151,19 @@ const UserList: React.FC = () => {
         <div id={styles.createUserModalContainer}>
           <h2>Create New User</h2>
           <form onSubmit={handleSubmit}>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="username">Username</label>
+              <input
+                type="username"
+                id="username"
+                name="username"
+                value={username}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+
             <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <input
@@ -120,8 +197,13 @@ const UserList: React.FC = () => {
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => setRole(e.target.value)}
               >
                 <option value="user">User</option>
-                <option value="admin">Admin</option>
-                <option value="subadmin">Sub Admin</option>
+                {user !== null && user.role === "admin" && (
+                  <>
+                    <option value="admin">Admin</option>
+                    <option value="subadmin">Sub Admin</option>
+                  </>
+                )}
+
               </select>
             </div>
 

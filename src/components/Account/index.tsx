@@ -1,36 +1,58 @@
+import React from "react";
 import { useState, ChangeEvent } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Trash2, Upload } from "lucide-react";
-import styles from "./styles.module.css";
-
-type User = {
-  name: string;
-  email: string;
-  avatar: string;
-};
+import { User } from "../../types/user";
+import { useAuth } from "../../contexts/AuthProvider";
+import axios from "axios";
+import { ApiError } from "../../types/apiError";
+import "./AccountPage.css";
 
 type FormData = {
-  name: string;
-  email: string;
+  first_name: string;
+  last_name: String;
+  username: string;
 };
+
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export default function Account() {
   console.log("account rendered");
 
   const { register, handleSubmit } = useForm<FormData>();
-  const [user, setUser] = useState<User>({
-    name: "John Doe",
-    email: "johndoe@example.com",
-    avatar:
-      "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1738868287~exp=1738871887~hmac=e24f4e7f6c2262238670c06cca214d2d0629465513fa6c63fdf54624c2855cf2&w=740",
-  });
+  const { user,setUser }: any = useAuth();
+
 
   const [open, setOpen] = useState<boolean>(false);
   const [image, setImage] = useState<string>(user.avatar);
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    setUser((prev) => ({ ...prev, ...data, avatar: image }));
-    setOpen(false);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log(data);
+  //   try {
+  //     const token = sessionStorage.getItem("token");
+  //     const updateUserInfoApi_response = await axios.put(`${API_BASE_URL}/api/users/update_profile/`,data, {
+  //         headers: {
+  //             Authorization: `Token ${token}`,
+  //         }
+  //     });
+  //     console.log(updateUserInfoApi_response);
+  //     setUser(updateUserInfoApi_response.data);
+  //     localStorage.setItem('user', JSON.stringify(updateUserInfoApi_response.data));
+
+  // } catch (err: any) {
+  //     console.log(err)
+  //     const apiError = err as ApiError;
+  //     if (apiError.response) {
+  //         const status = apiError.response.status;
+  //         const errorMessage = apiError.response.data?.username || 'could not update user info';
+  //         if(Array.isArray(errorMessage)){
+  //           alert(errorMessage[0])
+  //         }else{
+  //           alert(errorMessage)
+  //         }
+  //     }
+  // }
+    // setOpen(false);
   };
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -42,56 +64,65 @@ export default function Account() {
   };
 
   const handleDeleteAccount = () => {
-    // if (confirm("Are you sure you want to delete your account? This action is irreversible.")) {
-    //   alert("Account deleted!");
-    // }
+    
   };
 
   return (
-    <div className={styles.profileContainer}>
-      <div className={styles.profileCard}>
+    <div className="profile-container">
+      <div className="profile-card">
         <h2>Profile Settings</h2>
-        <div className={styles.profileAvatar}>
-          <img src={user.avatar} alt="Profile" className={styles.avatarImg} />
+        <div className="profile-avatar">
+          <img src={user.profile_picture!==null && user.profile_picture.startsWith('http')
+            ? user.profile_picture
+            : `${API_BASE_URL}${user.profile_picture}`} alt="Profile" className="avatar-img" />
         </div>
-        <button className={styles.editBtn} onClick={() => setOpen(true)}>
+        <button className="edit-btn" onClick={() => setOpen(true)}>
           Edit Profile
         </button>
         {open && (
-          <div className={styles.modal} style={{ fontSize: "14px" }}>
-            <div className={styles.modalContent}>
+          <div className="modal" style={{ fontSize: "14px" }}>
+            <div className="modal-content">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <label className={styles.uploadLabel}>
+                <label className="upload-label">
                   <Upload size={18} /> Upload New Photo
                   <input type="file" className="hidden" onChange={handleImageUpload} />
                 </label>
-                {image && <img src={image} alt="New" className={styles.previewImg} />}
-                <label>Name</label>
-                <input
-                  {...register("name")}
-                  defaultValue={user.name}
-                  className={styles.inputField}
+                {image && <img src={image} alt="New" className="preview-img" />}
+                {/* <label>First Name</label> */}
+                {/* <input
+                required
+                  {...register("first_name")}
+                  defaultValue={user.first_name}
+                  className="input-field"
                 />
-                <label>Email</label>
+                <label>Last Name</label>
                 <input
-                  {...register("email")}
-                  defaultValue={user.email}
-                  type="email"
-                  className={styles.inputField}
+                  required
+                  {...register("last_name")}
+                  defaultValue={user.last_name}
+                  className="input-field"
+                /> */}
+                <label>UserName</label>
+                <input
+                required
+                  {...register("username")}
+                  defaultValue={user.username}
+                  type="text"
+                  className="input-field"
                 />
-                <button type="submit" className={styles.saveBtn}>
+                <button type="submit" className="save-btn">
                   Save Changes
                 </button>
               </form>
-              <button className={styles.closeBtn} onClick={() => setOpen(false)}>
+              <button className="close-btn" onClick={() => setOpen(false)}>
                 Close
               </button>
             </div>
           </div>
         )}
-        <button className={styles.deleteBtn} onClick={handleDeleteAccount}>
+        {/* <button className="delete-btn" onClick={handleDeleteAccount}>
           Delete Account
-        </button>
+        </button> */}
       </div>
     </div>
   );

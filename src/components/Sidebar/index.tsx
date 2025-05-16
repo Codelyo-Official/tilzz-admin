@@ -31,9 +31,9 @@ const Sidebar = () => {
 
 
 
-  const handleActiveMenu = (name:string) => {
+  const handleActiveMenu = async (name:string) => {
     if (name === "user-logout") {
-      const res = logout();
+      const res = await logout();
       if (res.success) {
         navigate("/login");
       }

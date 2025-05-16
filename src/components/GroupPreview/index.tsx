@@ -24,12 +24,16 @@ const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 const GroupPreview: React.FC = () => {
   const { user }: any = useAuth();
   const [users, setUsers] = React.useState<User[]>([]);
+  const [allusers, setAllUsers] = React.useState<User[]>([]);
+
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const GroupId = queryParams.get('groupId');
   const groupadminId = queryParams.get('createdBy');
   const [open, setOpen] = useState<boolean>(false);
+  const [open1, setOpen1] = useState<boolean>(false);
+
   const [groupName, setGroupName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [role, setRole] = useState<string>("user"); // Default role is 'user'
@@ -82,9 +86,9 @@ const GroupPreview: React.FC = () => {
       });
       console.log(getUsers_response);
       if (temp_user === "admin") {
-        setUsers(getUsers_response.data);
+        setAllUsers(getUsers_response.data);
       } else if (temp_user === "subadmin") {
-        setUsers(getUsers_response.data.assigned_users);
+        setAllUsers(getUsers_response.data.assigned_users);
       }
 
     } catch (err: any) {
@@ -99,18 +103,52 @@ const GroupPreview: React.FC = () => {
     }
   }
 
+  const getUsersinOrganization = async () => {
+    try {
+
+      const token = sessionStorage.getItem('token');
+      const getGroupDetails_response = await axios.get(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(getGroupDetails_response);
+      setUsers(getGroupDetails_response.data.members)
+
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+  }
+
   React.useEffect(() => {
-    getAllUsers();
+    // getAllUsers();
+    getUsersinOrganization();
   }, [])
+
+  React.useEffect(() => {
+    if (open1) {
+      getAllUsers();
+    }
+  }, [open1])
 
   return (
     <>
       <div style={{ marginTop: "10px", marginBottom: "10px", display: "flex", justifyContent: "flex-end" }}>
         <button
           className={styles.createUserBtn}
-          onClick={() => { }}
+          onClick={() => {
+            setOpen1(!open1)
+          }}
         >
-          Save Changes
+          Add Members
         </button>
       </div>
       <div className={styles.userListContainer}>
@@ -121,13 +159,13 @@ const GroupPreview: React.FC = () => {
               <th>Name</th>
               <th>User Email</th>
               <th>Username</th>
-              <th>Actions</th>
+              {/* <th>Actions</th> */}
             </tr>
           </thead>
           <tbody>
             {users.map((cuser: User) => {
 
-              if(cuser.id===user.id)
+              if (cuser.id === user.i && false)
                 return;
 
               return (
@@ -135,9 +173,9 @@ const GroupPreview: React.FC = () => {
                   <td data-label="Name">{cuser.first_name} {cuser.last_name}</td>
                   <td data-label="User Email">{cuser.email}</td>
                   <td data-label="Username">{cuser.username}</td>
-                  <td data-label="Actions">
+                  {/* <td data-label="Actions">
                     <input type="checkbox" />
-                  </td>
+                  </td> */}
                 </tr>);
             })}
           </tbody>
@@ -166,6 +204,51 @@ const GroupPreview: React.FC = () => {
                 Cancel
               </button>
             </div>
+          </form>
+        </div>
+      </ModalDialog>
+
+      <ModalDialog isOpen={open1} onClose={() => setOpen1(false)} >
+        <div>
+          <h2>Add members to Group</h2>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.formGroup} style={{ overflow: "scroll" }}>
+              <table className={styles.userTable}>
+                <thead>
+                  <tr>
+                    {/* <th>Name</th> */}
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allusers.map((cuser: User) => {
+
+                    if (cuser.id === user.id || cuser.profile.role === "admin" || cuser.profile.role === "subadmin")
+                      return;
+
+                    return (
+                      <tr key={cuser.id}>
+                        {/* <td data-label="Name">{cuser.first_name} {cuser.last_name}</td> */}
+                        <td data-label="Email">{cuser.email}</td>
+                        <td data-label="Username">{cuser.username}</td>
+                        <td data-label="Actions">
+                          <input type="checkbox" />
+                        </td>
+                      </tr>);
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div className={styles.formActions}>
+              <button type="submit" className={styles.createUserBtn}
+              >Save</button>
+              <button className={styles.cancelBtn} type="button" onClick={() => setOpen1(false)}>
+                Cancel
+              </button>
+            </div>
+
           </form>
         </div>
       </ModalDialog>

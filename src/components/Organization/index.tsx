@@ -91,6 +91,37 @@ const Organization: React.FC = () => {
     getAllGroups();
   }, [])
 
+  const delOrganization = async (gid: number) => {
+  
+    try {
+      const token = sessionStorage.getItem('token');
+      const delGroup_response = await axios.post(`${API_BASE_URL}/organizations/${gid}/delete`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(delGroup_response);
+      // setUsers([...users, createUser_response.data.user]);
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+  };
+
+  const confirmDelete = (gid:number)=> {
+    const confirmed = window.confirm("Are you sure you want to delete this?");
+    if (confirmed) {
+      delOrganization(gid);
+    } 
+  }
+
   return (
     <>
       <div style={{ marginTop: "10px", marginBottom: "10px", display: "flex", justifyContent: "flex-end" }}>
@@ -128,7 +159,9 @@ const Organization: React.FC = () => {
                     </NavLink>
                     Edit
                   </button>
-                  <button className={styles.deleteBtn} style={{ margin: "5px" }}>Delete</button>
+                  <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={()=>{
+                    confirmDelete(gr.id);
+                  }}>Delete</button>
                 </td>
               </tr>
             ))}

@@ -41,10 +41,17 @@ const GroupPreview: React.FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newGroup = { groupName };
-    console.log("Creating group:", newGroup);
-    clearForm();
-    setOpen(false);
+    const form = e.currentTarget;
+    const checkboxes = form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+    const checkedValues: string[] = [];
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkedValues.push(checkbox.value);
+      }
+    });
+
+    console.log('Checked values:', checkedValues);
   };
 
   const clearForm = () => {
@@ -236,7 +243,7 @@ const GroupPreview: React.FC = () => {
                         <td data-label="Email">{cuser.email}</td>
                         <td data-label="Username">{cuser.username}</td>
                         <td data-label="Actions">
-                          <input type="checkbox" />
+                          <input type="checkbox" value={cuser.id} />
                         </td>
                       </tr>);
                   })}

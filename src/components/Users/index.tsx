@@ -94,6 +94,37 @@ const UserList: React.FC = () => {
 
   }
 
+  const delUser = async (deluserid: number) => {
+  
+    try {
+      const token = sessionStorage.getItem('token');
+      const delUser_response = await axios.post(`${API_BASE_URL}/${user.role}/users/${deluserid}/delete/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(delUser_response);
+      // setUsers([...users, createUser_response.data.user]);
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+  };
+
+  const confirmDelete = (cuserid:number)=> {
+    const confirmed = window.confirm("Are you sure you want to delete this?");
+    if (confirmed) {
+      delUser(cuserid);
+    } 
+  }
+
   React.useEffect(() => {
     getAllUsers();
   }, [])
@@ -138,8 +169,9 @@ const UserList: React.FC = () => {
                 <td data-label="Email">{cuser.email}</td>
                 <td data-label="Role" className={styles.capitalize}>{cuser.profile.role}</td>
                 <td data-label="Actions">
-                  <button className={styles.editBtn} style={{ margin: "5px" }}>Edit</button>
-                  <button className={styles.deleteBtn} style={{ margin: "5px" }}>Delete</button>
+                  <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={()=>{
+                    confirmDelete(cuser.id);
+                    }}>Delete</button>
                 </td>
               </tr>)
             })}

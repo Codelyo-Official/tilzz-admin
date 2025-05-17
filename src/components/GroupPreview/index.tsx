@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { ApiError } from "../../types/apiError";
 import { useAuth } from "../../contexts/AuthProvider";
 import axios from "axios";
+import { compose } from "@reduxjs/toolkit";
 
 interface User {
   id: number;
@@ -62,19 +63,20 @@ const GroupPreview: React.FC = () => {
       if (groupadminId === null)
         return;
       if (user.role === "admin") {
-        if (user.id === parseInt(groupadminId)) {
-
-          // all users
-
-        } else {
-          temp_user = "subadmin"
-          // only users under subadmin
-          targetRoute = `/api/accounts/subadmins/${groupadminId}/users/`;
+        if (users.length > 0) {
+          if (user.id === parseInt(groupadminId)) {
+            // all users
+          } else {
+            if (users[0].profile.role === "subadmin") {
+              // only users under subadmin
+              temp_user = "subadmin"
+              targetRoute = `/api/accounts/subadmins/${groupadminId}/users/`;
+            }
+          }
         }
       } else if (user.role === "subadmin") {
-        temp_user = "subadmin"
-
         // only users under subadmin
+        temp_user = "subadmin"
         targetRoute = `/api/accounts/subadmins/${groupadminId}/users/`;
       }
 

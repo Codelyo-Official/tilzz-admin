@@ -39,19 +39,48 @@ const GroupPreview: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [role, setRole] = useState<string>("user"); // Default role is 'user'
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const checkboxes = form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
-    const checkedValues: string[] = [];
+    const checkedValues: number[] = [];
+
+
 
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
-        checkedValues.push(checkbox.value);
+        checkedValues.push(parseInt(checkbox.value));
       }
     });
 
+
+    /// api/accounts/organizations/{org-id}/add-member/
+
     console.log('Checked values:', checkedValues);
+
+    try {
+      const token = sessionStorage.getItem('token');
+      const addtoGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/add-member/`, {
+        user_ids: checkedValues
+      }, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(addtoGroupApiResponse);
+
+
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+
   };
 
   const clearForm = () => {
@@ -135,6 +164,14 @@ const GroupPreview: React.FC = () => {
       }
     } finally {
     }
+  }
+
+  const checkifinusers = (uid: number) => {
+    for (let i = 0; i < users.length; i++) {
+      if (uid === users[i].id)
+        return true;
+    }
+    return false;
   }
 
   React.useEffect(() => {
@@ -234,7 +271,7 @@ const GroupPreview: React.FC = () => {
                 <tbody>
                   {allusers.map((cuser: User) => {
 
-                    if (cuser.id === user.id || cuser.profile.role === "admin" || cuser.profile.role === "subadmin")
+                    if (cuser.id === user.id || cuser.profile.role === "admin" || cuser.profile.role === "subadmin" || checkifinusers(cuser.id))
                       return;
 
                     return (

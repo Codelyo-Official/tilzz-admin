@@ -98,13 +98,14 @@ const UserList: React.FC = () => {
   
     try {
       const token = sessionStorage.getItem('token');
-      const delUser_response = await axios.post(`${API_BASE_URL}/${user.role}/users/${deluserid}/delete/`, {
+      const delUser_response = await axios.delete(`${API_BASE_URL}/api/accounts/${user.role}/users/${deluserid}/delete/`, {
         headers: {
           Authorization: `Token ${token}`,
         }
       });
       console.log(delUser_response);
-      // setUsers([...users, createUser_response.data.user]);
+      let result = users.filter((user)=>user.id!==deluserid);
+      setUsers(result);
 
     } catch (err: any) {
       console.log(err)
@@ -116,7 +117,7 @@ const UserList: React.FC = () => {
       }
     } finally {
     }
-  };
+  }
 
   const confirmDelete = (cuserid:number)=> {
     const confirmed = window.confirm("Are you sure you want to delete this?");

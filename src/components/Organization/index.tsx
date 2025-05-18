@@ -95,13 +95,14 @@ const Organization: React.FC = () => {
   
     try {
       const token = sessionStorage.getItem('token');
-      const delGroup_response = await axios.post(`${API_BASE_URL}/organizations/${gid}/delete`, {
+      const delGroup_response = await axios.delete(`${API_BASE_URL}/api/accounts/organizations/${gid}/delete/`, {
         headers: {
           Authorization: `Token ${token}`,
         }
       });
       console.log(delGroup_response);
-      // setUsers([...users, createUser_response.data.user]);
+      let result = groups.filter((g)=>g.id!==gid);
+      setGroups(result);
 
     } catch (err: any) {
       console.log(err)

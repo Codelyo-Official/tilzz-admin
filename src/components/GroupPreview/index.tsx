@@ -90,7 +90,8 @@ const GroupPreview: React.FC = () => {
 
     try {
       const token = sessionStorage.getItem('token');
-      const removefromGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/remove-member/${uid}/`, {
+      console.log(token)
+      const removefromGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/remove-member/${uid}/`,{},{
         headers: {
           Authorization: `Token ${token}`,
         }

@@ -90,7 +90,7 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                                         </p>
                                         <p className="descp">{st.description}</p>
                                     </div>
-                                    {user.role==="admin" && (
+                                    {(user.role==="admin" || (user.role==="subadmin" && st.creator_admin!==null && st.creator_admin.id===user.id)) && (
                                         <div className="admin-options">
                                         <IoMdEye style={{ color: "white" }} onClick={() => {
                                             setCtext("Are you sure you want to set this story to private")

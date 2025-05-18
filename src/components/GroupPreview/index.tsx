@@ -45,14 +45,15 @@ const GroupPreview: React.FC = () => {
     const checkboxes = form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
     const checkedValues: number[] = [];
 
-
-
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
         checkedValues.push(parseInt(checkbox.value));
       }
     });
 
+    let result = checkedValues.join(', ')
+
+    console.log(result)
 
     /// api/accounts/organizations/{org-id}/add-member/
 
@@ -61,14 +62,41 @@ const GroupPreview: React.FC = () => {
     try {
       const token = sessionStorage.getItem('token');
       const addtoGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/add-member/`, {
-        user_ids: checkedValues
+        user_ids: result
       }, {
         headers: {
           Authorization: `Token ${token}`,
         }
       });
       console.log(addtoGroupApiResponse);
+      await getUsersinOrganization();
 
+    } catch (err: any) {
+      console.log(err)
+      const apiError = err as ApiError;
+      if (apiError.response) {
+        const status = apiError.response.status;
+        const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+        alert(errorMessage);
+      }
+    } finally {
+    }
+
+  };
+
+  const removefromorganization = async (uid: number) => {
+
+    // api/accounts/organizations/{org-id}/remove-member/{user-id}/
+
+    try {
+      const token = sessionStorage.getItem('token');
+      const removefromGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/remove-member/${uid}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      });
+      console.log(removefromGroupApiResponse);
+      await getUsersinOrganization();
 
     } catch (err: any) {
       console.log(err)
@@ -185,6 +213,13 @@ const GroupPreview: React.FC = () => {
     }
   }, [open1])
 
+  const confirmDelete = (uid:number)=> {
+    const confirmed = window.confirm("Are you sure you want to delete this?");
+    if (confirmed) {
+      removefromorganization(uid);
+    } 
+  }
+
   return (
     <>
       <div style={{ marginTop: "10px", marginBottom: "10px", display: "flex", justifyContent: "flex-end" }}>
@@ -205,7 +240,7 @@ const GroupPreview: React.FC = () => {
               <th>Name</th>
               <th>User Email</th>
               <th>Username</th>
-              {/* <th>Actions</th> */}
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -219,9 +254,11 @@ const GroupPreview: React.FC = () => {
                   <td data-label="Name">{cuser.first_name} {cuser.last_name}</td>
                   <td data-label="User Email">{cuser.email}</td>
                   <td data-label="Username">{cuser.username}</td>
-                  {/* <td data-label="Actions">
-                    <input type="checkbox" />
-                  </td> */}
+                  <td data-label="Actions">
+                    <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={() => {
+                       confirmDelete(cuser.id);
+                    }}>Delete</button>
+                  </td>
                 </tr>);
             })}
           </tbody>

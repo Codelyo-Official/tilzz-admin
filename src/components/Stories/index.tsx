@@ -25,34 +25,37 @@ function Stories({ slugStories }: { slugStories: string | null }) {
     const [dataStories, setDataStories] = React.useState<story[]>([]);
 
     const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+    const [cur_st_id, set_cur_st_id] = React.useState<null | story>(null);
+
     const [ctext, setCtext] = React.useState("");
 
     const getStories = async () => {
         try {
 
             const targetRoute = user.role === "subadmin" ? `/api/stories/admin/subadmin/stories/` : "/api/stories/admin/stories/";
-      
+
             const token = sessionStorage.getItem('token');
             const getStories_response = await axios.get(`${API_BASE_URL}${targetRoute}`, {
-              headers: {
-                Authorization: `Token ${token}`,
-              }
+                headers: {
+                    Authorization: `Token ${token}`,
+                }
             });
             console.log(getStories_response);
 
             setDataStories(getStories_response.data)
-            
-      
-          } catch (err: any) {
+
+
+        } catch (err: any) {
             console.log(err)
             const apiError = err as ApiError;
             if (apiError.response) {
-              const status = apiError.response.status;
-              const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
-              alert(errorMessage);
+                const status = apiError.response.status;
+                const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+                alert(errorMessage);
             }
-          } finally {
-          }
+        } finally {
+        }
     }
 
     useEffect(() => {
@@ -62,6 +65,81 @@ function Stories({ slugStories }: { slugStories: string | null }) {
     const handleActiveMenu = (name: string) => {
         dispatch(setActiveTab(name));
     };
+
+    // /api/stories/stories/{id}/
+
+    const delStory = async () => {
+        console.log(cur_st_id);
+        // /api/stories/admin/stories/${cur_st_id.id}/delete/
+        try {
+            if (cur_st_id !== null) {
+                const token = sessionStorage.getItem('token');
+                const delStories_response = await axios.delete(`${API_BASE_URL}/api/stories/admin/stories/${cur_st_id.id}/delete/`, {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    }
+                });
+                console.log(delStories_response);
+
+
+                let result = dataStories.filter(st => st.id !== cur_st_id.id);
+                setDataStories(result);
+            }
+
+
+        } catch (err: any) {
+            console.log(err)
+            const apiError = err as ApiError;
+            if (apiError.response) {
+                const status = apiError.response.status;
+                const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+                alert(errorMessage);
+            }
+        } finally {
+        }
+    }
+
+    // /api/stories/admin/stories/{story-id}/visibility/
+
+    const toggleVisibility = async () => {
+        console.log(cur_st_id);
+
+        try {
+            if (cur_st_id !== null) {
+                const token = sessionStorage.getItem('token');
+                const toggleStoriesEye_response = await axios.put(`${API_BASE_URL}/api/stories/admin/stories/${cur_st_id.id}/visibility/`, {
+                    visibility: cur_st_id.visibility === "public" ? "private" : "public"
+                }, {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    }
+                });
+                console.log(toggleStoriesEye_response);
+                let result = dataStories.map((st: any) => {
+                    if (st.id !== cur_st_id.id)
+                        return st;
+                    else {
+                        return {
+                            ...st, visibility: cur_st_id.visibility === "public" ? "private" : "public"
+                        }
+                    }
+                })
+                setDataStories(result);
+                alert(toggleStoriesEye_response.data.message);
+            }
+
+
+        } catch (err: any) {
+            console.log(err)
+            const apiError = err as ApiError;
+            if (apiError.response) {
+                const status = apiError.response.status;
+                const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+                alert(errorMessage);
+            }
+        } finally {
+        }
+    }
 
     return (
         <div>
@@ -83,39 +161,42 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                                     >
                                     </NavLink>
 
-                                    <img src={!st.cover_image.startsWith('http')?`${API_BASE_URL}${st.cover_image}`:st.cover_image} alt="" />
+                                    <img src={!st.cover_image.startsWith('http') ? `${API_BASE_URL}${st.cover_image}` : st.cover_image} alt="" />
                                     <div className="title">
                                         <p >{st.title}
 
                                         </p>
                                         <p className="descp">{st.description}</p>
                                     </div>
-                                    {(user.role==="admin" || (user.role==="subadmin" && st.creator_admin!==null && st.creator_admin.id===user.id)) && (
+                                    {(user.role === "admin" || (user.role === "subadmin" && st.creator_admin !== null && st.creator_admin.id === user.id)) && (
                                         <div className="admin-options">
-                                        <IoMdEye style={{ color: "white" }} onClick={() => {
-                                            setCtext("Are you sure you want to set this story to private")
-                                            setOpen(true);
-                                        }} />
-                                        <IoTrashOutline style={{ color: "white" }} onClick={() => {
-                                            setCtext("Are you sure you want to delete this story")
-                                            setOpen(true);
-                                        }} />
-                                    </div>
+                                            <IoMdEye style={{ color: "white" }} onClick={() => {
+                                                setCtext("Are you sure you want to toggle visibility")
+                                                set_cur_st_id(st);
+                                                setOpen(true);
+                                            }} />
+                                            <IoTrashOutline style={{ color: "white" }} onClick={() => {
+                                                setCtext("Are you sure you want to delete this story")
+                                                set_cur_st_id(st);
+                                                setOpen1(true);
+                                            }} />
+                                        </div>
                                     )}
-                                    
+
                                 </li>
                             )
                         })}
                     </ul>
 
                 </div>
-                
+
                 <ModalDialog isOpen={open} onClose={() => setOpen(false)}
                 >
-                    <p className="text-lg text-center mb-6">Are You Sure You want to proceed</p>
+                    <p className="text-lg text-center mb-6">{ctext}</p>
                     <div className="flex justify-center gap-4">
                         <button
                             onClick={() => {
+                                set_cur_st_id(null);
                                 setOpen(false)
                             }}
                             className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg"
@@ -124,7 +205,33 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                         </button>
                         <button
                             onClick={() => {
+                                toggleVisibility();
                                 setOpen(false)
+                            }}
+                            className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg"
+                        >
+                            Confirm
+                        </button>
+                    </div>
+                </ModalDialog>
+
+                <ModalDialog isOpen={open1} onClose={() => setOpen1(false)}
+                >
+                    <p className="text-lg text-center mb-6">{ctext}</p>
+                    <div className="flex justify-center gap-4">
+                        <button
+                            onClick={() => {
+                                set_cur_st_id(null);
+                                setOpen1(false)
+                            }}
+                            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={() => {
+                                delStory();
+                                setOpen1(false)
                             }}
                             className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg"
                         >

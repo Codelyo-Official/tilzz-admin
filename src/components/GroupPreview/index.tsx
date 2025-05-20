@@ -91,7 +91,7 @@ const GroupPreview: React.FC = () => {
     try {
       const token = sessionStorage.getItem('token');
       console.log(token)
-      const removefromGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/remove-member/${uid}/`,{},{
+      const removefromGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/remove-member/${uid}/`, {}, {
         headers: {
           Authorization: `Token ${token}`,
         }
@@ -214,11 +214,11 @@ const GroupPreview: React.FC = () => {
     }
   }, [open1])
 
-  const confirmDelete = (uid:number)=> {
+  const confirmDelete = (uid: number) => {
     const confirmed = window.confirm("Are you sure you want to delete this?");
     if (confirmed) {
       removefromorganization(uid);
-    } 
+    }
   }
 
   return (
@@ -245,10 +245,7 @@ const GroupPreview: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((cuser: User) => {
-
-              if (cuser.id === user.i && false)
-                return;
+            {users.map((cuser: User, index: number) => {
 
               return (
                 <tr key={cuser.id}>
@@ -256,9 +253,10 @@ const GroupPreview: React.FC = () => {
                   <td data-label="User Email">{cuser.email}</td>
                   <td data-label="Username">{cuser.username}</td>
                   <td data-label="Actions">
-                    <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={() => {
-                       confirmDelete(cuser.id);
-                    }}>Delete</button>
+                    {index !== 0 && (
+                      <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={() => {
+                        confirmDelete(cuser.id);
+                      }}>Delete</button>)}
                   </td>
                 </tr>);
             })}

@@ -22,4 +22,5 @@ export type story = {
     liked_by:number[];
     versions:any;
     creator_admin:any;
+    visibility:any;
 }

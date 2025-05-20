@@ -102,6 +102,7 @@ const Reports = () => {
         }
       });
       console.log(ApproveEpisodesApi_response);
+      alert("episode content updated and made open to public again")
     } catch (err: any) {
       console.log(err)
       const apiError = err as ApiError;

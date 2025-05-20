@@ -64,6 +64,7 @@ const Reports = () => {
         }
       });
       console.log(ApproveEpisodesApi_response);
+      alert("episode approved")
     } catch (err: any) {
       console.log(err)
       const apiError = err as ApiError;
@@ -86,6 +87,8 @@ const Reports = () => {
         }
       });
       console.log(RejectEpisodesApi_response);
+      alert("episode rejected")
+
     } catch (err: any) {
       console.log(err)
       const apiError = err as ApiError;

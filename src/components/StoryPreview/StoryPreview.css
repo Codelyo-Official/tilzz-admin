@@ -1,0 +1,247 @@
+.story-preview {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.story-header {
+  position: relative;
+}
+
+.story-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.story-info {
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
+.story-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+.story-description {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px;
+  color: #555;
+}
+
+.episodes-list {
+  padding: 20px;
+}
+
+.episodes-list h3{
+  font-size: 14px;
+}
+
+.episode {
+  /* border-bottom: 1px solid #eee; */
+  padding: 0;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.episode-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.episode-header:hover {
+  background: #ececec;
+}
+
+.episode-header h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.episode-header span {
+  font-size: 14px;
+}
+
+.episode-content {
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+  height: auto;
+  /* background: #f1f1f1; */
+  border-radius: 8px;
+  margin-top: 0px;
+  text-align: center;
+}
+
+.episode-content textarea{
+  width: 100%;
+}
+
+.edit-episode-btn {
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right:30px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-episode {
+  padding: 20px;
+  padding-top: 0px;
+  text-align: center;
+}
+
+.new-episode-btn,
+.new-episode-submit {
+  padding: 12px 20px;
+  width: 160px;
+  border-radius: 24px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #4F46E5;
+  color: #4F46E5;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+
+.new-version-cancel {
+  padding: 12px 20px;
+  width: 160px;
+  border-radius: 24px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e54e46;
+  color: #e54646;
+  cursor: pointer;
+  font-size: 12px;
+  /* color:wh; */
+}
+
+.new-episode-btn:hover,
+.new-episode-submit:hover {
+  background: #4F46E5;
+  color:white;
+}
+
+.new-episode-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.new-episode-form input, .new-episode-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.new-episode-form button {
+ width: 200px;
+}
+
+
+
+.episode-title-ok-al{
+  white-space: nowrap;            /* Prevent text from wrapping to the next line */
+    overflow: hidden;               /* Hide the overflowed text */
+    text-overflow: ellipsis;        /* Add the ellipsis (...) */
+    width: 250px;
+    font-weight: bold;
+}
+
+.episode-options{
+ /* position: absolute; */
+ /* bottom: 16px; */
+ /* right:18px; */
+  display: inline-block;
+ /* margin-top: 15px; */
+ margin-right: 5px;
+}
+
+.episode-options button{
+ margin-left: 10px;
+ }
+
+
+ .tooltip1 {
+  position: relative;
+  display: inline-block; 
+}
+
+.tooltip1 .tooltiptext1 {
+  visibility: hidden;
+  width: 60px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -30px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 10px;
+}
+
+.tooltip1 .tooltiptext1::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip1:hover .tooltiptext1 {
+  visibility: visible;
+  opacity: 1;
+}
+
+.read-only-editor .ql-toolbar.ql-snow {
+  /* display: none !important; */
+ height: 0px;
+ padding: 0px;
+ border: none;
+ border-bottom: 1px solid #ccc;
+ /* background-color: red; */
+}
+
+.myeditarea{
+  background-color: #F9F9F9;
+}

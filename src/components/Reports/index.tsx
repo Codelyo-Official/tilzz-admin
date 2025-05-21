@@ -84,7 +84,7 @@ const Reports = () => {
 
   }
 
-  const approval = async (ep: any) => {
+  const approval = async (ep: any,report:any) => {
     //  /api/stories/admin/episodes/<episode_id>/approve/
 
     if (updateEpisodeObject.content.trim().length === 0) {
@@ -103,6 +103,16 @@ const Reports = () => {
       });
       console.log(ApproveEpisodesApi_response);
       alert("episode content updated and made open to public again")
+      let result = reports.map((r:any)=>{
+        if(r.id===report.id){
+          let temp_versions = r.versions.map((v:any)=>{
+            return {...v,episodes:v.episodes.filter((e:any)=>e.id!==ep.id)}
+          })
+          return {...r,versions:temp_versions}
+        }else
+          return r;
+      })
+      setReports(result);
     } catch (err: any) {
       console.log(err)
       const apiError = err as ApiError;
@@ -163,7 +173,7 @@ const Reports = () => {
                                 }}>{episode.content}</textarea>
                                 <div style={{ display: "flex", justifyContent: "center" }}>
                                   <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={() => {
-                                    approval(episode);
+                                    approval(episode,report);
                                   }}>Submit</button>
                                   <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
                                     cancel();

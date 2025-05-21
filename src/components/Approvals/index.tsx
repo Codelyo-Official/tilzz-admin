@@ -85,7 +85,7 @@ const Reports = () => {
     }
   }
 
-  const rejection = async (ep: any) => {
+  const rejection = async (ep: any,report:any) => {
 
     // api/stories/api/admin/episodes/<episode_id>/reject/
     try {
@@ -98,6 +98,16 @@ const Reports = () => {
       });
       console.log(RejectEpisodesApi_response);
       alert("episode rejected")
+      let result = reports.map((r:any)=>{
+        if(r.id===report.id){
+          let temp_versions = r.versions.map((v:any)=>{
+            return {...v,episodes:v.episodes.filter((e:any)=>e.id!==ep.id)}
+          })
+          return {...r,versions:temp_versions}
+        }else
+          return r;
+      })
+      setReports(result);
 
     } catch (err: any) {
       console.log(err)
@@ -161,7 +171,7 @@ const Reports = () => {
                                     approval(episode,report);
                                   }}>Approve</button>
                                   <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
-                                    rejection(episode);
+                                    rejection(episode,report);
                                   }} >Reject</button>
                                 </div>
 

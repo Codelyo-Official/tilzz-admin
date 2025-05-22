@@ -161,7 +161,7 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                                     >
                                     </NavLink>
 
-                                    <img src={!st.cover_image.startsWith('http') ? `${API_BASE_URL}${st.cover_image}` : st.cover_image} alt="" />
+                                    <img src={ st.cover_image!==null && !st.cover_image.startsWith('http') ? `${API_BASE_URL}${st.cover_image}` : st.cover_image} alt="" />
                                     <div className="title">
                                         <p >{st.title}
 

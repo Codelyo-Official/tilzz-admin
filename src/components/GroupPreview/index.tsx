@@ -324,8 +324,7 @@ const GroupPreview: React.FC = () => {
               </table>
             </div>
             <div className={styles.formActions}>
-              <button type="submit" className={styles.createUserBtn}
-              >Save</button>
+              <button type="submit" className={styles.createUserBtn}>Save</button>
               <button className={styles.cancelBtn} type="button" onClick={() => setOpen1(false)}>
                 Cancel
               </button>

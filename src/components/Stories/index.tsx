@@ -181,7 +181,7 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                                         <p className="descp">{getfirstepsiodedescp(st)}</p>
                                     </div>
                                     {(user.role === "admin" || (user.role === "subadmin" && st.creator_admin !== null && st.creator_admin.id === user.id)) && (
-                                        <div className="admin-options">
+                                        <div className="admin-options" style={{zIndex:"6"}}>
                                             <IoMdEye style={{ color: "white" }} onClick={() => {
                                                 setCtext("Are you sure you want to toggle visibility")
                                                 set_cur_st_id(st);

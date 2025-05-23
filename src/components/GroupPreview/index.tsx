@@ -180,6 +180,7 @@ const GroupPreview: React.FC = () => {
         }
       });
       console.log(getGroupDetails_response);
+      setGroupName(getGroupDetails_response.data.organization.name)
       setUsers(getGroupDetails_response.data.members)
 
 
@@ -234,7 +235,7 @@ const GroupPreview: React.FC = () => {
         </button>
       </div>
       <div className={styles.userListContainer}>
-        <h2 className={styles.tableTitle}>Edit Group members for XYZ Group Name</h2>
+        <h2 className={styles.tableTitle}>Edit Group members for {groupName}</h2>
         <table className={styles.userTable}>
           <thead>
             <tr>

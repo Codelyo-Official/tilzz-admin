@@ -133,6 +133,17 @@
     border-radius: 10px;
     overflow: hidden;
   }
+
+  .story-box::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #31313150;
+    content: '';
+    z-index: 0;
+  }
   
   .story-box img{
     width: 100%;
@@ -147,6 +158,7 @@
     bottom: 10px;
     left:0px;
     width: 100%;
+    z-index: 1;
   }
 
   .story-by-user{
@@ -195,6 +207,10 @@
     font-size: 10px;
     margin: 0;
     margin-left: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Show 3 lines */
+    overflow: hidden;
   }
   
   .story-box .descp{
@@ -526,4 +542,6 @@
     width: 40px;
     display: flex;
     justify-content: space-between;
+    z-index: 1;
   }
+

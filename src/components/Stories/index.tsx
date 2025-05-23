@@ -141,6 +141,18 @@ function Stories({ slugStories }: { slugStories: string | null }) {
         }
     }
 
+    const getfirstepsiodedescp = (st: any) => {
+
+        if (st.versions.length > 0) {
+            if (st.versions[0].episodes.length > 0) {
+                return st.versions[0].episodes[0].content;
+            }
+        }
+
+        return '';
+    }
+
+
     return (
         <div>
             <div className="logged-in-user-story-div" style={{
@@ -166,7 +178,7 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                                         <p >{st.title}
 
                                         </p>
-                                        <p className="descp">{st.description}</p>
+                                        <p className="descp">{getfirstepsiodedescp(st)}</p>
                                     </div>
                                     {(user.role === "admin" || (user.role === "subadmin" && st.creator_admin !== null && st.creator_admin.id === user.id)) && (
                                         <div className="admin-options">

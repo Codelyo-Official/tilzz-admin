@@ -293,7 +293,7 @@ const GroupPreview: React.FC = () => {
 
       <ModalDialog isOpen={open1} onClose={() => setOpen1(false)} >
         <div>
-          <h2>Add members to Group</h2>
+          <h2 style={{marginBottom:"8px"}}>Add members to Group</h2>
           <form onSubmit={handleSubmit}>
             <div className={styles.formGroup} style={{ overflow: "scroll" }}>
               <table className={styles.userTable}>
@@ -324,9 +324,16 @@ const GroupPreview: React.FC = () => {
                 </tbody>
               </table>
             </div>
-            <div className={styles.formActions}>
-              <button type="submit" className={styles.createUserBtn}>Save</button>
-              <button className={styles.cancelBtn} type="button" onClick={() => setOpen1(false)}>
+            <div className={styles.formActions} style={{width:"fit-content", marginLeft:"auto",marginRight:"auto"}}>
+              <button type="submit" style={{  fontSize: "14px",
+                // height: "40px",
+                // paddingLeft: "15px",
+                // paddingRight:" 15px",
+                width:"120px",
+                padding:"8px",
+                margin:"0"
+              }}>Save</button>
+              <button className={styles.cancelBtn} type="button" style={{marginLeft:"5px",width:"120px"}} onClick={() => setOpen1(false)}>
                 Cancel
               </button>
             </div>

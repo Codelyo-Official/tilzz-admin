@@ -407,7 +407,7 @@ const StoryPreview = () => {
           <div className="episodes-list" style={{ paddingTop: "0px", marginTop: "0px" }}>
             {episodes.map((episode: any) => (
               (episode.number >= activeEpisode && loading) ? (<div key={episode.id} style={{ width: "100%", backgroundColor: "#F1F1F1", borderRadius: "10px", marginTop: "10px", marginBottom: "10px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Spinner animation="grow" role="status" variant="light" style={{ color: "white", fontSize: "20px" }}>
+                <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px",background:"#ACA6FF" }}>
                   <span className="visually-hidden">Loading...</span>
                 </Spinner>
               </div>) : (

@@ -37,6 +37,7 @@ const GroupPreview: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [open1, setOpen1] = useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const [groupAdmin,setGroupAdmin] = React.useState<any>(null);
 
   const [groupName, setGroupName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -187,6 +188,7 @@ const GroupPreview: React.FC = () => {
       });
       console.log(getGroupDetails_response);
       setLoading(false);
+      setGroupAdmin(getGroupDetails_response.data.organization.created_by)
       setGroupName(getGroupDetails_response.data.organization.name)
       setUsers(getGroupDetails_response.data.members)
     } catch (err: any) {
@@ -263,7 +265,7 @@ const GroupPreview: React.FC = () => {
                   <td data-label="User Email">{cuser.email}</td>
                   <td data-label="Username">{cuser.username}</td>
                   <td data-label="Actions">
-                    {index !== 0 && (
+                    {groupAdmin===null || (groupAdmin!==cuser.id) && (
                       <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={() => {
                         confirmDelete(cuser.id);
                       }}>Delete</button>)}

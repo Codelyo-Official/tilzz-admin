@@ -4,6 +4,7 @@ import ModalDialog from "../../common/components/ModalDialog";
 import { useAuth } from "../../contexts/AuthProvider";
 import { ApiError } from "../../types/apiError";
 import axios from "axios";
+import Dots from "../../common/components/dots";
 
 interface User {
   id: number;
@@ -22,8 +23,7 @@ const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 const UserList: React.FC = () => {
 
   const { user, setUser }: any = useAuth();
-
-  // console.log(user)
+  const [loading, setLoading] = React.useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
@@ -65,9 +65,8 @@ const UserList: React.FC = () => {
   const getAllUsers = async () => {
 
     try {
-
+      setLoading(true);
       const targetRoute = user.role === "subadmin" ? `/api/accounts/subadmins/${user.id}/users/` : "/api/stories/admin/users/";
-
       const token = sessionStorage.getItem('token');
       const getUsers_response = await axios.get(`${API_BASE_URL}${targetRoute}`, {
         headers: {
@@ -75,6 +74,7 @@ const UserList: React.FC = () => {
         }
       });
       console.log(getUsers_response);
+      setLoading(false);
       if (user.role === "admin") {
         setUsers(getUsers_response.data);
       } else {
@@ -82,6 +82,7 @@ const UserList: React.FC = () => {
       }
 
     } catch (err: any) {
+      setLoading(false);
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {
@@ -95,7 +96,7 @@ const UserList: React.FC = () => {
   }
 
   const delUser = async (deluserid: number) => {
-  
+
     try {
       const token = sessionStorage.getItem('token');
       const delUser_response = await axios.delete(`${API_BASE_URL}/api/accounts/${user.role}/users/${deluserid}/delete/`, {
@@ -104,7 +105,7 @@ const UserList: React.FC = () => {
         }
       });
       console.log(delUser_response);
-      let result = users.filter((user)=>user.id!==deluserid);
+      let result = users.filter((user) => user.id !== deluserid);
       setUsers(result);
 
     } catch (err: any) {
@@ -119,11 +120,11 @@ const UserList: React.FC = () => {
     }
   }
 
-  const confirmDelete = (cuserid:number)=> {
+  const confirmDelete = (cuserid: number) => {
     const confirmed = window.confirm("Are you sure you want to delete this?");
     if (confirmed) {
       delUser(cuserid);
-    } 
+    }
   }
 
   React.useEffect(() => {
@@ -149,35 +150,38 @@ const UserList: React.FC = () => {
 
       <div className={styles.userListContainer}>
         <h2 className={styles.tableTitle}>User List</h2>
-        <table className={styles.userTable}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((cuser: User) => {
-              if (user.id === cuser.id)
-                return;
+        {loading ? (<div style={{ width: "100%", height: "120px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Dots />
+        </div>) : (
+          <table className={styles.userTable}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((cuser: User) => {
+                if (user.id === cuser.id)
+                  return;
 
-              return (<tr key={cuser.id}>
-                <td data-label="Name">{cuser.first_name} {cuser.last_name}</td>
-                <td data-label="Username">{cuser.username}</td>
-                <td data-label="Email">{cuser.email}</td>
-                <td data-label="Role" className={styles.capitalize}>{cuser.profile.role}</td>
-                <td data-label="Actions">
-                  <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={()=>{
-                    confirmDelete(cuser.id);
+                return (<tr key={cuser.id}>
+                  <td data-label="Name">{cuser.first_name} {cuser.last_name}</td>
+                  <td data-label="Username">{cuser.username}</td>
+                  <td data-label="Email">{cuser.email}</td>
+                  <td data-label="Role" className={styles.capitalize}>{cuser.profile.role}</td>
+                  <td data-label="Actions">
+                    <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={() => {
+                      confirmDelete(cuser.id);
                     }}>Delete</button>
-                </td>
-              </tr>)
-            })}
-          </tbody>
-        </table>
+                  </td>
+                </tr>)
+              })}
+            </tbody>
+          </table>)}
       </div>
 
       <ModalDialog isOpen={open} onClose={() => setOpen(false)}>

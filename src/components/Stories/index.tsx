@@ -10,17 +10,16 @@ import { story } from "../../types/story";
 import { useAuth } from "../../contexts/AuthProvider";
 import { ApiError } from "../../types/apiError";
 import axios from "axios";
+import Dots from "../../common/components/dots";
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function Stories({ slugStories }: { slugStories: string | null }) {
 
     const { user, setUser }: any = useAuth();
-
     const dispatch = useDispatch();
-
     console.log("stories component rendered");
-
+    const [loading, setLoading] = React.useState<boolean>(true);
 
     const [dataStories, setDataStories] = React.useState<story[]>([]);
 
@@ -32,9 +31,8 @@ function Stories({ slugStories }: { slugStories: string | null }) {
 
     const getStories = async () => {
         try {
-
+            setLoading(true);
             const targetRoute = user.role === "subadmin" ? `/api/stories/admin/subadmin/stories/` : "/api/stories/admin/stories/";
-
             const token = sessionStorage.getItem('token');
             const getStories_response = await axios.get(`${API_BASE_URL}${targetRoute}`, {
                 headers: {
@@ -42,11 +40,12 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                 }
             });
             console.log(getStories_response);
-
+            setLoading(false);
             setDataStories(getStories_response.data)
 
 
         } catch (err: any) {
+            setLoading(false);
             console.log(err)
             const apiError = err as ApiError;
             if (apiError.response) {
@@ -160,6 +159,9 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                 boxShadow: slugStories === "public-feed" ? "none" : "rgba(149, 157, 165, 0.2) 0px 8px 24px",
             }}>
                 <h2 className="heading-your-story">All Stories</h2>
+                {loading ? (<div style={{ width: "100%", height: "120px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <Dots/>
+                </div>) : (
                 <div className="story-container">
                     <ul className="story-box101">
                         {dataStories.map((st, index) => {
@@ -200,7 +202,7 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                         })}
                     </ul>
 
-                </div>
+                </div>)}
 
                 <ModalDialog isOpen={open} onClose={() => setOpen(false)}
                 >

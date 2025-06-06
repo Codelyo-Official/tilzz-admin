@@ -7,6 +7,7 @@ import { ApiError } from "../../types/apiError";
 import { useAuth } from "../../contexts/AuthProvider";
 import axios from "axios";
 import { compose } from "@reduxjs/toolkit";
+import Dots from "../../common/components/dots";
 
 interface User {
   id: number;
@@ -34,6 +35,7 @@ const GroupPreview: React.FC = () => {
   const groupadminId = queryParams.get('createdBy');
   const [open, setOpen] = useState<boolean>(false);
   const [open1, setOpen1] = useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(true);
 
   const [groupName, setGroupName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -172,7 +174,7 @@ const GroupPreview: React.FC = () => {
 
   const getUsersinOrganization = async () => {
     try {
-
+      setLoading(true);
       const token = sessionStorage.getItem('token');
       const getGroupDetails_response = await axios.get(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/`, {
         headers: {
@@ -180,11 +182,11 @@ const GroupPreview: React.FC = () => {
         }
       });
       console.log(getGroupDetails_response);
+      setLoading(false);
       setGroupName(getGroupDetails_response.data.organization.name)
       setUsers(getGroupDetails_response.data.members)
-
-
     } catch (err: any) {
+      setLoading(false);
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {
@@ -236,6 +238,9 @@ const GroupPreview: React.FC = () => {
       </div>
       <div className={styles.userListContainer}>
         <h2 className={styles.tableTitle}>Edit Group members for {groupName}</h2>
+        {loading ? (<div style={{ width: "100%", height: "120px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Dots />
+        </div>) : (
         <table className={styles.userTable}>
           <thead>
             <tr>
@@ -262,7 +267,7 @@ const GroupPreview: React.FC = () => {
                 </tr>);
             })}
           </tbody>
-        </table>
+        </table>)}
       </div>
 
       <ModalDialog isOpen={open} onClose={() => setOpen(false)}>

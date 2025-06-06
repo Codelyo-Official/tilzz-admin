@@ -12,6 +12,8 @@ import { ApiError } from '../../types/apiError';
 import axios from 'axios';
 import { story } from '../../types/story';
 import styles from '../SharedStylesStoryPreview/styles.module.css';
+import Dots from "../../common/components/dots";
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -26,7 +28,8 @@ const Reports = () => {
     title: "",
     content: "",
   });
-
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [loading1, setLoading1] = React.useState<boolean>(false);
   const handleEpisodeToggle = (episode: any) => {
     setActiveEpisode(activeEpisode === episode.id ? null : episode.id);
     setUpdateEpisodeObject({ ...updateEpisodeObject, content: episode.content });
@@ -38,6 +41,7 @@ const Reports = () => {
 
   const getAllToReviewStories = async () => {
     try {
+      setLoading(true);
       const token = sessionStorage.getItem("token");
       const QEpisodesApi_response = await axios.get(`${API_BASE_URL}/api/stories/admin/episodes/pending-review/`, {
         headers: {
@@ -45,8 +49,10 @@ const Reports = () => {
         }
       });
       console.log(QEpisodesApi_response);
+      setLoading(false);
       setReports(QEpisodesApi_response.data);
     } catch (err: any) {
+      setLoading(false);
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {
@@ -84,7 +90,7 @@ const Reports = () => {
 
   }
 
-  const approval = async (ep: any,report:any) => {
+  const approval = async (ep: any, report: any) => {
     //  /api/stories/admin/episodes/<episode_id>/approve/
 
     if (updateEpisodeObject.content.trim().length === 0) {
@@ -103,13 +109,13 @@ const Reports = () => {
       });
       console.log(ApproveEpisodesApi_response);
       alert("episode content updated and made open to public again")
-      let result = reports.map((r:any)=>{
-        if(r.id===report.id){
-          let temp_versions = r.versions.map((v:any)=>{
-            return {...v,episodes:v.episodes.filter((e:any)=>e.id!==ep.id)}
+      let result = reports.map((r: any) => {
+        if (r.id === report.id) {
+          let temp_versions = r.versions.map((v: any) => {
+            return { ...v, episodes: v.episodes.filter((e: any) => e.id !== ep.id) }
           })
-          return {...r,versions:temp_versions}
-        }else
+          return { ...r, versions: temp_versions }
+        } else
           return r;
       })
       setReports(result);
@@ -140,61 +146,65 @@ const Reports = () => {
 
   return (
     <>
-      {reports.map((report: any) => {
-        let flag = checkifapprovalsinreport(report);
-        if (flag)
-          return (
-            <div className={styles.storyPreview}>
-              <div className={styles.storyHeader}>
-                <img src={`${API_BASE_URL}/${report.cover_image}`} alt="Story Preview" className={styles.storyImage} />
-                <div className={styles.storyInfo}>
-                  <h2 className={styles.storyTitle}>{report.title}</h2>
-                </div>
-              </div>
+      {loading ? (
+        <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Dots />
+        </div>) : (
+        <>
+          {reports.map((report: any) => {
+            let flag = checkifapprovalsinreport(report);
+            if (flag)
+              return (
+                <div className={styles.storyPreview}>
+                  <div className={styles.storyHeader}>
+                    <img src={`${API_BASE_URL}/${report.cover_image}`} alt="Story Preview" className={styles.storyImage} />
+                    <div className={styles.storyInfo}>
+                      <h2 className={styles.storyTitle}>{report.title}</h2>
+                    </div>
+                  </div>
 
-              <div className={styles.episodesList}>
-                <h3>Episodes to Review</h3>
-                {report.versions.map((ver_temp: any) => {
-                  return (ver_temp.episodes.map((episode: any) => {
-                    if (episode.status === "deleted")
-                      return (
-                        <div key={episode.id} className={styles.episode}>
-                          <div className={styles.episodeHeader} onClick={() => handleEpisodeToggle(episode)}>
-                            {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
-                            <h4 className={styles.episodeTitleOkAl}> {episode.content}</h4>
-                            <button className={styles.editEpisodeBtn}><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
-                            <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle />}</span>
-                          </div>
-                          {activeEpisode === episode.id && (
-                            <div className={styles.episodeContent} style={{ marginTop: "20px" }}>
-                              <div className={styles.newEpisodeForm}>
-                                <textarea  onChange={(e: any) => {
-                                  setUpdateEpisodeObject({ ...updateEpisodeObject, content: e.target.value })
-                                }}>{episode.content}</textarea>
-                                <div style={{ display: "flex", justifyContent: "center" }}>
-                                  <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={() => {
-                                    approval(episode,report);
-                                  }}>Submit</button>
-                                  <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
-                                    cancel();
-                                  }} >Cancel</button>
-                                </div>
-
+                  <div className={styles.episodesList}>
+                    <h3>Episodes to Review</h3>
+                    {report.versions.map((ver_temp: any) => {
+                      return (ver_temp.episodes.map((episode: any) => {
+                        if (episode.status === "deleted")
+                          return (
+                            <div key={episode.id} className={styles.episode}>
+                              <div className={styles.episodeHeader} onClick={() => handleEpisodeToggle(episode)}>
+                                {/* <h4>episode {episode.episode} : {episode.title}</h4> */}
+                                <h4 className={styles.episodeTitleOkAl}> {episode.content}</h4>
+                                <button className={styles.editEpisodeBtn}><FiEdit style={{ height: "14px", width: "14px", display: "inline-block", margin: "0", color: "black", marginRight: "5px", marginTop: "-2px" }} /></button>
+                                <span>{activeEpisode === episode.id ? <FiArrowUpCircle /> : <FiArrowDownCircle />}</span>
                               </div>
-                            </div>
-                          )}
-                        </div>);
-                    else
-                      return (<></>)
-                  }))
-                })}
-              </div>
+                              {activeEpisode === episode.id && (
+                                <div className={styles.episodeContent} style={{ marginTop: "20px" }}>
+                                  <div className={styles.newEpisodeForm}>
+                                    <textarea onChange={(e: any) => {
+                                      setUpdateEpisodeObject({ ...updateEpisodeObject, content: e.target.value })
+                                    }}>{episode.content}</textarea>
+                                    <div style={{ display: "flex", justifyContent: "center" }}>
+                                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={() => {
+                                        approval(episode, report);
+                                      }}>Submit</button>
+                                      <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
+                                        cancel();
+                                      }} >Cancel</button>
+                                    </div>
 
-            </div>);
-        else
-          return (<></>)
-      })}
+                                  </div>
+                                </div>
+                              )}
+                            </div>);
+                        else
+                          return (<></>)
+                      }))
+                    })}
+                  </div>
 
+                </div>);
+            else
+              return (<></>)
+          })} </>)}
     </>
   );
 };

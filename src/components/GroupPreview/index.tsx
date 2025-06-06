@@ -8,6 +8,7 @@ import { useAuth } from "../../contexts/AuthProvider";
 import axios from "axios";
 import { compose } from "@reduxjs/toolkit";
 import Dots from "../../common/components/dots";
+import { Spinner } from "react-bootstrap";
 
 interface User {
   id: number;
@@ -62,6 +63,7 @@ const GroupPreview: React.FC = () => {
     console.log('Checked values:', checkedValues);
 
     try {
+      setLoading(true);
       const token = sessionStorage.getItem('token');
       const addtoGroupApiResponse = await axios.post(`${API_BASE_URL}/api/accounts/organizations/${GroupId}/add-member/`, {
         user_ids: result
@@ -71,9 +73,11 @@ const GroupPreview: React.FC = () => {
         }
       });
       console.log(addtoGroupApiResponse);
+      setLoading(false);
       await getUsersinOrganization();
 
     } catch (err: any) {
+      setLoading(false);
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {
@@ -329,11 +333,10 @@ const GroupPreview: React.FC = () => {
                 </tbody>
               </table>
             </div>
-            <div className={styles.formActions} style={{width:"fit-content", marginLeft:"auto",marginRight:"auto"}}>
+
+            {!loading ? (
+              <div className={styles.formActions} style={{width:"fit-content", marginLeft:"auto",marginRight:"auto"}}>
               <button type="submit" style={{  fontSize: "14px",
-                // height: "40px",
-                // paddingLeft: "15px",
-                // paddingRight:" 15px",
                 width:"120px",
                 padding:"8px",
                 margin:"0"
@@ -342,6 +345,13 @@ const GroupPreview: React.FC = () => {
                 Cancel
               </button>
             </div>
+             ) : (
+              <div style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
 
           </form>
         </div>

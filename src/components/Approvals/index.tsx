@@ -63,6 +63,7 @@ const Reports = () => {
     //  /api/stories/admin/episodes/<episode_id>/approve/
 
     try {
+      setLoading1(true);
       const token = sessionStorage.getItem("token");
       const ApproveEpisodesApi_response = await axios.post(`${API_BASE_URL}/api/stories/admin/episodes/${ep.id}/approve/
       `, {}, {
@@ -81,9 +82,11 @@ const Reports = () => {
         } else
           return r;
       })
+      setLoading(false);
       setReports(result);
     } catch (err: any) {
       console.log(err)
+      setLoading(false);
       const apiError = err as ApiError;
       if (apiError.response) {
         const status = apiError.response.status;
@@ -96,6 +99,7 @@ const Reports = () => {
 
     // api/stories/api/admin/episodes/<episode_id>/reject/
     try {
+      setLoading(true);
       const token = sessionStorage.getItem("token");
       const RejectEpisodesApi_response = await axios.post(`${API_BASE_URL}/api/stories/admin/episodes/${ep.id}/reject/
       `, {}, {
@@ -114,9 +118,11 @@ const Reports = () => {
         } else
           return r;
       })
+      setLoading(false);
       setReports(result);
 
     } catch (err: any) {
+      setLoading(false);
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {
@@ -178,14 +184,21 @@ const Reports = () => {
                                 <div className={styles.episodeContent} style={{ marginTop: "20px" }}>
                                   <div className={styles.newEpisodeForm}>
                                     <p>{episode.content}</p>
-                                    <div style={{ display: "flex", justifyContent: "center" }}>
-                                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={() => {
-                                        approval(episode, report);
-                                      }}>Approve</button>
-                                      <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
-                                        rejection(episode, report);
-                                      }} >Reject</button>
-                                    </div>
+
+                                    {loading1 ? (
+                                      <div key={episode.id} style={{ width: "100%", borderRadius: "10px", marginTop: "10px", marginBottom: "10px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                        <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
+                                          <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                      </div>) : (
+                                      <div style={{ display: "flex", justifyContent: "center" }}>
+                                        <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={() => {
+                                          approval(episode, report);
+                                        }}>Approve</button>
+                                        <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
+                                          rejection(episode, report);
+                                        }} >Reject</button>
+                                      </div>)}
 
                                   </div>
                                 </div>

@@ -5,6 +5,7 @@ import ModalDialog from "../../common/components/ModalDialog";
 import { ApiError } from "../../types/apiError";
 import axios from "axios";
 import Dots from "../../common/components/dots";
+import { Spinner } from "react-bootstrap";
 
 interface Group {
   id: number;
@@ -30,7 +31,7 @@ const Organization: React.FC = () => {
     console.log("Creating group:", newGroup);
 
     try {
-
+      setLoading(true);
       const token = sessionStorage.getItem('token');
       const createGroups_response = await axios.post(`${API_BASE_URL}/api/accounts/organizations/`, newGroup, {
         headers: {
@@ -38,10 +39,12 @@ const Organization: React.FC = () => {
         }
       });
       console.log(createGroups_response);
+      setLoading(false);
       setGroups([...groups, createGroups_response.data.organization]);
 
 
     } catch (err: any) {
+      setLoading(false);
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {
@@ -190,13 +193,22 @@ const Organization: React.FC = () => {
                 required
               />
             </div>
-            <div className={styles.formActions}>
+
+            {!loading ? (
+              <div className={styles.formActions}>
               <button type="submit" className={styles.createUserBtn}
               >Create</button>
               <button className={styles.cancelBtn} type="button" onClick={() => setOpen(false)}>
                 Cancel
               </button>
-            </div>
+            </div>) : (
+              <div style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
+
           </form>
         </div>
       </ModalDialog>

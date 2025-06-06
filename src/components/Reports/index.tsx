@@ -98,8 +98,9 @@ const Reports = () => {
       return;
     }
 
-    await handleUpdateEpisode(ep);
+    setLoading1(true)
 
+    await handleUpdateEpisode(ep);
     try {
       const token = sessionStorage.getItem("token");
       const ApproveEpisodesApi_response = await axios.post(`${API_BASE_URL}/api/stories/admin/episodes/${ep.id}/approve/`, {}, {
@@ -118,8 +119,10 @@ const Reports = () => {
         } else
           return r;
       })
+      setLoading1(false)
       setReports(result);
     } catch (err: any) {
+      setLoading1(false)
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {
@@ -182,14 +185,22 @@ const Reports = () => {
                                     <textarea onChange={(e: any) => {
                                       setUpdateEpisodeObject({ ...updateEpisodeObject, content: e.target.value })
                                     }}>{episode.content}</textarea>
-                                    <div style={{ display: "flex", justifyContent: "center" }}>
-                                      <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={() => {
-                                        approval(episode, report);
-                                      }}>Submit</button>
-                                      <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
-                                        cancel();
-                                      }} >Cancel</button>
-                                    </div>
+
+                                    {loading1 ? (
+                                      <div key={episode.id} style={{ width: "100%", borderRadius: "10px", marginTop: "10px", marginBottom: "10px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                        <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
+                                          <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                      </div>) : (
+
+                                      <div style={{ display: "flex", justifyContent: "center" }}>
+                                        <button className={styles.newEpisodeSubmit} style={{ margin: "5px" }} onClick={() => {
+                                          approval(episode, report);
+                                        }}>Submit</button>
+                                        <button style={{ margin: "5px" }} className={styles.newVersionCancel} onClick={() => {
+                                          cancel();
+                                        }} >Cancel</button>
+                                      </div>)}
 
                                   </div>
                                 </div>

@@ -5,6 +5,7 @@ import { useAuth } from "../../contexts/AuthProvider";
 import { ApiError } from "../../types/apiError";
 import axios from "axios";
 import Dots from "../../common/components/dots";
+import { Spinner } from "react-bootstrap";
 
 interface User {
   id: number;
@@ -38,6 +39,7 @@ const UserList: React.FC = () => {
 
     // /api/accounts/users/create/
     try {
+      setLoading(true);
       const token = sessionStorage.getItem('token');
       const createUser_response = await axios.post(`${API_BASE_URL}/api/accounts/users/create/`, newUser, {
         headers: {
@@ -45,10 +47,12 @@ const UserList: React.FC = () => {
         }
       });
       console.log(createUser_response);
+      setLoading(false);
       setUsers([...users, createUser_response.data.user]);
 
     } catch (err: any) {
       console.log(err)
+      setLoading(false);
       const apiError = err as ApiError;
       if (apiError.response) {
         const status = apiError.response.status;
@@ -244,13 +248,22 @@ const UserList: React.FC = () => {
               </select>
             </div>
 
-            <div className={styles.formActions}>
-              <button type="submit" className={styles.createUserBtn}
-              >Create</button>
-              <button className={styles.cancelBtn} type="button" onClick={() => setOpen(false)}>
-                Cancel
-              </button>
-            </div>
+
+            {!loading ? (
+              <div className={styles.formActions}>
+                <button type="submit" className={styles.createUserBtn}
+                >Create</button>
+                <button className={styles.cancelBtn} type="button" onClick={() => setOpen(false)}>
+                  Cancel
+                </button>
+              </div>) : (
+              <div style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
+
           </form>
         </div>
       </ModalDialog>

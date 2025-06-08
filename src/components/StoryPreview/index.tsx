@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, ChangeEvent } from 'react';
 import './StoryPreview.css';
 import { useAuth } from "../../contexts/AuthProvider";
 import { FiEdit } from 'react-icons/fi';
@@ -17,6 +17,7 @@ import { ApiError } from '../../types/apiError';
 import { story } from '../../types/story';
 import axios from 'axios';
 import Dots from '../../common/components/dots';
+import ModalDialog from '../../common/components/ModalDialog';
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -28,6 +29,7 @@ const StoryPreview = () => {
   const [episodes, setEpisodes] = React.useState<any>([]);
   const [currentEditId, setCurrentEditId] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
   const location = useLocation();
   const [isAddNewVersion, setIsAddNewVersion] = useState(false);
   const [newVAt, setNewVAt] = useState<any | null>(null)
@@ -37,6 +39,17 @@ const StoryPreview = () => {
   const queryParams = new URLSearchParams(location.search);
   const paramvalue = queryParams.get('storyId');
   const [varChangeAt, setVarChangeAt] = React.useState<any>(null);
+  const [open, setOpen] = React.useState<boolean>(false);
+
+  const [bannerImage, setBannerImage] = useState<string | null>(null);
+  const [bannerFile, setBannerFile] = useState<File | null>(null);
+
+  const [updateStoryObject, setUpdateStoryObject] = React.useState<any>({
+    title: "title of story",
+    description: "story description",
+    visibility: "public",
+    // cover_image: ""
+  })
 
   const [addNewEpisodeObject, setAddNewEpisodeObject] = React.useState<any>({
     title: "story title",
@@ -47,6 +60,14 @@ const StoryPreview = () => {
     title: "story title",
     content: "",
   });
+
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setBannerImage(URL.createObjectURL(file));
+      setBannerFile(file);
+    }
+  }
 
   const getStoryDetails = async () => {
     try {
@@ -397,13 +418,56 @@ const StoryPreview = () => {
     else if (user.role === "subadmin") {
       if (dataStory !== null && dataStory.creator_admin?.id && dataStory.creator_admin.id === user.id)
         return true;
-      else if (ep.creator_admin?.id && ep.creator_admin.id === user.id)
+      else if (ep?.creator_admin && ep.creator_admin?.id && ep.creator_admin.id === user.id)
         return true;
     }
 
     return false;
   }
 
+  const handleUpdateStoryInfo = async (e: any) => {
+    e.preventDefault();
+    console.log(updateStoryObject)
+    if (updateStoryObject.title.trim() === "") {
+      alert("title cannot be empty")
+      return;
+    }
+
+    if (dataStory !== null) {
+
+      const formData = new FormData();
+      formData.append('title', updateStoryObject.title);      // your other fields
+      formData.append('description', updateStoryObject.description);
+      formData.append('visibility', updateStoryObject.visibility);
+      // Append the actual file
+      if (bannerFile !== null)
+        formData.append('cover_image', bannerFile); // payload.file should be a File object
+
+      try {
+        setLoading1(true);
+        const token = sessionStorage.getItem('token');
+        const updateStory_response = await axios.put(`${API_BASE_URL}/api/stories/stories/${dataStory.id}/`, formData, {
+          headers: {
+            Authorization: `Token ${token}`,
+          }
+        });
+        console.log(updateStory_response);
+        setDataStory(updateStory_response.data);
+        setOpen(false)
+        setLoading1(false);
+      } catch (err: any) {
+        setLoading1(false);
+        console.log(err)
+        const apiError = err as ApiError;
+        if (apiError.response) {
+          const status = apiError.response.status;
+          const errorMessage = apiError.response.data?.error || 'Something went wrong on the server!';
+          alert(errorMessage);
+        }
+      } finally {
+      }
+    }
+  }
 
   return (
     <>
@@ -415,6 +479,11 @@ const StoryPreview = () => {
         <div className="story-preview">
           <div className="story-header">
             <img src={dataStory.cover_image} alt="Story Preview" className="story-image" />
+            {getPermission(dataStory) && (
+              <button className='story-edit-btn' onClick={() => {
+                setOpen(prev => !prev);
+                setUpdateStoryObject({ ...updateStoryObject, title: dataStory.title })
+              }}><FiEdit style={{ color: "white", height: "16px", width: "16px" }} /></button>)}
             <div className="story-info">
               <h2 className="story-title">{dataStory.title}</h2>
             </div>
@@ -532,6 +601,71 @@ const StoryPreview = () => {
           </div>
 
         </div>)}
+
+      <ModalDialog isOpen={open} onClose={() => setOpen(false)}>
+        <form onSubmit={handleUpdateStoryInfo} className="create-story-form">
+
+          <div >
+            <div >
+              <h2 id='story-title-edit-id'>Edit Story Details</h2>
+              <label style={{ fontSize: "14px" }}>Title</label>
+              <input
+                type="text"
+                id="story-title-id"
+                name="story-title"
+                value={updateStoryObject !== null ? (updateStoryObject.title) : ("")}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setUpdateStoryObject({ ...updateStoryObject, title: e.target.value })}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="banner-image" style={{ fontSize: "14px", marginTop: "10px" }}>Upload Banner Image</label>
+              <input
+                type="file"
+                id="banner-image"
+                accept="image/*"
+                style={{width:"100%",border:"1px solid lightgray",fontSize:"14px",padding:"10px",margin:"2px",borderRadius:"8px", marginBottom:"10px"}}
+                onChange={handleImageChange}
+              />
+              {bannerImage && (
+                <div className="image-preview">
+                  <img src={bannerImage} alt="Banner Preview" />
+                </div>
+              )}
+            </div>
+
+            {!loading1 ? (
+              <div style={{ width: "fit-content", marginLeft: "auto", marginRight: "auto" }}>
+                <button type="submit"
+                  style={{
+                    fontSize: "14px",
+                    width: "120px",
+                    padding: "8px",
+                    margin: "0"
+                  }}>Save</button>
+                <button type="button" style={{
+                  fontSize: "14px",
+                  width: "120px",
+                  padding: "8px",
+                  margin: "0",
+                  border: "1px solid",
+                  borderRadius: "22px",
+                  marginLeft: "5px",
+                  borderColor: "#e54646", color: "#e54646"
+                }} onClick={() => setOpen(false)}>
+                  Cancel
+                </button>
+              </div>) : (
+              <div style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
+          </div>
+        </form>
+      </ModalDialog>
     </>
   );
 };

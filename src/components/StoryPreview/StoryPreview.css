@@ -264,3 +264,14 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+.under-review{
+  background-color: rgb(239, 239, 239);
+  height: auto;
+  border-radius: 11px;
+  margin-bottom: 5px;
+  padding: 5px;
+  padding-bottom: 5px;
+  padding-left:10px;
+  padding-right: 10px;
+}

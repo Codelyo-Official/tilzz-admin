@@ -74,6 +74,7 @@ const LoginSignup = () => {
         setErrors(errorMessage);
       }
     } finally {
+      setLoading(false);
     }
 
   };

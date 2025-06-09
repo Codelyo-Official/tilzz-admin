@@ -72,7 +72,7 @@ const StoryPreview = () => {
   const getStoryDetails = async () => {
     try {
       const token = sessionStorage.getItem("token");
-      const StoryApi_response = await axios.get(`${API_BASE_URL}/api/stories/stories/${paramvalue}/`, {
+      const StoryApi_response = await axios.get(`${API_BASE_URL}/api/stories/admin/stories/${paramvalue}/`, {
         headers: {
           Authorization: `Token ${token}`,
         }
@@ -478,7 +478,11 @@ const StoryPreview = () => {
       ) : (
         <div className="story-preview">
           <div className="story-header">
-            <img src={dataStory.cover_image} alt="Story Preview" className="story-image" />
+            <img src={
+              dataStory.cover_image.startsWith("http")
+                ? dataStory.cover_image
+                : `${API_BASE_URL}/${dataStory.cover_image}`
+            } alt="Story Preview" className="story-image" />
             {getPermission(dataStory) && (
               <button className='story-edit-btn' onClick={() => {
                 setOpen(prev => !prev);
@@ -494,7 +498,7 @@ const StoryPreview = () => {
               (varChangeAt !== null && varChangeAt.id <= episode.id) ? (
                 <>
                   {varChangeAt.id === episode.id ? (
-                    <div key={episode.id} style={{ width: "100%", backgroundColor: "#F1F1F1", borderRadius: "10px", marginTop: "10px", marginBottom: "10px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <div key={episode.id} style={{ width: "100%", borderRadius: "10px", marginTop: "10px", marginBottom: "10px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center" }}>
                       <Dots />
                     </div>
                   ) : (<></>)}
@@ -524,33 +528,36 @@ const StoryPreview = () => {
                               </div>)}
                           </div>
                         ) : (
-                          <p>{(!episode.is_reported && (episode.status === "public" || episode.status === "private")) ? (episode.content) : (<>under review</>)} <div className="episode-options">
+                          <p>{(!episode.is_reported && (episode.status === "public" || episode.status === "private")) ? (episode.content) : (<div className='under-review'>
+                            <p className='r-tag'>under review</p>
+                            <p style={{ filter: 'blur(2px)' }}>{episode.content}</p>
+                          </div>)} <div className="episode-options">
 
-                            {index !== 0 && (
-                              <button className="tooltip1" onClick={() => {
-                                addVersion(episode)
-                              }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
-                            )}
+                              {index !== 0 && (
+                                <button className="tooltip1" onClick={() => {
+                                  addVersion(episode)
+                                }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
+                              )}
 
-                            {(!episode.is_reported && (episode.status === "public" || episode.status === "private")) && getPermission(episode) && (<button onClick={() => {
-                              setCurrentEditId(episode.id);
-                              setUpdateEpisodeObject({
-                                title: episode.title,
-                                content: episode.content
-                              });
-                            }}><FiEdit /></button>)}
+                              {(!episode.is_reported && (episode.status === "public" || episode.status === "private")) && getPermission(episode) && (<button onClick={() => {
+                                setCurrentEditId(episode.id);
+                                setUpdateEpisodeObject({
+                                  title: episode.title,
+                                  content: episode.content
+                                });
+                              }}><FiEdit /></button>)}
 
-                            {episode.previous_version !== null && (<button className="tooltip1" onClick={() => {
-                              prevVariation(episode);
-                            }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
-                            {episode.next_version !== null && (<button className="tooltip1" onClick={() => {
-                              nextVariation(episode);
-                            }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
-                            {((!episode.is_reported && (episode.status === "public" || episode.status === "private")) && getPermission(episode)) && (
-                              <button className="tooltip1" onClick={() => {
-                                confirmDelete(episode.id)
-                              }}><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>)}
-                          </div></p>)}
+                              {episode.previous_version !== null && (<button className="tooltip1" onClick={() => {
+                                prevVariation(episode);
+                              }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}
+                              {episode.next_version !== null && (<button className="tooltip1" onClick={() => {
+                                nextVariation(episode);
+                              }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
+                              {((!episode.is_reported && (episode.status === "public" || episode.status === "private")) && getPermission(episode)) && (
+                                <button className="tooltip1" onClick={() => {
+                                  confirmDelete(episode.id)
+                                }}><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>)}
+                            </div></p>)}
 
                       </div>
                     </div>)}
@@ -625,7 +632,7 @@ const StoryPreview = () => {
                 type="file"
                 id="banner-image"
                 accept="image/*"
-                style={{width:"100%",border:"1px solid lightgray",fontSize:"14px",padding:"10px",margin:"2px",borderRadius:"8px", marginBottom:"10px"}}
+                style={{ width: "100%", border: "1px solid lightgray", fontSize: "14px", padding: "10px", margin: "2px", borderRadius: "8px", marginBottom: "10px" }}
                 onChange={handleImageChange}
               />
               {bannerImage && (

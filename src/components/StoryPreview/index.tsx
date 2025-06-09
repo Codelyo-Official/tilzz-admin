@@ -1,4 +1,4 @@
-import React, { useState, useMemo, ChangeEvent } from 'react';
+import React, { useState, useMemo, ChangeEvent,useRef,useEffect } from 'react';
 import './StoryPreview.css';
 import { useAuth } from "../../contexts/AuthProvider";
 import { FiEdit } from 'react-icons/fi';
@@ -20,6 +20,61 @@ import Dots from '../../common/components/dots';
 import ModalDialog from '../../common/components/ModalDialog';
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+
+const ParagraphWithOptions = ({ text }: { text: string }) => {
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const [isMultiline, setIsMultiline] = useState(false);
+
+  useEffect(() => {
+    const checkIfMultiline = () => {
+      const para = paragraphRef.current;
+      if (!para) return;
+
+      const parent = para.parentElement;
+      if (!parent) return;
+
+      const parentWidth = parent.clientWidth;
+
+      // Create a canvas context for measuring text
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      // Match computed styles
+      const computedStyle = getComputedStyle(para);
+      const font = `${computedStyle.fontStyle} ${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+      ctx.font = font;
+
+      // Measure each word plus a space
+      const words = text.split(" ");
+      let currentLineWidth = 0;
+      let willWrap = false;
+
+      for (const word of words) {
+        const wordWidth = ctx.measureText(word + " ").width;
+
+        if (currentLineWidth + wordWidth > parentWidth) {
+          willWrap = true;
+          break;
+        } else {
+          currentLineWidth += wordWidth;
+        }
+      }
+
+      setIsMultiline(willWrap);
+    };
+
+    checkIfMultiline();
+    window.addEventListener("resize", checkIfMultiline);
+    return () => window.removeEventListener("resize", checkIfMultiline);
+  }, [text]);
+
+  return (
+    <p ref={paragraphRef} style={{display:isMultiline?"inline":"block"}}>
+      {text}
+    </p>
+  );
+};
 
 const StoryPreview = () => {
 
@@ -528,10 +583,12 @@ const StoryPreview = () => {
                               </div>)}
                           </div>
                         ) : (
-                          <p>{(!episode.is_reported && (episode.status === "public" || episode.status === "private")) ? (episode.content) : (<div className='under-review'>
+                          <>
+                          {(!episode.is_reported && (episode.status === "public" || episode.status === "private")) ? (<ParagraphWithOptions text={episode.content}/>) : (<div className='under-review'>
                             <p className='r-tag'>under review</p>
                             <p style={{ filter: 'blur(2px)' }}>{episode.content}</p>
-                          </div>)} <div className="episode-options">
+                          </div>)} 
+                          <div className="episode-options">
 
                               {index !== 0 && (
                                 <button className="tooltip1" onClick={() => {
@@ -557,7 +614,7 @@ const StoryPreview = () => {
                                 <button className="tooltip1" onClick={() => {
                                   confirmDelete(episode.id)
                                 }}><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>)}
-                            </div></p>)}
+                            </div></>)}
 
                       </div>
                     </div>)}

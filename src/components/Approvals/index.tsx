@@ -82,11 +82,11 @@ const Reports = () => {
         } else
           return r;
       })
-      setLoading(false);
+      setLoading1(false);
       setReports(result);
     } catch (err: any) {
       console.log(err)
-      setLoading(false);
+      setLoading1(false);
       const apiError = err as ApiError;
       if (apiError.response) {
         const status = apiError.response.status;
@@ -99,7 +99,7 @@ const Reports = () => {
 
     // api/stories/api/admin/episodes/<episode_id>/reject/
     try {
-      setLoading(true);
+      setLoading1(true);
       const token = sessionStorage.getItem("token");
       const RejectEpisodesApi_response = await axios.post(`${API_BASE_URL}/api/stories/admin/episodes/${ep.id}/reject/
       `, {}, {
@@ -118,11 +118,11 @@ const Reports = () => {
         } else
           return r;
       })
-      setLoading(false);
+      setLoading1(false);
       setReports(result);
 
     } catch (err: any) {
-      setLoading(false);
+      setLoading1(false);
       console.log(err)
       const apiError = err as ApiError;
       if (apiError.response) {

@@ -127,7 +127,8 @@ const StoryPreview = () => {
   const getStoryDetails = async () => {
     try {
       const token = sessionStorage.getItem("token");
-      const StoryApi_response = await axios.get(`${API_BASE_URL}/api/stories/admin/stories/${paramvalue}/`, {
+      // let target_url = user.role==="admin" ? `/api/stories/admin/stories/`:`/api/stories/stories/`;
+      const StoryApi_response = await axios.get(`${API_BASE_URL}/api/stories/stories/${paramvalue}/`, {
         headers: {
           Authorization: `Token ${token}`,
         }

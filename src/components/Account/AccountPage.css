@@ -145,3 +145,31 @@
     background: #495057;
   }
   
+  .account-details-user {
+    background-color: rgb(246, 246, 246);
+    min-height: 250px;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    padding-top: 20px;
+  }
+  
+  .account-details-user span {
+    position: relative;
+  }
+  
+  .account-details-user svg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -15px;
+  }
+  
+  .account-details-user h2 {
+    font-family: vice;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }

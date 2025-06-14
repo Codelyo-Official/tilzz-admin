@@ -585,7 +585,7 @@ const StoryPreview = () => {
                           </div>
                         ) : (
                           <>
-                          {(!episode.is_reported && (episode.status === "public" || episode.status === "private")) ? (<ParagraphWithOptions text={episode.content}/>) : (<div className='under-review'>
+                          {(episode.status !== "deleted") ? (<ParagraphWithOptions text={episode.content}/>) : (<div className='under-review'>
                             <p className='r-tag'>under review</p>
                             <p style={{ filter: 'blur(2px)' }}>{episode.content}</p>
                           </div>)} 
@@ -597,7 +597,7 @@ const StoryPreview = () => {
                                 }}><IoAddCircleOutline /><span className="tooltiptext1">Add Version</span></button>
                               )}
 
-                              {(!episode.is_reported && (episode.status === "public" || episode.status === "private")) && getPermission(episode) && (<button onClick={() => {
+                              {(episode.status !== "deleted") && getPermission(episode) && (<button onClick={() => {
                                 setCurrentEditId(episode.id);
                                 setUpdateEpisodeObject({
                                   title: episode.title,
@@ -611,7 +611,7 @@ const StoryPreview = () => {
                               {episode.next_version !== null && (<button className="tooltip1" onClick={() => {
                                 nextVariation(episode);
                               }}><FiArrowRightCircle /><span className="tooltiptext1">Next Version</span></button>)}
-                              {((!episode.is_reported && (episode.status === "public" || episode.status === "private")) && getPermission(episode)) && (
+                              {((episode.status !== "deleted") && getPermission(episode)) && (
                                 <button className="tooltip1" onClick={() => {
                                   confirmDelete(episode.id)
                                 }}><TiDeleteOutline /><span className="tooltiptext1">Delete</span></button>)}

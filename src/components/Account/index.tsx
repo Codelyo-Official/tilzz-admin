@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts/AuthProvider";
 import axios from "axios";
 import { ApiError } from "../../types/apiError";
 import "./AccountPage.css";
+import { MdOutgoingMail } from "react-icons/md";
 import Spinner from 'react-bootstrap/Spinner';
 
 type FormData = {
@@ -99,7 +100,7 @@ export default function Account() {
   return (
     <div className="profile-container">
       <div className="profile-card">
-        <h2>Profile Settings</h2>
+        <h2 style={{marginBottom:"20px"}}>Profile Settings</h2>
         <div className="profile-avatar">
           {user.profile_picture === null ? (<img src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`} alt="avatar" className="avatar-img" />) : (
             <img src={user.profile_picture.startsWith('http')
@@ -107,6 +108,14 @@ export default function Account() {
               : `${API_BASE_URL}${user.profile_picture}`}
               className="avatar-img" />
           )}
+        </div>
+        <div>
+          <p>{user.username}</p>
+          <div className="account-details-user">
+            <h2>Account Details</h2>
+
+            <span><MdOutgoingMail/>{user.email}</span>
+          </div>
         </div>
         <button className="edit-btn" onClick={() => setOpen(true)}>
           Edit Profile

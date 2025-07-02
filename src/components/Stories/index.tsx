@@ -11,10 +11,13 @@ import { useAuth } from "../../contexts/AuthProvider";
 import { ApiError } from "../../types/apiError";
 import axios from "axios";
 import Dots from "../../common/components/dots";
+import { ToastContainer, toast } from 'react-toastify';
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function Stories({ slugStories }: { slugStories: string | null }) {
+
+    const notify = (msg: string) => toast(msg);
 
     const { user, setUser }: any = useAuth();
     const dispatch = useDispatch();
@@ -124,7 +127,7 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                     }
                 })
                 setDataStories(result);
-                alert(toggleStoriesEye_response.data.message);
+                notify(toggleStoriesEye_response.data.message);
             }
 
 
@@ -160,49 +163,49 @@ function Stories({ slugStories }: { slugStories: string | null }) {
             }}>
                 <h2 className="heading-your-story">All Stories</h2>
                 {loading ? (<div style={{ width: "100%", height: "120px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Dots/>
+                    <Dots />
                 </div>) : (
-                <div className="story-container">
-                    <ul className="story-box101">
-                        {dataStories.map((st, index) => {
-                            return (
-                                <li className="story-box" key={index}>
-                                    <NavLink
-                                        className=""
-                                        style={{ position: "absolute", top: "0px", left: "0px", width: "100%", height: "100%",zIndex:5 }}
-                                        to={`/dashboard?activeTab=story-preview&storyId=${st.id}`}
-                                        onClick={() => { handleActiveMenu("story-preview") }}
-                                    >
-                                    </NavLink>
+                    <div className="story-container">
+                        <ul className="story-box101">
+                            {dataStories.map((st, index) => {
+                                return (
+                                    <li className="story-box" key={index}>
+                                        <NavLink
+                                            className=""
+                                            style={{ position: "absolute", top: "0px", left: "0px", width: "100%", height: "100%", zIndex: 5 }}
+                                            to={`/dashboard?activeTab=story-preview&storyId=${st.id}`}
+                                            onClick={() => { handleActiveMenu("story-preview") }}
+                                        >
+                                        </NavLink>
 
-                                    <img src={ st.cover_image!==null && !st.cover_image.startsWith('http') ? `${API_BASE_URL}${st.cover_image}` : st.cover_image} alt="" />
-                                    <div className="title">
-                                        <p >{st.title}
+                                        <img src={st.cover_image !== null && !st.cover_image.startsWith('http') ? `${API_BASE_URL}${st.cover_image}` : st.cover_image} alt="" />
+                                        <div className="title">
+                                            <p >{st.title}
 
-                                        </p>
-                                        <p className="descp">{getfirstepsiodedescp(st)}</p>
-                                    </div>
-                                    {(user.role === "admin" || (user.role === "subadmin" && st.creator_admin !== null && st.creator_admin.id === user.id)) && (
-                                        <div className="admin-options" style={{zIndex:"6"}}>
-                                            <IoMdEye style={{ color: "white" }} onClick={() => {
-                                                setCtext("Are you sure you want to toggle visibility")
-                                                set_cur_st_id(st);
-                                                setOpen(true);
-                                            }} />
-                                            <IoTrashOutline style={{ color: "white" }} onClick={() => {
-                                                setCtext("Are you sure you want to delete this story")
-                                                set_cur_st_id(st);
-                                                setOpen1(true);
-                                            }} />
+                                            </p>
+                                            <p className="descp">{getfirstepsiodedescp(st)}</p>
                                         </div>
-                                    )}
+                                        {(user.role === "admin" || (user.role === "subadmin" && st.creator_admin !== null && st.creator_admin.id === user.id)) && (
+                                            <div className="admin-options" style={{ zIndex: "6" }}>
+                                                <IoMdEye style={{ color: "white" }} onClick={() => {
+                                                    setCtext("Are you sure you want to toggle visibility")
+                                                    set_cur_st_id(st);
+                                                    setOpen(true);
+                                                }} />
+                                                <IoTrashOutline style={{ color: "white" }} onClick={() => {
+                                                    setCtext("Are you sure you want to delete this story")
+                                                    set_cur_st_id(st);
+                                                    setOpen1(true);
+                                                }} />
+                                            </div>
+                                        )}
 
-                                </li>
-                            )
-                        })}
-                    </ul>
+                                    </li>
+                                )
+                            })}
+                        </ul>
 
-                </div>)}
+                    </div>)}
 
                 <ModalDialog isOpen={open} onClose={() => setOpen(false)}
                 >
@@ -254,6 +257,19 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                     </div>
                 </ModalDialog>
             </div>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 }

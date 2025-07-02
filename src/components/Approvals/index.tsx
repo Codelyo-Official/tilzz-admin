@@ -14,10 +14,13 @@ import { story } from '../../types/story';
 import styles from '../SharedStylesStoryPreview/styles.module.css';
 import Dots from "../../common/components/dots";
 import Spinner from 'react-bootstrap/esm/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Reports = () => {
+
+  const notify = (msg:string) => toast(msg);
 
   console.log("story preview rendered")
   const { user } = useAuth();
@@ -72,7 +75,7 @@ const Reports = () => {
         }
       });
       console.log(ApproveEpisodesApi_response);
-      alert("episode approved")
+      notify("episode approved")
       let result = reports.map((r: any) => {
         if (r.id === report.id) {
           let temp_versions = r.versions.map((v: any) => {
@@ -108,7 +111,7 @@ const Reports = () => {
         }
       });
       console.log(RejectEpisodesApi_response);
-      alert("episode rejected")
+      notify("episode rejected")
       let result = reports.map((r: any) => {
         if (r.id === report.id) {
           let temp_versions = r.versions.map((v: any) => {
@@ -216,6 +219,19 @@ const Reports = () => {
           })}
 
         </>)}
+
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

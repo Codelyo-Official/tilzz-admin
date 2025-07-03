@@ -12,6 +12,7 @@ import { ApiError } from "../../types/apiError";
 import axios from "axios";
 import Dots from "../../common/components/dots";
 import { ToastContainer, toast } from 'react-toastify';
+import CategoryFilter from "../CategoryFilter";
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -29,6 +30,8 @@ function Stories({ slugStories }: { slugStories: string | null }) {
     const [open, setOpen] = React.useState(false);
     const [open1, setOpen1] = React.useState(false);
     const [cur_st_id, set_cur_st_id] = React.useState<null | story>(null);
+    const [selectedCategory, setSelectedCategory] = React.useState<string>("");
+    const [searchQuery, setSearchQuery] = React.useState<string>("");
 
     const [ctext, setCtext] = React.useState("");
 
@@ -154,9 +157,22 @@ function Stories({ slugStories }: { slugStories: string | null }) {
         return '';
     }
 
+    const handleCategoryChange = (category: string, searchQuery: string) => {
+        console.log("Selected category from child:", category, searchQuery);
+        setSelectedCategory(category)
+        setSearchQuery(searchQuery)
+        // Do whatever you need here
+    };
+
+    // Filter stories by title based on searchQuery
+    const filteredStories = dataStories.filter((story: any) =>
+        (selectedCategory === "All" || (story.category !== null && story.category.includes(selectedCategory))) && (searchQuery === "" || story.title.includes(searchQuery))
+    );
 
     return (
         <div>
+            <CategoryFilter onCategoryChange={handleCategoryChange} />
+
             <div className="logged-in-user-story-div" style={{
                 backgroundColor: slugStories === "public-feed" ? "transparent" : "white",
                 boxShadow: slugStories === "public-feed" ? "none" : "rgba(149, 157, 165, 0.2) 0px 8px 24px",
@@ -167,7 +183,7 @@ function Stories({ slugStories }: { slugStories: string | null }) {
                 </div>) : (
                     <div className="story-container">
                         <ul className="story-box101">
-                            {dataStories.map((st, index) => {
+                            {filteredStories.map((st, index) => {
                                 return (
                                     <li className="story-box" key={index}>
                                         <NavLink

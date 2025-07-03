@@ -704,6 +704,10 @@ const StoryPreview = () => {
                                     </div>
                                     <span className="tooltiptext1">Like</span></button>
                                 )}
+                                 {(episode.status !== "deleted") && (
+                                  <button className="tooltip1" onClick={() => {
+                                    confirmReport(episode.id)
+                                  }}><FaRegFlag /><span className="tooltiptext1">Report</span></button>)}
                                 {episode.previous_version !== null && (<button className="tooltip1" onClick={() => {
                                   prevVariation(episode);
                                 }}><FiArrowLeftCircle /><span className="tooltiptext1">Prev Version</span></button>)}

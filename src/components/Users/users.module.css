@@ -11,6 +11,7 @@
   font-family: 'Montserrat', sans-serif !important;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   overflow-x: auto; /* Enables horizontal scroll on smaller screens */
+  margin-bottom: 80px;
 }
 
 .createUserBtn{

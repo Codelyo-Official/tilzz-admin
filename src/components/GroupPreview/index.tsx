@@ -250,7 +250,7 @@ const GroupPreview: React.FC = () => {
         <table className={styles.userTable}>
           <thead>
             <tr>
-              <th>Name</th>
+              {/* <th>Name</th> */}
               <th>User Email</th>
               <th>Username</th>
               <th>Actions</th>
@@ -261,14 +261,16 @@ const GroupPreview: React.FC = () => {
 
               return (
                 <tr key={cuser.id}>
-                  <td data-label="Name">{cuser.first_name} {cuser.last_name}</td>
+                  {/* <td data-label="Name">{cuser.first_name} {cuser.last_name}</td> */}
                   <td data-label="User Email">{cuser.email}</td>
                   <td data-label="Username">{cuser.username}</td>
                   <td data-label="Actions">
-                    {groupAdmin===null || (groupAdmin!==cuser.id) && (
+                    {groupAdmin===null || (groupAdmin!==cuser.id) ? (
                       <button className={styles.deleteBtn} style={{ margin: "5px" }} onClick={() => {
                         confirmDelete(cuser.id);
-                      }}>Delete</button>)}
+                      }}>Delete</button>):(
+                        <>group admin</>
+                      )}
                   </td>
                 </tr>);
             })}

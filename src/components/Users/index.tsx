@@ -160,7 +160,7 @@ const UserList: React.FC = () => {
           <table className={styles.userTable}>
             <thead>
               <tr>
-                <th>Name</th>
+                {/* <th>Name</th> */}
                 <th>Username</th>
                 <th>Email</th>
                 <th>Role</th>
@@ -173,7 +173,7 @@ const UserList: React.FC = () => {
                   return;
 
                 return (<tr key={cuser.id}>
-                  <td data-label="Name">{cuser.first_name} {cuser.last_name}</td>
+                  {/* <td data-label="Name"> {cuser.first_name} {cuser.last_name}</td> */}
                   <td data-label="Username">{cuser.username}</td>
                   <td data-label="Email">{cuser.email}</td>
                   <td data-label="Role" className={styles.capitalize}>{cuser.profile.role}</td>

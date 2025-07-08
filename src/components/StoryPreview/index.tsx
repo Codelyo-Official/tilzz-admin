@@ -623,7 +623,7 @@ const StoryPreview = () => {
               <button className='story-edit-btn' onClick={() => {
                 setOpen(prev => !prev);
                 setUpdateStoryObject({ ...updateStoryObject, title: dataStory.title })
-              }}><FiEdit style={{ color: "white", height: "16px", width: "16px" }} /></button>)}
+              }} style={{backgroundColor:"white",padding:"8px",borderRadius:"50%"}}><FiEdit style={{ color: "black", height: "16px", width: "16px" }} /></button>)}
             <div className="story-info">
               <h2 className="story-title">{dataStory.title}</h2>
             </div>

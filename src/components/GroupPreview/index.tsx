@@ -309,7 +309,7 @@ const GroupPreview: React.FC = () => {
           <h2 style={{marginBottom:"8px"}}>Add members to Group</h2>
           <form onSubmit={handleSubmit}>
             <div className={styles.formGroup} style={{ overflow: "scroll" }}>
-              <table className={styles.userTable}>
+              <table className={styles.userTable} style={{overflow:"scroll",height:"360px"}}>
                 <thead>
                   <tr>
                     {/* <th>Name</th> */}

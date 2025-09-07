@@ -7,6 +7,7 @@ import { ApiError } from "../../types/apiError";
 import { User } from "../../types/user";
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
+import Footer from "../../components/Footer";
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -81,72 +82,75 @@ const LoginSignup = () => {
 
 
   return (
-    <div className={styles.loginSignupContainer} >
-      <div
-        style={{
-          position: "absolute",
-          top: "0px",
-          left: "0px",
-          width: "100%",
-          height: "100px",
-          textAlign: "center",
-        }}
-      >
-        <Link to={"/"}>
-          <h2
-            className={styles.Logo}
-            style={{
-              position: "absolute",
-              left: "50%",
-              transform: "translateX(-50%)",
-            }}
-          >
-            Narrato
-          </h2>
-        </Link>
+    <>
+      <div className={styles.loginSignupContainer} >
+        <div
+          style={{
+            position: "absolute",
+            top: "0px",
+            left: "0px",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+          }}
+        >
+          <Link to={"/"}>
+            <h2
+              className={styles.Logo}
+              style={{
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
+            >
+              Narrato
+            </h2>
+          </Link>
+        </div>
+
+        <div className={styles.formContainer} style={{ marginTop: "120px" }}>
+          <h2 style={{ fontSize: "16px", color: "black" }}>{"Login to Admin Panel"}</h2>
+          <form onSubmit={handleLoginSubmit}>
+            <input
+              type="text"
+              placeholder="username"
+              ref={inputEmailRef}
+              required
+              onChange={(e) => {
+                if (inputEmailRef.current) {
+                  inputEmailRef.current.value = e.target.value;
+                }
+              }}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              ref={inputPasswordRef}
+              required
+              onChange={(e) => {
+                if (inputPasswordRef.current) {
+                  inputPasswordRef.current.value = e.target.value;
+                }
+              }}
+            />
+            {errors && <p style={{ color: "red" }} className="errors">{errors}</p>}
+
+            {!loading ? (
+              <button type="submit" style={{ fontSize: "14px" }}>
+                {"Login"}
+              </button>) : (
+              <div style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
+
+          </form>
+        </div>
       </div>
-
-      <div className={styles.formContainer} style={{ marginTop: "120px" }}>
-        <h2 style={{ fontSize: "16px", color: "black" }}>{"Login to Admin Panel"}</h2>
-        <form onSubmit={handleLoginSubmit}>
-          <input
-            type="text"
-            placeholder="username"
-            ref={inputEmailRef}
-            required
-            onChange={(e) => {
-              if (inputEmailRef.current) {
-                inputEmailRef.current.value = e.target.value;
-              }
-            }}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            ref={inputPasswordRef}
-            required
-            onChange={(e) => {
-              if (inputPasswordRef.current) {
-                inputPasswordRef.current.value = e.target.value;
-              }
-            }}
-          />
-          {errors && <p style={{ color: "red" }} className="errors">{errors}</p>}
-
-          {!loading ? (
-            <button type="submit" style={{ fontSize: "14px" }}>
-              {"Login"}
-            </button>) : (
-            <div style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <Spinner animation="grow" role="status" style={{ color: "blue", fontSize: "20px", background: "#ACA6FF" }}>
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-            </div>
-          )}
-
-        </form>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
